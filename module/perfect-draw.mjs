@@ -30,10 +30,6 @@ Hooks.once('init', function () {
    * Set an initiative formula for the system
    * @type {String}
    */
-  CONFIG.Combat.initiative = {
-    formula: '1d20 + @abilities.dex.mod',
-    decimals: 2,
-  };
 
   // Define custom Document and DataModel classes
   CONFIG.Actor.documentClass = PerfectDrawActor;
