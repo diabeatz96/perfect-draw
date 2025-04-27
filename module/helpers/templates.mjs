@@ -6,11 +6,5 @@
 export const preloadHandlebarsTemplates = async function () {
   return loadTemplates([
     // Actor partials.
-    'systems/perfect-draw/templates/actor/parts/actor-features.hbs',
-    'systems/perfect-draw/templates/actor/parts/actor-items.hbs',
-    'systems/perfect-draw/templates/actor/parts/actor-spells.hbs',
-    'systems/perfect-draw/templates/actor/parts/actor-effects.hbs',
-    // Item partials
-    'systems/perfect-draw/templates/item/parts/item-effects.hbs',
   ]);
 };

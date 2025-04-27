@@ -47,7 +47,7 @@
   "socket": true,
   "manifest": "https://raw.githubusercontent.com/diabeatz96/perfect-draw/refs/heads/main/system.json",
   "download": "https://github.com/diabeatz96/perfect-draw/releases/latest/download/perfectdraw.zip",
-  "background": "systems/perfect-draw/assets/anvil-impact.png",
+  "background": "systems/perfect-draw/assets/Perfect_Draw_Logo.png",
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "health",

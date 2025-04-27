@@ -4,7 +4,7 @@ import { PerfectDrawItem } from './documents/item.mjs';
 // Import sheet classes.
 import { PerfectDrawActorSheet } from './sheets/actor-sheet.mjs';
 import { PerfectDrawItemSheet } from './sheets/item-sheet.mjs';
-// Import helper/utility classes and constants.
+
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { PERFECT_DRAW } from './helpers/config.mjs';
 // Import DataModel classes
@@ -45,11 +45,10 @@ Hooks.once('init', function () {
     character: models.PerfectDrawCharacter,
     npc: models.PerfectDrawNPC
   }
+
   CONFIG.Item.documentClass = PerfectDrawItem;
   CONFIG.Item.dataModels = {
-    item: models.PerfectDrawItem,
-    feature: models.PerfectDrawFeature,
-    spell: models.PerfectDrawSpell
+
   }
 
   // Active Effects are never copied to the Actor,
