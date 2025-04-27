@@ -1,5 +1,7 @@
+# Workflow name
 name: Create Release
 
+# Triggers: Runs on push to main or when a PR targeting main is closed and merged
 on:
   push:
     branches:
@@ -9,45 +11,95 @@ on:
     branches:
       - main
 
+# Jobs to run
 jobs:
   create_release:
+    # Condition: Only run if the PR was merged OR if the event was a direct push to main
     if: github.event.pull_request.merged == true || github.event_name == 'push'
+    # Runner environment
     runs-on: ubuntu-latest
 
+    # Permissions needed for the job
     permissions:
-      contents: write  # Ensure the workflow has write permissions to the repository contents
+      contents: write # Required to create releases and upload artifacts
 
+    # Steps to execute
     steps:
+      # Step 1: Check out the repository code
       - name: Checkout repository
         uses: actions/checkout@v4.1.7
+        with:
+          fetch-depth: 0 # Fetch all history for accurate versioning/notes if needed elsewhere
 
+      # Step 2: Get the current version from system.json
       - name: Get current version
         id: get_version
-        run: echo "::set-output name=version::$(jq -r .version system.json)"
+        run: echo "version=$(jq -r .version system.json)" >> $GITHUB_OUTPUT
 
+      # Step 3: Get pull request details (only if the event is a pull request)
       - name: Get pull request details
         if: github.event_name == 'pull_request'
         id: pr_details
         run: |
-          echo "::set-output name=pr_title::${{ github.event.pull_request.title }}"
-          echo "::set-output name=pr_body::${{ github.event.pull_request.body }}"
-          echo "::set-output name=pr_number::${{ github.event.pull_request.number }}"
+          echo "pr_title=${{ github.event.pull_request.title }}" >> $GITHUB_OUTPUT
+          # Properly handle potential multiline PR bodies for the output
+          pr_body=$(cat <<'EOF'
+          ${{ github.event.pull_request.body }}
+          EOF
+          )
+          # Escape special characters for multiline output variable
+          pr_body="${pr_body//'%'/'%25'}"
+          pr_body="${pr_body//$'\n'/'%0A'}"
+          pr_body="${pr_body//$'\r'/'%0D'}"
+          echo "pr_body=$pr_body" >> $GITHUB_OUTPUT
+          echo "pr_number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
 
+      # Step 4: Set the release body content based on the event type
+      - name: Set Release Body
+        id: set_body
+        run: |
+          RELEASE_NOTES=""
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # Construct body for Pull Request event
+            TITLE="${{ steps.pr_details.outputs.pr_title }}"
+            # Use the potentially multiline body, defaulting if empty
+            BODY_CONTENT="${{ steps.pr_details.outputs.pr_body || 'No description provided.' }}"
+            NUMBER="${{ steps.pr_details.outputs.pr_number }}"
+            # Use printf for safer formatting
+            RELEASE_NOTES=$(printf "## Changes in this release\n- Pull Request #%s: %s\n\n**Description:**\n%s" "$NUMBER" "$TITLE" "$BODY_CONTENT")
+          else
+            # Construct body for Push event
+            RELEASE_NOTES=$(printf "## Changes in this release\nNo specific notes associated with this push event.")
+          fi
+          # Escape special characters for the final multiline output
+          RELEASE_NOTES="${RELEASE_NOTES//'%'/'%25'}"
+          RELEASE_NOTES="${RELEASE_NOTES//$'\n'/'%0A'}"
+          RELEASE_NOTES="${RELEASE_NOTES//$'\r'/'%0D'}"
+          echo "release_body=$RELEASE_NOTES" >> $GITHUB_OUTPUT
+
+      # Step 5: Create a zip archive of the current directory contents
       - name: Create zip file
-        run: zip -r cain.zip .
+        run: zip -r perfectdraw.zip . -x ".git/*" # Exclude .git folder
 
+      # Step 6: Create the GitHub Release
       - name: Create Release
         uses: ncipollo/release-action@v1.14.0
         with:
+          # Tag for the release (e.g., v1.2.3)
           tag: v${{ steps.get_version.outputs.version }}
+          # Name of the release (e.g., Release 1.2.3)
           name: Release ${{ steps.get_version.outputs.version }}
-          body: |
-            ## Changes in this release
-            - Pull Request #${{ steps.pr_details.outputs.pr_number }}: ${{ steps.pr_details.outputs.pr_title }}
-            - ${{ steps.pr_details.outputs.pr_body }}
-          generateReleaseNotes: true
+          # Body content determined in the previous step
+          body: ${{ steps.set_body.outputs.release_body }}
+          # Do not auto-generate notes; use the custom body provided above
+          # generateReleaseNotes: false # This is the default when 'body' is provided
+          # Mark this as the latest release
           makeLatest: true
+          # Artifacts to upload with the release
           artifacts: perfectdraw.zip
+          # GitHub token to authenticate API calls
           token: ${{ secrets.GITHUB_TOKEN }}
+          # Allow updating an existing release with the same tag
           allowUpdates: true
+          # Replace existing artifacts if the release is updated
           replacesArtifacts: true
