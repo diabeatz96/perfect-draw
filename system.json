@@ -1,33 +1,37 @@
 {
   "id": "perfect-draw",
   "title": "Perfect Draw",
-  "description": "The Perfect Draw system for FoundryVTT!",
+  "description": "Perfect Draw! is a tabletop role-playing game based on the Powered By The Apocalypse framework that combines Trading Card Games with collaborative storytelling - allowing you to tell stories similar to card game anime like Yu-Gi-Oh!, Duel Masters, and CardFight! Vanguard",
   "authors": [
     {
-      "name": "Asacolips",
-      "discord": "asacolips"
+      "name": "Adam Kostandy - (Developer)",
+      "discord": "adamkostandy"
     },
     {
-      "name": "Lee Talman",
-      "discord": ".pizzaWizard"
+      "name": "Norae - Lead Designer",
+      "discord": "continuityand"
+    },
+    {
+      "name": "Iris Saintclaire - Co-Writer / Editor",
+      "discord": "observances"
     }
   ],
-  "url": "Replace this with a link to your public repository",
+  "url": "https://github.com/diabeatz96/perfect-draw",
   "license": "LICENSE.txt",
   "readme": "README.md",
-  "bugs": "Replace this with a link to file issues or tickets",
+  "bugs": "https://github.com/diabeatz96/perfect-draw/issues",
   "changelog": "CHANGELOG.md",
   "media": [
     {
       "type": "setup",
-      "url": "systems/perfect-draw/assets/anvil-impact.png",
-      "thumbnail": "systems/perfect-draw/assets/anvil-impact.png"
+      "url": "systems/perfect-draw/assets/Perfect_Draw_Logo.png",
+      "thumbnail": "systems/perfect-draw/assets/Perfect_Draw_Logo.png"
     }
   ],
-  "version": "2.0.0",
+  "version": "0.0.1",
   "compatibility": {
     "minimum": 11,
-    "verified": "11.315"
+    "verified": "12"
   },
   "esmodules": ["module/perfect-draw.mjs"],
   "styles": ["css/perfect-draw.css"],
@@ -40,8 +44,8 @@
   ],
   "packs": [],
   "packFolders": [],
-  "socket": false,
-  "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
+  "socket": true,
+  "manifest": "https://noorasphere.itch.io/perfect-draw-ttrpg",
   "download": "This must link to a .zip file of the current version",
   "background": "systems/perfect-draw/assets/anvil-impact.png",
   "gridDistance": 5,
