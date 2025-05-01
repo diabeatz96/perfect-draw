@@ -65,7 +65,27 @@
     "linked_options": "Linked Options",
     "linked_options.item": "Option",
     "notes": "Notes"
+  },
+    "Card": {
+    "id": "Card ID",
+    "name": "Card Name",
+    "type": "Card Type",
+    "strength": "Strength",
+    "is_ace": "Ace Card",
+    "keywords": "Keywords",
+    "keywords.item": "Keyword",
+    "effect_text": "Effect Text",
+    "weakness_text": "Weakness Text",
+    "type_attributes": "Type Attributes",
+    "type_attributes.item": "Attribute",
+    "ribbon_effect_text": "Ribbon Effect Text",
+    "ep_cost": "Effect Point Cost",
+    "base_ep": "Base Effect Points",
+    "source_playbook_id": "Source Playbook",
+    "mini_deck_name": "Mini-Deck Name",
+    "retheme_description": "Retheme Description"
   }
+  
   },
 
   "TYPES": {
