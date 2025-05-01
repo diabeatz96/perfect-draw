@@ -1,22 +1,49 @@
 {
   "PERFECT_DRAW": {
-    "Ability": {
-      "Str": { "long": "Strength", "abbr": "str" },
-      "Con": { "long": "Constitution", "abbr": "con" },
-      "Dex": { "long": "Dexterity", "abbr": "dex" },
-      "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Wisdom", "abbr": "wis" },
-      "Cha": { "long": "Charisma", "abbr": "cha" }
-    },
     "SheetLabels": {
       "Actor": "PerfectDraw Actor Sheet",
       "Item": "PerfectDraw Item Sheet"
     },
+    "Move": {
+      "id": "Move ID",
+      "name": "Move Name",
+      "description": "Description",
+      "type": "Move Type",
+      "card_game_only": "Card Game Only",
+      "roll_stat": "Roll Stat",
+      "outcomes": "Outcomes",
+      "outcomes.10plus": "10+ Outcome",
+      "outcomes.7_9": "7-9 Outcome",
+      "outcomes.6minus": "6- Outcome",
+      "specific_effects": "Specific Effects",
+      "card_details": "Card Details",
+      "card_details.type": "Card Type",
+      "card_details.features": "Card Features",
+      "associated_abilities": "Associated Abilities",
+      "associated_abilities.item": "Ability",
+      "usage_limits": "Usage Limits",
+      "gimmick_association": "Gimmick Association",
+      "notes": "Notes"
+    },
+    "Keyword": {
+      "id": "Keyword ID",
+      "name": "Keyword Name",
+      "category": "Category",
+      "source_book": "Source Book",
+      "description": "Description",
+      "detailed_rules": "Detailed Rules",
+      "custom_card_costing_guidance": "Custom Card Costing Guidance",
+      "notes_for_judge": "Notes for Judge"
+    },
+    "Baggage": {
+    "id": "Baggage ID",
+    "character_id": "Character ID",
+    "description": "Description",
+    "is_serious": "Serious Baggage",
+    "gain_source": "Gain Source",
+    "notes": "Notes"
+  },
     "Item": {
-      "Spell": {
-        "SpellLVL": "Level {level} Spells",
-        "AddLVL": "Add LVL {level}"
-      }
     },
     "Effect": {
       "Source": "Source",
@@ -24,7 +51,21 @@
       "Temporary": "Temporary Effects",
       "Passive": "Passive Effects",
       "Inactive": "Inactive Effects"
-    }
+    },
+    "Ability": {
+    "id": "Ability ID",
+    "name": "Ability Name",
+    "description": "Description",
+    "playbook_origin": "Playbook Origin",
+    "selection_type": "Selection Type",
+    "requirements": "Requirements",
+    "requirements.item": "Required Ability",
+    "tags": "Tags",
+    "tags.item": "Tag",
+    "linked_options": "Linked Options",
+    "linked_options.item": "Option",
+    "notes": "Notes"
+  }
   },
 
   "TYPES": {
