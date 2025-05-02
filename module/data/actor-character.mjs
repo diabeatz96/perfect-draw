@@ -59,7 +59,12 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
     });
 
     // These fields are flexible objects, but you should use the imported models for validation/manipulation elsewhere
-    schema.stats_data = new fields.SchemaField({}, { required: false, label: "PERFECT_DRAW.Character.stats_data" });
+    schema.stats_data = new fields.SchemaField({
+      passion: new fields.NumberField({ required: false, label: "PERFECT_DRAW.Character.stats_data.passion" }),
+      skill: new fields.NumberField({ required: false, label: "PERFECT_DRAW.Character.stats_data.skill" }),
+      friendship: new fields.NumberField({ required: false, label: "PERFECT_DRAW.Character.stats_data.friendship" }),
+      life_points: new fields.NumberField({ required: false, label: "PERFECT_DRAW.Character.stats_data.life_points" }),
+    }, { required: false, label: "PERFECT_DRAW.Character.stats_data" });
     schema.baggage_data = new fields.SchemaField({}, { required: false, label: "PERFECT_DRAW.Character.baggage_data" });
     schema.deck_details = new fields.SchemaField({}, { required: false, label: "PERFECT_DRAW.Character.deck_details" });
 

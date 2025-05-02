@@ -5,6 +5,8 @@
  */
 export const preloadHandlebarsTemplates = async function () {
   return loadTemplates([
-    // Actor partials.
+    // Actor Partials
+
+    // Item Partials
   ]);
 };

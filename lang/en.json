@@ -12,6 +12,7 @@
       "card_game_only": "Card Game Only",
       "roll_stat": "Roll Stat",
       "outcomes": {
+        "label": "Outcomes",
         "10plus": "10+ Outcome",
         "7_9": "7-9 Outcome",
         "6minus": "6- Outcome"

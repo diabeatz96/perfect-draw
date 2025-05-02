@@ -9,13 +9,15 @@ export default class PerfectDrawStaple extends PerfectDrawItemBase {
     schema.name = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Staple.name"
+      label: "PERFECT_DRAW.Staple.name",
+      initial: "New Staple"
     }); // Staple name
 
     schema.type = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Staple.type"
+      label: "PERFECT_DRAW.Staple.type",
+      initial: "generic",
     }); // 'Generic' or 'Playbook'
 
     schema.source_playbook_id = new fields.StringField({
@@ -23,12 +25,6 @@ export default class PerfectDrawStaple extends PerfectDrawItemBase {
       blank: true,
       label: "PERFECT_DRAW.Staple.source_playbook_id"
     }); // Playbook reference (optional)
-
-    schema.description = new fields.HTMLField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Staple.description"
-    }); // Mechanical effect
 
     schema.keywords = new fields.ArrayField(
       new fields.StringField({ required: false, blank: true, label: "PERFECT_DRAW.Staple.keywords.item" }),
