@@ -13,14 +13,8 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
     const fields = foundry.data.fields;
     const schema = super.defineSchema();
 
-    schema.id = new fields.StringField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Character.id"
-    });
-
     schema.name = new fields.StringField({
-      required: true,
+      required: false,
       blank: false,
       label: "PERFECT_DRAW.Character.name"
     });
@@ -32,8 +26,8 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
     });
 
     schema.playbook = new fields.StringField({
-      required: true,
-      blank: false,
+      required: false,
+      blank: true,
       label: "PERFECT_DRAW.Character.playbook"
     });
 
@@ -138,23 +132,65 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
     return schema;
   }
 
-  /**
-   * Example: Integrate with data models for validation, population, or transformation.
-   * You can use the imported models (PerfectDrawPlaybook, PerfectDrawAbility, etc.)
-   * to fetch, validate, or enrich the character's playbook, abilities, staples, cards, etc.
-   * For example, when loading a character, you might populate their abilities with
-   * full data from the Ability model based on the stored IDs.
-   */
 
-  prepareDerivedData() {
-    // Example: You could resolve ability IDs to full ability objects here
-    // this.abilities = this.abilities.map(id => fetchAbilityById(id));
-    // Or resolve playbook, staples, etc.
+  async prepareDerivedData() {
+    // Resolve playbook object
+    if (this.playbook) {
+      this.playbookData = await PerfectDrawPlaybook.findById?.(this.playbook) || null;
+    }
+
+    // Resolve full ability objects
+    if (Array.isArray(this.abilities)) {
+      this.abilityData = await Promise.all(
+        this.abilities.map(id => PerfectDrawAbility.findById?.(id))
+      );
+    }
+
+    // Resolve staple objects
+    if (Array.isArray(this.staples)) {
+      this.stapleData = await Promise.all(
+        this.staples.map(staple =>
+          staple.id ? PerfectDrawStaple.findById?.(staple.id) : null
+        )
+      );
+    }
+
+    // Resolve cards in deck_details (if using card IDs)
+    if (this.deck_details?.cards && Array.isArray(this.deck_details.cards)) {
+      this.cardData = await Promise.all(
+        this.deck_details.cards.map(cardId =>
+          typeof cardId === "string"
+            ? PerfectDrawCard.findById?.(cardId)
+            : cardId // already a card object
+        )
+      );
+    }
+
+    // Resolve baggage objects (if using baggage IDs)
+    if (this.baggage_data?.normal && Array.isArray(this.baggage_data.normal)) {
+      this.baggageNormalData = await Promise.all(
+        this.baggage_data.normal.map(baggageId =>
+          typeof baggageId === "string"
+            ? PerfectDrawBaggage.findById?.(baggageId)
+            : baggageId // already a baggage object
+        )
+      );
+    }
+    if (this.baggage_data?.serious && Array.isArray(this.baggage_data.serious)) {
+      this.baggageSeriousData = await Promise.all(
+        this.baggage_data.serious.map(baggageId =>
+          typeof baggageId === "string"
+            ? PerfectDrawBaggage.findById?.(baggageId)
+            : baggageId
+        )
+      );
+    }
   }
 
   getRollData() {
     // Populate roll data as needed for your system
     const data = {};
+    if (this.stats_data) Object.assign(data, this.stats_data);
     return data;
   }
 }

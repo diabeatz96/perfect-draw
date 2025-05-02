@@ -6,22 +6,19 @@ export default class PerfectDrawCard extends PerfectDrawItemBase {
     const fields = foundry.data.fields;
     const schema = {};
 
-    schema.id = new fields.StringField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Card.id"
-    }); // Unique identifier
 
     schema.name = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Card.name"
+      label: "PERFECT_DRAW.Card.name",
+      initial: "none" // Source book
     }); // Display name
 
     schema.type = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Card.type"
+      label: "PERFECT_DRAW.Card.type",
+      initial: "generic"
     }); // Card type: Warrior, Item, Invocation
 
     schema.strength = new fields.StringField({
@@ -44,7 +41,8 @@ export default class PerfectDrawCard extends PerfectDrawItemBase {
     schema.effect_text = new fields.HTMLField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Card.effect_text"
+      label: "PERFECT_DRAW.Card.effect_text",
+      initial: "none" // Source book
     }); // Card effect description
 
     schema.weakness_text = new fields.HTMLField({
@@ -66,12 +64,14 @@ export default class PerfectDrawCard extends PerfectDrawItemBase {
 
     schema.ep_cost = new fields.NumberField({
       required: true,
-      label: "PERFECT_DRAW.Card.ep_cost"
+      label: "PERFECT_DRAW.Card.ep_cost",
+      initial: 0 // Total Effect Point cost
     }); // Total Effect Point cost
 
     schema.base_ep = new fields.NumberField({
       required: true,
-      label: "PERFECT_DRAW.Card.base_ep"
+      label: "PERFECT_DRAW.Card.base_ep",
+      initial: 0 // Base Effect Points
     }); // Base Effect Points
 
     schema.source_playbook_id = new fields.StringField({
@@ -98,5 +98,5 @@ export default class PerfectDrawCard extends PerfectDrawItemBase {
     static async findById(id) {
     return game.items?.find(i => i.type === "card" && i.system?.id === id) ?? null;
   }
-  
+
 }

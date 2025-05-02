@@ -6,22 +6,18 @@ export default class PerfectDrawPlaybook extends PerfectDrawItemBase {
     const fields = foundry.data.fields;
     const schema = {};
 
-    schema.id = new fields.StringField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Playbook.id"
-    }); // Unique identifier
-
     schema.name = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Playbook.name"
+      label: "PERFECT_DRAW.Playbook.name",
+      initial: "none" // Source book
     }); // Display name
 
     schema.description = new fields.HTMLField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Playbook.description"
+      label: "PERFECT_DRAW.Playbook.description",
+      initial: "none" // Source book
     }); // Narrative concept/theme
 
     schema.example_archetypes = new fields.ArrayField(
@@ -83,24 +79,28 @@ export default class PerfectDrawPlaybook extends PerfectDrawItemBase {
     schema.starting_staple_id = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Playbook.starting_staple_id"
+      label: "PERFECT_DRAW.Playbook.starting_staple_id",
+      initial: "none" // Source book
     }); // Playbook staple
 
     schema.initial_generic_staple_count = new fields.NumberField({
       required: true,
-      label: "PERFECT_DRAW.Playbook.initial_generic_staple_count"
+      label: "PERFECT_DRAW.Playbook.initial_generic_staple_count",
+      initial: 0
     }); // Generic staples count
 
     schema.baggage_rule_description = new fields.HTMLField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Playbook.baggage_rule_description"
+      label: "PERFECT_DRAW.Playbook.baggage_rule_description",
+      initial: "none" // Source book
     }); // Baggage rules
 
     schema.deck_rule_description = new fields.HTMLField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Playbook.deck_rule_description"
+      label: "PERFECT_DRAW.Playbook.deck_rule_description",
+      initial: "none" // Source book
     }); // Deck rules
 
     schema.unique_mechanics = new fields.SchemaField({

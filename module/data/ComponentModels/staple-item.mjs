@@ -6,12 +6,6 @@ export default class PerfectDrawStaple extends PerfectDrawItemBase {
     const fields = foundry.data.fields;
     const schema = {};
 
-    schema.id = new fields.StringField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Staple.id"
-    }); // Unique identifier
-
     schema.name = new fields.StringField({
       required: true,
       blank: false,
@@ -57,5 +51,5 @@ export default class PerfectDrawStaple extends PerfectDrawItemBase {
     static async findById(id) {
     return game.items?.find(i => i.type === "staple" && i.system?.id === id) ?? null;
   }
-  
+
 }

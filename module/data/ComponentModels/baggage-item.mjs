@@ -6,16 +6,11 @@ export default class PerfectDrawBaggage extends PerfectDrawItemBase {
     const fields = foundry.data.fields;
     const schema = {};
 
-    schema.id = new fields.StringField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Baggage.id"
-    }); // Unique identifier for this baggage instance
-
     schema.character_id = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Baggage.character_id"
+      label: "PERFECT_DRAW.Baggage.character_id",
+      initial: "unknown"
     }); // Reference to the Player Character ID
 
     schema.is_serious = new fields.BooleanField({
@@ -42,5 +37,5 @@ export default class PerfectDrawBaggage extends PerfectDrawItemBase {
     static async findById(id) {
     return game.items?.find(i => i.type === "baggage" && i.system?.id === id) ?? null;
   }
-  
+
 }

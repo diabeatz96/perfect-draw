@@ -6,40 +6,38 @@ export default class PerfectDrawMove extends PerfectDrawItemBase {
     const fields = foundry.data.fields;
     const schema = {};
 
-    schema.id = new fields.StringField({ 
-      required: true, 
-      blank: false, 
-      label: "PERFECT_DRAW.Move.id" 
-    }); // Unique identifier
-
     schema.name = new fields.StringField({ 
       required: true, 
       blank: false, 
-      label: "PERFECT_DRAW.Move.name" 
+      label: "PERFECT_DRAW.Move.name",
+      initial: "none" // Source book
     }); // Display name
 
     schema.description = new fields.HTMLField({ 
       required: true, 
       blank: false, 
-      label: "PERFECT_DRAW.Move.description" 
+      label: "PERFECT_DRAW.Move.description",
+      initial: "none" // Source book
     }); // Narrative/mechanical description
 
     schema.type = new fields.StringField({ 
       required: true, 
       blank: false, 
-      label: "PERFECT_DRAW.Move.type" 
+      label: "PERFECT_DRAW.Move.type",
+      initial: "generic" // Move type: Basic, Advanced, etc.
     }); // Move category
 
     schema.card_game_only = new fields.BooleanField({ 
       required: true, 
       initial: false, 
-      label: "PERFECT_DRAW.Move.card_game_only" 
+      label: "PERFECT_DRAW.Move.card_game_only"
     }); // Card combat only?
 
     schema.roll_stat = new fields.StringField({ 
       required: true, 
       blank: false, 
-      label: "PERFECT_DRAW.Move.roll_stat" 
+      label: "PERFECT_DRAW.Move.roll_stat", 
+      initial: "passion" // Attribute used for roll
     }); // Attribute used for roll
 
     schema.outcomes = new fields.SchemaField({

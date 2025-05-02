@@ -6,34 +6,32 @@ export default class PerfectDrawKeyword extends PerfectDrawItemBase {
     const fields = foundry.data.fields;
     const schema = {};
 
-    schema.id = new fields.StringField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Keyword.id"
-    }); // Unique identifier
-
     schema.name = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Keyword.name"
+      label: "PERFECT_DRAW.Keyword.name",
+      initial: "none" // Source book
     }); // Keyword name
 
     schema.category = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Keyword.category"
+      label: "PERFECT_DRAW.Keyword.category",
+      initial: "generic"
     }); // Keyword category
 
     schema.source_book = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Keyword.source_book"
+      label: "PERFECT_DRAW.Keyword.source_book",
+      initial: "none" // Source book
     }); // Source publication
 
     schema.description = new fields.HTMLField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Keyword.description"
+      label: "PERFECT_DRAW.Keyword.description",
+      initial: "none" // Source book
     }); // Brief summary
 
     schema.detailed_rules = new fields.HTMLField({

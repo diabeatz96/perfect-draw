@@ -11,16 +11,21 @@
       "type": "Move Type",
       "card_game_only": "Card Game Only",
       "roll_stat": "Roll Stat",
-      "outcomes": "Outcomes",
-      "outcomes.10plus": "10+ Outcome",
-      "outcomes.7_9": "7-9 Outcome",
-      "outcomes.6minus": "6- Outcome",
+      "outcomes": {
+        "10plus": "10+ Outcome",
+        "7_9": "7-9 Outcome",
+        "6minus": "6- Outcome"
+      },
       "specific_effects": "Specific Effects",
-      "card_details": "Card Details",
-      "card_details.type": "Card Type",
-      "card_details.features": "Card Features",
-      "associated_abilities": "Associated Abilities",
-      "associated_abilities.item": "Ability",
+      "card_details": {
+        "label": "Card Details",
+        "type": "Card Type",
+        "features": "Card Features"
+      },
+      "associated_abilities": {
+        "label": "Associated Abilities",
+        "item": "Ability"
+      },
       "usage_limits": "Usage Limits",
       "gimmick_association": "Gimmick Association",
       "notes": "Notes"
@@ -36,14 +41,12 @@
       "notes_for_judge": "Notes for Judge"
     },
     "Baggage": {
-    "id": "Baggage ID",
-    "character_id": "Character ID",
-    "description": "Description",
-    "is_serious": "Serious Baggage",
-    "gain_source": "Gain Source",
-    "notes": "Notes"
-  },
-    "Item": {
+      "id": "Baggage ID",
+      "character_id": "Character ID",
+      "description": "Description",
+      "is_serious": "Serious Baggage",
+      "gain_source": "Gain Source",
+      "notes": "Notes"
     },
     "Effect": {
       "Source": "Source",
@@ -53,110 +56,178 @@
       "Inactive": "Inactive Effects"
     },
     "Ability": {
-    "id": "Ability ID",
-    "name": "Ability Name",
-    "description": "Description",
-    "playbook_origin": "Playbook Origin",
-    "selection_type": "Selection Type",
-    "requirements": "Requirements",
-    "requirements.item": "Required Ability",
-    "tags": "Tags",
-    "tags.item": "Tag",
-    "linked_options": "Linked Options",
-    "linked_options.item": "Option",
-    "notes": "Notes"
-  },
+      "id": "Ability ID",
+      "name": "Ability Name",
+      "description": "Description",
+      "playbook_origin": "Playbook Origin",
+      "selection_type": "Selection Type",
+      "requirements": {
+        "label": "Requirements",
+        "item": "Required Ability"
+      },
+      "tags": {
+        "label": "Tags",
+        "item": "Tag"
+      },
+      "linked_options": {
+        "label": "Linked Options",
+        "item": "Option"
+      },
+      "notes": "Notes"
+    },
     "Card": {
-    "id": "Card ID",
-    "name": "Card Name",
-    "type": "Card Type",
-    "strength": "Strength",
-    "is_ace": "Ace Card",
-    "keywords": "Keywords",
-    "keywords.item": "Keyword",
-    "effect_text": "Effect Text",
-    "weakness_text": "Weakness Text",
-    "type_attributes": "Type Attributes",
-    "type_attributes.item": "Attribute",
-    "ribbon_effect_text": "Ribbon Effect Text",
-    "ep_cost": "Effect Point Cost",
-    "base_ep": "Base Effect Points",
-    "source_playbook_id": "Source Playbook",
-    "mini_deck_name": "Mini-Deck Name",
-    "retheme_description": "Retheme Description"
-  },
+      "id": "Card ID",
+      "name": "Card Name",
+      "type": "Card Type",
+      "strength": "Strength",
+      "is_ace": "Ace Card",
+      "keywords": {
+        "label": "Keywords",
+        "item": "Keyword"
+      },
+      "effect_text": "Effect Text",
+      "weakness_text": "Weakness Text",
+      "type_attributes": {
+        "label": "Type Attributes",
+        "item": "Attribute"
+      },
+      "ribbon_effect_text": "Ribbon Effect Text",
+      "ep_cost": "Effect Point Cost",
+      "base_ep": "Base Effect Points",
+      "source_playbook_id": "Source Playbook",
+      "mini_deck_name": "Mini-Deck Name",
+      "retheme_description": "Retheme Description"
+    },
     "Staple": {
-    "id": "Staple ID",
-    "name": "Staple Name",
-    "type": "Staple Type",
-    "source_playbook_id": "Source Playbook",
-    "description": "Description",
-    "keywords": "Keywords",
-    "keywords.item": "Keyword",
-    "limitations": "Limitations",
-    "limitations.item": "Limitation",
-    "energy_cost_equivalent": "Energy Cost Equivalent"
+      "id": "Staple ID",
+      "name": "Staple Name",
+      "type": "Staple Type",
+      "source_playbook_id": "Source Playbook",
+      "description": "Description",
+      "keywords": {
+        "label": "Keywords",
+        "item": "Keyword"
+      },
+      "limitations": {
+        "label": "Limitations",
+        "item": "Limitation"
+      },
+      "energy_cost_equivalent": "Energy Cost Equivalent"
+    },
+    "Playbook": {
+      "id": "Playbook ID",
+      "name": "Playbook Name",
+      "description": "Description",
+      "example_archetypes": {
+        "label": "Example Archetypes",
+        "item": "Archetype"
+      },
+      "look_suggestions": {
+        "label": "Look Suggestions",
+        "hair": {
+          "label": "Hair",
+          "item": "Hair Option"
+        },
+        "clothes": {
+          "label": "Clothes",
+          "item": "Clothes Option"
+        },
+        "game_tools": {
+          "label": "Game Tools",
+          "item": "Game Tool Option"
+        },
+        "other": {
+          "label": "Other",
+          "item": "Other Option"
+        }
+      },
+      "initial_stats": {
+        "label": "Initial Stats",
+        "passion": "Passion",
+        "skill": "Skill",
+        "friendship": "Friendship"
+      },
+      "initial_stat_rule_description": "Initial Stat Rule Description",
+      "struggles_questions": {
+        "label": "Struggles Questions",
+        "item": "Struggle Question"
+      },
+      "friends_questions": {
+        "label": "Friends Questions",
+        "item": "Friends Question"
+      },
+      "initial_abilities": {
+        "label": "Initial Abilities",
+        "item": "Ability"
+      },
+      "available_abilities": {
+        "label": "Available Abilities",
+        "item": "Ability"
+      },
+      "starting_staple_id": "Starting Staple",
+      "initial_generic_staple_count": "Initial Generic Staple Count",
+      "baggage_rule_description": "Baggage Rule Description",
+      "deck_rule_description": "Deck Rule Description",
+      "unique_mechanics": {
+        "label": "Unique Mechanics",
+        "has_destruction_track": "Has Destruction Track",
+        "has_alignment_track": "Has Alignment Track",
+        "has_prep_resource": "Has Prep Resource",
+        "has_lessons_mechanic": "Has Lessons Mechanic",
+        "has_terrible_things_mechanic": "Has Terrible Things Mechanic",
+        "is_crew_playbook": "Is Crew Playbook",
+        "is_other_me_playbook": "Is Other Me Playbook",
+        "requires_host_playbook": "Requires Host Playbook",
+        "has_multiple_personas": "Has Multiple Personas",
+        "has_protege": "Has Protégé",
+        "has_pet_option": "Has Pet Option",
+        "has_contacts_option": "Has Contacts Option"
+      },
+      "advancement_notes": "Advancement Notes",
+      "judge_advice": "Judge Advice"
+    },
+    "NPC": {
+      "id": "NPC ID",
+      "name": "NPC Name",
+      "pronouns": "Pronouns",
+      "description": "Description",
+      "gimmick": "Gimmick",
+      "establish_plan_moves": "Establish Plan Moves",
+      "power_card_moves": "Power Card Moves",
+      "simple_card_moves": "Simple Card Moves",
+      "response_moves": "Response Moves",
+      "threat_moves": "Threat Moves",
+      "example_card_names": "Example Card Names",
+      "affiliated_organization_id": "Affiliated Organization",
+      "player_relationships": "Player Relationships",
+      "npc_relationships": "NPC Relationships",
+      "plots": "Plots",
+      "specific_playbook_data": {
+        "label": "Specific Playbook Data",
+        "is_crew_member": "Is Crew Member",
+        "crew_stats": "Crew Stats",
+        "crew_mini_deck_ids": "Crew Mini-Deck IDs",
+        "is_spirit_host": "Is Spirit Host",
+        "spirit_player_id": "Spirit Player ID",
+        "crew_temporary_member_skills": "Crew Temporary Member Skills"
+      },
+      "playbook_id": "Playbook ID",
+      "move_ids": "Move IDs"
+    }
   },
-  "Playbook": {
-  "id": "Playbook ID",
-  "name": "Playbook Name",
-  "description": "Description",
-  "example_archetypes": "Example Archetypes",
-  "example_archetypes.item": "Archetype",
-  "look_suggestions": "Look Suggestions",
-  "look_suggestions.hair": "Hair",
-  "look_suggestions.hair.item": "Hair Option",
-  "look_suggestions.clothes": "Clothes",
-  "look_suggestions.clothes.item": "Clothes Option",
-  "look_suggestions.game_tools": "Game Tools",
-  "look_suggestions.game_tools.item": "Game Tool Option",
-  "look_suggestions.other": "Other",
-  "look_suggestions.other.item": "Other Option",
-  "initial_stats": "Initial Stats",
-  "initial_stats.passion": "Passion",
-  "initial_stats.skill": "Skill",
-  "initial_stats.friendship": "Friendship",
-  "initial_stat_rule_description": "Initial Stat Rule Description",
-  "struggles_questions": "Struggles Questions",
-  "struggles_questions.item": "Struggle Question",
-  "friends_questions": "Friends Questions",
-  "friends_questions.item": "Friends Question",
-  "initial_abilities": "Initial Abilities",
-  "initial_abilities.item": "Ability",
-  "available_abilities": "Available Abilities",
-  "available_abilities.item": "Ability",
-  "starting_staple_id": "Starting Staple",
-  "initial_generic_staple_count": "Initial Generic Staple Count",
-  "baggage_rule_description": "Baggage Rule Description",
-  "deck_rule_description": "Deck Rule Description",
-  "unique_mechanics": "Unique Mechanics",
-  "unique_mechanics.has_destruction_track": "Has Destruction Track",
-  "unique_mechanics.has_alignment_track": "Has Alignment Track",
-  "unique_mechanics.has_prep_resource": "Has Prep Resource",
-  "unique_mechanics.has_lessons_mechanic": "Has Lessons Mechanic",
-  "unique_mechanics.has_terrible_things_mechanic": "Has Terrible Things Mechanic",
-  "unique_mechanics.is_crew_playbook": "Is Crew Playbook",
-  "unique_mechanics.is_other_me_playbook": "Is Other Me Playbook",
-  "unique_mechanics.requires_host_playbook": "Requires Host Playbook",
-  "unique_mechanics.has_multiple_personas": "Has Multiple Personas",
-  "unique_mechanics.has_protege": "Has Protégé",
-  "unique_mechanics.has_pet_option": "Has Pet Option",
-  "unique_mechanics.has_contacts_option": "Has Contacts Option",
-  "advancement_notes": "Advancement Notes",
-  "judge_advice": "Judge Advice"
-}
-
-  },
-
   "TYPES": {
     "Actor": {
       "character": "Duelist",
       "npc": "NPC"
     },
     "Item": {
-      "item": "Item",
-      "feature": "Feature",
-      "spell": "Spell"
+      "ability": "Ability",
+      "baggage": "Baggage",
+      "card": "Card",
+      "staple": "Staple",
+      "keyword": "Keyword",
+      "playbook": "Playbook",
+      "move": "Move"
     }
   }
 }

@@ -6,34 +6,24 @@ export default class PerfectDrawAbility extends PerfectDrawItemBase {
     const fields = foundry.data.fields;
     const schema = {};
 
-    schema.id = new fields.StringField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Ability.id"
-    }); // Unique identifier
-
     schema.name = new fields.StringField({
-      required: true,
+      required: false,
       blank: false,
       label: "PERFECT_DRAW.Ability.name"
     }); // Display name
 
-    schema.description = new fields.HTMLField({
-      required: true,
-      blank: false,
-      label: "PERFECT_DRAW.Ability.description"
-    }); // Full rules text
-
     schema.playbook_origin = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Ability.playbook_origin"
+      label: "PERFECT_DRAW.Ability.playbook_origin",
+      initial: "generic"
     }); // Playbook association
 
     schema.selection_type = new fields.StringField({
       required: true,
       blank: false,
-      label: "PERFECT_DRAW.Ability.selection_type"
+      label: "PERFECT_DRAW.Ability.selection_type",
+      initial: "none"
     }); // How the ability is obtained
 
     schema.requirements = new fields.ArrayField(

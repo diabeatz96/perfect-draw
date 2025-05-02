@@ -44,7 +44,13 @@ Hooks.once('init', function () {
 
   CONFIG.Item.documentClass = PerfectDrawItem;
   CONFIG.Item.dataModels = {
-
+    ability: models.PerfectDrawAbility,
+    baggage: models.PerfectDrawBaggage,
+    card: models.PerfectDrawCard,
+    staple: models.PerfectDrawStaple,
+    keyword: models.PerfectDrawKeyword,
+    playbook: models.PerfectDrawPlaybook,
+    move: models.PerfectDrawMove
   }
 
   // Active Effects are never copied to the Actor,
