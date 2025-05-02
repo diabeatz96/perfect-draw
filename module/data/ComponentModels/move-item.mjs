@@ -85,4 +85,8 @@ export default class PerfectDrawMove extends PerfectDrawItemBase {
     return schema;
   }
 
+    static async findById(id) {
+    return game.items?.find(i => i.type === "move" && i.system?.id === id) ?? null;
+  }
+
 }

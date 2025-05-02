@@ -95,4 +95,8 @@ export default class PerfectDrawCard extends PerfectDrawItemBase {
     return schema;
   }
 
+    static async findById(id) {
+    return game.items?.find(i => i.type === "card" && i.system?.id === id) ?? null;
+  }
+  
 }

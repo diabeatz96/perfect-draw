@@ -57,4 +57,8 @@ export default class PerfectDrawKeyword extends PerfectDrawItemBase {
     return schema;
   }
 
+  static async findById(id) {
+    return game.items?.find(i => i.type === "keyword" && i.system?.id === id) ?? null;
+  }
+
 }

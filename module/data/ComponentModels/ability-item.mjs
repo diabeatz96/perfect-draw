@@ -6,6 +6,12 @@ export default class PerfectDrawAbility extends PerfectDrawItemBase {
     const fields = foundry.data.fields;
     const schema = {};
 
+    schema.id = new fields.StringField({
+      required: true,
+      blank: false,
+      label: "PERFECT_DRAW.Ability.id"
+    }); // Unique identifier
+
     schema.name = new fields.StringField({
       required: true,
       blank: false,
@@ -52,6 +58,14 @@ export default class PerfectDrawAbility extends PerfectDrawItemBase {
     }); // Judge/thematic notes
 
     return schema;
+  }
+
+  static async findById(id) {
+    // Example: search all items of type "ability" in the world
+    const ability = game.items?.find(
+      i => i.type === "ability" && i.system?.id === id
+    );
+    return ability?.system ?? null;
   }
 
 }
