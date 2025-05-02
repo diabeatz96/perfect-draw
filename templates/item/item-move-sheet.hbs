@@ -35,7 +35,6 @@
           engine="prosemirror"
           button=true
           editable=editable
-          style="min-height:120px;max-height:200px;overflow:auto;"
         }}
       </div>
     </div>
@@ -44,13 +43,13 @@
       <div class="form-group">
         <label>{{localize "PERFECT_DRAW.Move.type"}}</label>
         <select name="system.type">
-          <option value="general-player" {{#if (eq system.type "general-player")}}selected{{/if}}>General Player</option>
-          <option value="card-combat-player" {{#if (eq system.type "card-combat-player")}}selected{{/if}}>Card Combat Player</option>
-          <option value="npc-establish-plan" {{#if (eq system.type "npc-establish-plan")}}selected{{/if}}>NPC Establish Plan</option>
-          <option value="npc-power-card" {{#if (eq system.type "npc-power-card")}}selected{{/if}}>NPC Power Card</option>
-          <option value="npc-simple-card" {{#if (eq system.type "npc-simple-card")}}selected{{/if}}>NPC Simple Card</option>
-          <option value="npc-response" {{#if (eq system.type "npc-response")}}selected{{/if}}>NPC Response</option>
-          <option value="npc-threat" {{#if (eq system.type "npc-threat")}}selected{{/if}}>NPC Threat</option>
+          <option value="general-player" {{#if (eq system.type "general-player")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.typeOptions.general-player"}}</option>
+          <option value="card-combat-player" {{#if (eq system.type "card-combat-player")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.typeOptions.card-combat-player"}}</option>
+          <option value="npc-establish-plan" {{#if (eq system.type "npc-establish-plan")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.typeOptions.npc-establish-plan"}}</option>
+          <option value="npc-power-card" {{#if (eq system.type "npc-power-card")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.typeOptions.npc-power-card"}}</option>
+          <option value="npc-simple-card" {{#if (eq system.type "npc-simple-card")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.typeOptions.npc-simple-card"}}</option>
+          <option value="npc-response" {{#if (eq system.type "npc-response")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.typeOptions.npc-response"}}</option>
+          <option value="npc-threat" {{#if (eq system.type "npc-threat")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.typeOptions.npc-threat"}}</option>
         </select>
       </div>
       <div class="form-group">
@@ -60,11 +59,11 @@
       <div class="form-group">
         <label>{{localize "PERFECT_DRAW.Move.roll_stat"}}</label>
         <select name="system.roll_stat">
-          <option value="Passion" {{#if (eq system.roll_stat "Passion")}}selected{{/if}}>Passion</option>
-          <option value="Skill" {{#if (eq system.roll_stat "Skill")}}selected{{/if}}>Skill</option>
-          <option value="Friendship" {{#if (eq system.roll_stat "Friendship")}}selected{{/if}}>Friendship</option>
-          <option value="Tension" {{#if (eq system.roll_stat "Tension")}}selected{{/if}}>Tension</option>
-          <option value="None" {{#if (eq system.roll_stat "None")}}selected{{/if}}>None</option>
+          <option value="Passion" {{#if (eq system.roll_stat "Passion")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.rollStatOptions.Passion"}}</option>
+          <option value="Skill" {{#if (eq system.roll_stat "Skill")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.rollStatOptions.Skill"}}</option>
+          <option value="Friendship" {{#if (eq system.roll_stat "Friendship")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.rollStatOptions.Friendship"}}</option>
+          <option value="Tension" {{#if (eq system.roll_stat "Tension")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.rollStatOptions.Tension"}}</option>
+          <option value="None" {{#if (eq system.roll_stat "None")}}selected{{/if}}>{{localize "PERFECT_DRAW.Move.rollStatOptions.None"}}</option>
         </select>
       </div>
       <div class="form-group">
@@ -75,7 +74,6 @@
           engine="prosemirror"
           button=true
           editable=editable
-          style="min-height:80px;max-height:160px;overflow:auto;"
         }}
       </div>
       <div class="form-group">
@@ -101,7 +99,6 @@
           engine="prosemirror"
           button=true
           editable=editable
-          style="min-height:60px;max-height:120px;overflow:auto;"
         }}
       </div>
       <div class="form-group">
@@ -119,7 +116,6 @@
           engine="prosemirror"
           button=true
           editable=editable
-          style="min-height:60px;max-height:120px;overflow:auto;"
         }}
       </div>
       <div class="form-group">
@@ -130,7 +126,6 @@
           engine="prosemirror"
           button=true
           editable=editable
-          style="min-height:60px;max-height:120px;overflow:auto;"
         }}
       </div>
       <div class="form-group">
@@ -141,7 +136,6 @@
           engine="prosemirror"
           button=true
           editable=editable
-          style="min-height:60px;max-height:120px;overflow:auto;"
         }}
       </div>
     </div>
@@ -153,7 +147,6 @@
         engine="prosemirror"
         button=true
         editable=editable
-        style="min-height:80px;max-height:160px;overflow:auto;"
       }}
     </div>
   </section>

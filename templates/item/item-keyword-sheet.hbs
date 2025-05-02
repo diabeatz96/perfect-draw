@@ -1,47 +1,79 @@
-{{! This template is a fallback for when items don't have more specific templates. }}
-{{! Generally, you'll want to make more specific templates when possible. }}
-<form class='{{cssClass}}' autocomplete='off'>
-  <header class='sheet-header'>
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
     <img
-      class='profile-img'
-      src='{{item.img}}'
-      data-edit='img'
-      title='{{item.name}}'
+      class="profile-img"
+      src="{{item.img}}"
+      data-edit="img"
+      title="{{item.name}}"
     />
-    <div class='header-fields'>
-      <h1 class='charname'><input
-          name='name'
-          type='text'
-          value='{{item.name}}'
-          placeholder='Name'
-        /></h1>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="{{localize 'PERFECT_DRAW.Keyword.name'}}"
+        />
+      </h1>
     </div>
   </header>
 
-  {{! Sheet Tab Navigation }}
-  <nav class='sheet-tabs tabs' data-group='primary'>
-    <a class='item' data-tab='description'>Description</a>
-    <a class='item' data-tab='attributes'>Attributes</a>
-  </nav>
-
-  {{! Sheet Body }}
-  <section class='sheet-body'>
-
-    {{! Description Tab }}
-    <div class='tab' data-group='primary' data-tab='description'>
-      {{! Editors must receive enriched text data from getData to properly handle rolls }}
+  <section class="sheet-body">
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Keyword.category"}}</label>
+      <select name="system.category">
+        <option value="Core" {{#if (eq system.category "Core")}}selected{{/if}}>{{localize "PERFECT_DRAW.Keyword.categoryOptions.Core"}}</option>
+        <option value="Special" {{#if (eq system.category "Special")}}selected{{/if}}>{{localize "PERFECT_DRAW.Keyword.categoryOptions.Special"}}</option>
+        <option value="Booster Pack" {{#if (eq system.category "Booster Pack")}}selected{{/if}}>{{localize "PERFECT_DRAW.Keyword.categoryOptions.BoosterPack"}}</option>
+        <option value="Custom" {{#if (eq system.category "Custom")}}selected{{/if}}>{{localize "PERFECT_DRAW.Keyword.categoryOptions.Custom"}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Keyword.source_book"}}</label>
+      <select name="system.source_book">
+        <option value="Core Book" {{#if (eq system.source_book "Core Book")}}selected{{/if}}>{{localize "PERFECT_DRAW.Keyword.sourceBookOptions.CoreBook"}}</option>
+        <option value="Booster Pack" {{#if (eq system.source_book "Booster Pack")}}selected{{/if}}>{{localize "PERFECT_DRAW.Keyword.sourceBookOptions.BoosterPack"}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Keyword.description"}}</label>
       {{editor
         enrichedDescription
-        target='system.description'
-        engine='prosemirror'
+        target="system.description"
+        engine="prosemirror"
         button=true
         editable=editable
       }}
     </div>
-
-    {{! Attributes Tab }}
-    <div class='tab attributes' data-group='primary' data-tab='attributes'>
-      {{! As you add new fields, add them in here! }}
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Keyword.detailed_rules"}}</label>
+      {{editor
+        system.detailed_rules
+        target="system.detailed_rules"
+        engine="prosemirror"
+        button=true
+        editable=editable
+      }}
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Keyword.custom_card_costing_guidance"}}</label>
+      {{editor
+        system.custom_card_costing_guidance
+        target="system.custom_card_costing_guidance"
+        engine="prosemirror"
+        button=true
+        editable=editable
+      }}
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Keyword.notes_for_judge"}}</label>
+      {{editor
+        system.notes_for_judge
+        target="system.notes_for_judge"
+        engine="prosemirror"
+        button=true
+        editable=editable
+      }}
     </div>
   </section>
 </form>

@@ -13,7 +13,7 @@ export default class PerfectDrawCard extends PerfectDrawItemBase {
       label: "PERFECT_DRAW.Card.name",
       initial: "none" // Source book
     }); // Display name
-
+    
     schema.type = new fields.StringField({
       required: true,
       blank: false,

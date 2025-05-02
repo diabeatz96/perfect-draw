@@ -29,7 +29,23 @@
       },
       "usage_limits": "Usage Limits",
       "gimmick_association": "Gimmick Association",
-      "notes": "Notes"
+      "notes": "Notes",
+    "typeOptions": {
+    "general-player": "General Player",
+    "card-combat-player": "Card Combat Player",
+    "npc-establish-plan": "NPC Establish Plan",
+    "npc-power-card": "NPC Power Card",
+    "npc-simple-card": "NPC Simple Card",
+    "npc-response": "NPC Response",
+    "npc-threat": "NPC Threat"
+  },
+  "rollStatOptions": {
+    "Passion": "Passion",
+    "Skill": "Skill",
+    "Friendship": "Friendship",
+    "Tension": "Tension",
+    "None": "None"
+  }
     },
     "Keyword": {
       "id": "Keyword ID",
@@ -39,7 +55,17 @@
       "description": "Description",
       "detailed_rules": "Detailed Rules",
       "custom_card_costing_guidance": "Custom Card Costing Guidance",
-      "notes_for_judge": "Notes for Judge"
+      "notes_for_judge": "Notes for Judge",
+      "categoryOptions": {
+        "Core": "Core",
+        "Special": "Special",
+        "BoosterPack": "Booster Pack",
+        "Custom": "Custom"
+      },
+      "sourceBookOptions": {
+        "CoreBook": "Core Book",
+        "BoosterPack": "Booster Pack"
+      }
     },
     "Baggage": {
       "id": "Baggage ID",
@@ -97,7 +123,12 @@
       "base_ep": "Base Effect Points",
       "source_playbook_id": "Source Playbook",
       "mini_deck_name": "Mini-Deck Name",
-      "retheme_description": "Retheme Description"
+      "retheme_description": "Retheme Description",
+        "typeOptions": {
+      "Warrior": "Warrior",
+      "Item": "Item",
+      "Invocation": "Invocation"
+  }
     },
     "Staple": {
       "id": "Staple ID",
@@ -109,11 +140,15 @@
         "label": "Keywords",
         "item": "Keyword"
       },
-      "limitations": {
+      "limitations": { 
         "label": "Limitations",
         "item": "Limitation"
       },
-      "energy_cost_equivalent": "Energy Cost Equivalent"
+      "energy_cost_equivalent": "Energy Cost Equivalent",
+        "typeOptions": {
+        "Generic": "Generic",
+        "Playbook": "Playbook"
+      }
     },
     "Playbook": {
       "id": "Playbook ID",

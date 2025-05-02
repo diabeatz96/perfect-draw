@@ -13,6 +13,14 @@ export default class PerfectDrawStaple extends PerfectDrawItemBase {
       initial: "New Staple"
     }); // Staple name
 
+    schema.description = new fields.HTMLField({ 
+      required: true, 
+      blank: false, 
+      label: "PERFECT_DRAW.Move.description",
+      initial: "none" // Source book
+    }); // Narrative/mechanical description
+
+
     schema.type = new fields.StringField({
       required: true,
       blank: false,
