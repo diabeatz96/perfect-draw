@@ -45,6 +45,23 @@ export class PerfectDrawItemSheet extends ItemSheet {
     // Use a safe clone of the item data for further operations.
     const itemData = this.document.toPlainObject();
 
+    // Prepare Linked Abilities
+
+    const uuids = this.item.system.linked_abilities ?? [];
+     context.linkedAbilities = [];
+    for (let uuid of uuids) {
+      try {
+        const ability = await fromUuid(uuid);
+        if (ability) {
+          context.linkedAbilities.push({ name: ability.name, uuid, missing: false });
+        } else {
+          context.linkedAbilities.push({ name: "Missing Ability", uuid, missing: true });
+        }
+      } catch (e) {
+        context.linkedAbilities.push({ name: "Invalid Reference", uuid, missing: true });
+      }
+    }
+
     // Enrich description info for display
     // Enrichment turns text like `[[/r 1d20]]` into buttons
     context.enrichedDescription = await TextEditor.enrichHTML(
@@ -89,5 +106,32 @@ export class PerfectDrawItemSheet extends ItemSheet {
     html.on('click', '.effect-control', (ev) =>
       onManageActiveEffect(ev, this.item)
     );
+
+    html.find('.linked-ability').on('click', async ev => {
+      const uuid = ev.currentTarget.dataset.uuid;
+      const item = await fromUuid(uuid);
+      if (item) item.sheet.render(true);
+    });
+
+    // Drag-and-drop linking
+    html.find('.linked-abilities-dropzone')
+      .on('dragover', ev => ev.preventDefault())
+      .on('drop', this._onDropAbility.bind(this));
   }
+
+  async _onDropAbility(event) {
+    event.preventDefault();
+    const data = JSON.parse(event.originalEvent.dataTransfer.getData('text/plain'));
+    if (data.type === "Item" && data.uuid) {
+      const item = await fromUuid(data.uuid);
+      if (item && item.type === "ability") {
+        let uuids = this.item.system.linked_abilities ?? [];
+        if (!uuids.includes(data.uuid)) {
+          uuids = [...uuids, data.uuid];
+          await this.item.update({ "system.linked_abilities": uuids });
+        }
+      }
+    }
+  }
+
 }

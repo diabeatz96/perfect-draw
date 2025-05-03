@@ -259,6 +259,24 @@
       </div>
     </div>
 
+    <section class="linked-abilities-section">
+      <h2>Linked Abilities</h2>
+      <div class="linked-abilities-dropzone" style="border: 2px dashed #bbb; padding: 0.5em; min-height: 2em;">
+        <ul>
+          {{#each linkedAbilities as |ability|}}
+            <li>
+              {{#if ability.missing}}
+                <span class="missing-ability">{{ability.name}} (Missing)</span>
+              {{else}}
+                <a class="linked-ability" data-uuid="{{ability.uuid}}" href="#">{{ability.name}}</a>
+              {{/if}}
+            </li>
+          {{/each}}
+        </ul>
+        <small>Drag abilities here to link them.</small>
+      </div>
+    </section>
+
     <div class="tab" data-group="primary" data-tab="notes">
       <div class="form-group">
         <label>{{localize "PERFECT_DRAW.Playbook.judge_advice"}}</label>

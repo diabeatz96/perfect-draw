@@ -103,6 +103,13 @@ export default class PerfectDrawPlaybook extends PerfectDrawItemBase {
       initial: "none" // Source book
     }); // Deck rules
 
+      
+    schema.linked_abilities = new fields.ArrayField(
+      new fields.StringField({ required: false, blank: true, label: "PERFECT_DRAW.Playbook.linked_abilities.item" }),
+      { required: false, initial: [], label: "PERFECT_DRAW.Playbook.linked_abilities" }
+    );
+
+
     schema.unique_mechanics = new fields.SchemaField({
       has_destruction_track: new fields.BooleanField({ required: false, initial: false, label: "PERFECT_DRAW.Playbook.unique_mechanics.has_destruction_track" }),
       has_alignment_track: new fields.BooleanField({ required: false, initial: false, label: "PERFECT_DRAW.Playbook.unique_mechanics.has_alignment_track" }),
