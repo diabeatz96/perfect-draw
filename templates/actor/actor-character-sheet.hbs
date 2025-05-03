@@ -1,30 +1,146 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
 
-  {{!-- Sheet Header --}}
-  <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-    
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120"/>
+    <div class="header-fields flexcol">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'PERFECT_DRAW.Character.name'}}"/>
+      </h1>
+      <div>
+        <label>{{localize "PERFECT_DRAW.Character.pronouns"}}</label>
+        <input name="system.pronouns" type="text" value="{{system.pronouns}}" placeholder="{{localize 'PERFECT_DRAW.Character.pronouns'}}"/>
+      </div>
+      <div>
+        <label>{{localize "PERFECT_DRAW.Character.playbook"}}</label>
+        <input name="system.playbook" type="text" value="{{system.playbook}}" placeholder="{{localize 'PERFECT_DRAW.Character.playbook'}}"/>
+      </div>
+    </div>
+    <div class="stats-block flexcol">
+      <div>
+        <label>{{localize "PERFECT_DRAW.Character.stats_data.passion"}}</label>
+        <input name="system.stats_data.passion" type="number" value="{{system.stats_data.passion}}" />
+      </div>
+      <div>
+        <label>{{localize "PERFECT_DRAW.Character.stats_data.skill"}}</label>
+        <input name="system.stats_data.skill" type="number" value="{{system.stats_data.skill}}" />
+      </div>
+      <div>
+        <label>{{localize "PERFECT_DRAW.Character.stats_data.friendship"}}</label>
+        <input name="system.stats_data.friendship" type="number" value="{{system.stats_data.friendship}}" />
+      </div>
+      <div>
+        <label>{{localize "PERFECT_DRAW.Character.stats_data.life_points"}}</label>
+        <input name="system.stats_data.life_points" type="number" value="{{system.stats_data.life_points}}" />
+      </div>
+    </div>
+  </header>
 
+  <section class="sheet-body flexrow">
+    <div class="main-col flexcol">
+      <section class="look-section">
+        <h2>{{localize "PERFECT_DRAW.Character.look.label"}}</h2>
+        <div>
+          <label>{{localize "PERFECT_DRAW.Character.look.hair"}}</label>
+          <input name="system.look.hair" type="text" value="{{system.look.hair}}" />
+        </div>
+        <div>
+          <label>{{localize "PERFECT_DRAW.Character.look.clothes"}}</label>
+          <input name="system.look.clothes" type="text" value="{{system.look.clothes}}" />
+        </div>
+        <div>
+          <label>{{localize "PERFECT_DRAW.Character.look.game_tools"}}</label>
+          <input name="system.look.game_tools" type="text" value="{{system.look.game_tools}}" />
+        </div>
+        <div>
+          <label>{{localize "PERFECT_DRAW.Character.look.other"}}</label>
+          <input name="system.look.other" type="text" value="{{system.look.other}}" />
+        </div>
+      </section>
+
+      <section class="struggles-section">
+        <h2>Struggles</h2>
+        <ul>
+          {{#each system.struggles}}
+            <li>
+              <input type="text" name="system.struggles.{{@index}}" value="{{this}}" placeholder="Struggle Question or Answer"/>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+
+      <section class="friends-section">
+        <h2>Friends</h2>
+        <ul>
+          {{#each system.friends}}
+            <li>
+              <input type="text" name="system.friends.{{@index}}" value="{{this}}" placeholder="Friend Question or Answer"/>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+
+      <section class="baggage-section">
+        <h2>{{localize "PERFECT_DRAW.Character.baggage_data"}}</h2>
+        <ul>
+          {{#each system.baggage_data}}
+            <li>
+              <input type="text" name="system.baggage_data.{{@index}}" value="{{this}}" placeholder="Baggage"/>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+
+      <section class="experience-section">
+        <h2>{{localize "PERFECT_DRAW.Character.experience_track"}}</h2>
+        <div class="experience-track">
+          {{#each system.experience_track}}
+            <input type="checkbox" name="system.experience_track.{{@index}}" {{#if this}}checked{{/if}}/>
+          {{/each}}
+        </div>
+      </section>
+
+      <section class="advancements-section">
+        <h2>{{localize "PERFECT_DRAW.Character.advancements"}}</h2>
+        <ul>
+          {{#each system.advancements}}
+            <li>
+              <input type="text" name="system.advancements.{{@index}}.type" value="{{this.type}}" placeholder="Type"/>
+              <input type="text" name="system.advancements.{{@index}}.ref_id" value="{{this.ref_id}}" placeholder="Ref ID"/>
+              <input type="text" name="system.advancements.{{@index}}.stat" value="{{this.stat}}" placeholder="Stat"/>
+            </li>
+          {{/each}}
+        </ul>
+        <label>
+          <input type="checkbox" name="system.major_advancements_unlocked" {{checked system.major_advancements_unlocked}}/>
+          {{localize "PERFECT_DRAW.Character.major_advancements_unlocked"}}
+        </label>
       </section>
     </div>
 
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="biography">Biography</a>
-  </nav>
+    <div class="side-col flexcol">
+      <section class="staples-section">
+        <h2>{{localize "PERFECT_DRAW.Character.staples"}}</h2>
+        <ul>
+          {{#each system.staples}}
+            <li>
+              <input type="text" name="system.staples.{{@index}}.name" value="{{this.name}}" placeholder="Staple Name"/>
+              <input type="text" name="system.staples.{{@index}}.description" value="{{this.description}}" placeholder="Description"/>
+              <input type="checkbox" name="system.staples.{{@index}}.is_playbook_staple" {{checked this.is_playbook_staple}}/> Playbook Staple
+            </li>
+          {{/each}}
+        </ul>
+      </section>
 
-  {{!-- Sheet Body --}}
-  <section class="sheet-body">
-
-    {{!-- Biography Tab --}}
-    <div class="tab biography" data-group="primary" data-tab="description">
-      {{!-- Editors must receive enriched text data from getData to properly handle rolls --}}
-      {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
+      <section class="abilities-section">
+        <h2>{{localize "PERFECT_DRAW.Character.abilities"}}</h2>
+        <ul>
+          {{#each system.abilities}}
+            <li>
+              <input type="text" name="system.abilities.{{@index}}" value="{{this}}" placeholder="Ability ID"/>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
     </div>
-
   </section>
 </form>

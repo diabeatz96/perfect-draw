@@ -13,6 +13,13 @@ export default class PerfectDrawBaggage extends PerfectDrawItemBase {
       initial: "unknown"
     }); // Reference to the Player Character ID
 
+    schema.description = new fields.HTMLField({
+      required: true,
+      blank: false,
+      label: "PERFECT_DRAW.Baggage.description",
+      initial: "none" // Source book
+    }); // Narrative/mechanical description
+    
     schema.is_serious = new fields.BooleanField({
       required: true,
       initial: false,

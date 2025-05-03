@@ -1,33 +1,103 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
 
-  {{!-- Sheet Header --}}
-  <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-
-      </div>
+  <header class="sheet-header flexrow">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120"/>
+    <div class="header-fields flexcol">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'PERFECT_DRAW.NPC.name'}}"/>
+        <span class="pronouns">
+          <input name="system.pronouns" type="text" value="{{system.pronouns}}" placeholder="{{localize 'PERFECT_DRAW.NPC.pronouns'}}"/>
+        </span>
+      </h1>
+      <em>
+        <input name="system.gimmick" type="text" value="{{system.gimmick}}" placeholder="{{localize 'PERFECT_DRAW.NPC.gimmick'}}" style="width:100%"/>
+      </em>
     </div>
   </header>
 
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="biography">Biography</a>
-  </nav>
-
-  {{!-- Sheet Body --}}
-  <section class="sheet-body">
-
-    {{!-- Biography Tab --}}
-    <div class="tab biography" data-group="primary" data-tab="description">
-      {{!-- Editors must receive enriched text data from getData to properly handle rolls --}}
-      {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
+  <section class="npc-description">
+    <div>
+      <label>{{localize "PERFECT_DRAW.NPC.description"}}</label>
+      {{editor system.description target="system.description" engine="prosemirror" button=true editable=editable}}
     </div>
+  </section>
 
-    {{!-- Owned Items Tab --}}
+  <section class="npc-blocks">
+    <div class="npc-block">
+      <h2>{{localize "PERFECT_DRAW.NPC.establish_plan_moves"}}</h2>
+      <ul>
+        {{#each system.establish_plan_moves}}
+          <li><input type="text" name="system.establish_plan_moves.{{@index}}" value="{{this}}" placeholder="Establish Plan Move"/></li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="npc-block">
+      <h2>{{localize "PERFECT_DRAW.NPC.power_card_moves"}}</h2>
+      <ul>
+        {{#each system.power_card_moves}}
+          <li><input type="text" name="system.power_card_moves.{{@index}}" value="{{this}}" placeholder="Power Card Move"/></li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="npc-block">
+      <h2>{{localize "PERFECT_DRAW.NPC.simple_card_moves"}}</h2>
+      <ul>
+        {{#each system.simple_card_moves}}
+          <li><input type="text" name="system.simple_card_moves.{{@index}}" value="{{this}}" placeholder="Simple Card Move"/></li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="npc-block">
+      <h2>{{localize "PERFECT_DRAW.NPC.response_moves"}}</h2>
+      <ul>
+        {{#each system.response_moves}}
+          <li><input type="text" name="system.response_moves.{{@index}}" value="{{this}}" placeholder="Response Move"/></li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
 
+  <section class="npc-extras flexrow">
+    <div class="npc-extra-col">
+      <label>{{localize "PERFECT_DRAW.NPC.example_card_names"}}</label>
+      <ul>
+        {{#each system.example_card_names}}
+          <li><input type="text" name="system.example_card_names.{{@index}}" value="{{this}}" placeholder="Example Card Name"/></li>
+        {{/each}}
+      </ul>
+      <label>{{localize "PERFECT_DRAW.NPC.affiliated_organization_id"}}</label>
+      <input type="text" name="system.affiliated_organization_id" value="{{system.affiliated_organization_id}}" placeholder="Affiliation"/>
+    </div>
+    <div class="npc-extra-col">
+      <label>{{localize "PERFECT_DRAW.NPC.player_relationships"}}</label>
+      <ul>
+        {{#each system.player_relationships}}
+          <li>
+            <input type="text" name="system.player_relationships.{{@index}}.player_id" value="{{this.player_id}}" placeholder="Player ID"/>
+            <input type="text" name="system.player_relationships.{{@index}}.type" value="{{this.type}}" placeholder="Type"/>
+            <input type="text" name="system.player_relationships.{{@index}}.description" value="{{this.description}}" placeholder="Description"/>
+          </li>
+        {{/each}}
+      </ul>
+      <label>{{localize "PERFECT_DRAW.NPC.npc_relationships"}}</label>
+      <ul>
+        {{#each system.npc_relationships}}
+          <li>
+            <input type="text" name="system.npc_relationships.{{@index}}.npc_id" value="{{this.npc_id}}" placeholder="NPC ID"/>
+            <input type="text" name="system.npc_relationships.{{@index}}.type" value="{{this.type}}" placeholder="Type"/>
+            <input type="text" name="system.npc_relationships.{{@index}}.description" value="{{this.description}}" placeholder="Description"/>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
+
+  <section class="npc-plots">
+    <label>{{localize "PERFECT_DRAW.NPC.plots"}}</label>
+    <ul>
+      {{#each system.plots}}
+        <li><input type="text" name="system.plots.{{@index}}" value="{{this}}" placeholder="Plot"/></li>
+      {{/each}}
+    </ul>
   </section>
 </form>
-

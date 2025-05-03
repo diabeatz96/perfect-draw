@@ -1,47 +1,80 @@
-{{! This template is a fallback for when items don't have more specific templates. }}
-{{! Generally, you'll want to make more specific templates when possible. }}
-<form class='{{cssClass}}' autocomplete='off'>
-  <header class='sheet-header'>
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
     <img
-      class='profile-img'
-      src='{{item.img}}'
-      data-edit='img'
-      title='{{item.name}}'
+      class="profile-img"
+      src="{{item.img}}"
+      data-edit="img"
+      title="{{item.name}}"
     />
-    <div class='header-fields'>
-      <h1 class='charname'><input
-          name='name'
-          type='text'
-          value='{{item.name}}'
-          placeholder='Name'
-        /></h1>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="{{localize 'PERFECT_DRAW.Ability.name'}}"
+        />
+      </h1>
     </div>
   </header>
 
-  {{! Sheet Tab Navigation }}
-  <nav class='sheet-tabs tabs' data-group='primary'>
-    <a class='item' data-tab='description'>Description</a>
-    <a class='item' data-tab='attributes'>Attributes</a>
-  </nav>
-
-  {{! Sheet Body }}
-  <section class='sheet-body'>
-
-    {{! Description Tab }}
-    <div class='tab' data-group='primary' data-tab='description'>
-      {{! Editors must receive enriched text data from getData to properly handle rolls }}
+  <section class="sheet-body">
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Ability.playbook_origin"}}</label>
+      <input
+        type="text"
+        name="system.playbook_origin"
+        value="{{system.playbook_origin}}"
+        placeholder="{{localize 'PERFECT_DRAW.Ability.playbook_origin'}}"
+      />
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Ability.selection_type"}}</label>
+      <select name="system.selection_type">
+        <option value="selectable" {{#if (eq system.selection_type "selectable")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.selectable"}}</option>
+        <option value="starting" {{#if (eq system.selection_type "starting")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.starting"}}</option>
+        <option value="crew-unique" {{#if (eq system.selection_type "crew-unique")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.crew-unique"}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Ability.requirements.label"}}</label>
+      <ul>
+        {{#each system.requirements}}
+          <li>
+            <input type="text" name="system.requirements.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Ability.requirements.item'}}" />
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Ability.tags.label"}}</label>
+      <ul>
+        {{#each system.tags}}
+          <li>
+            <input type="text" name="system.tags.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Ability.tags.item'}}" />
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Ability.linked_options.label"}}</label>
+      <ul>
+        {{#each system.linked_options}}
+          <li>
+            <input type="text" name="system.linked_options.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Ability.linked_options.item'}}" />
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="form-group">
+      <label>{{localize "PERFECT_DRAW.Ability.notes"}}</label>
       {{editor
-        enrichedDescription
-        target='system.description'
-        engine='prosemirror'
+        system.notes
+        target="system.notes"
+        engine="prosemirror"
         button=true
         editable=editable
       }}
-    </div>
-
-    {{! Attributes Tab }}
-    <div class='tab attributes' data-group='primary' data-tab='attributes'>
-      {{! As you add new fields, add them in here! }}
     </div>
   </section>
 </form>

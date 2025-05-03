@@ -22,9 +22,10 @@ export default class PerfectDrawNPC extends PerfectDrawActorBase {
     });
 
     schema.description = new fields.HTMLField({
-      required: false,
-      blank: true,
-      label: "PERFECT_DRAW.NPC.description"
+      required: true,
+      blank: false,
+      label: "PERFECT_DRAW.NPC.description",
+      initial: "none" // Narrative concept/theme
     });
 
     schema.gimmick = new fields.StringField({

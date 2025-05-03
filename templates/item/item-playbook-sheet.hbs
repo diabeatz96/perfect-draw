@@ -1,47 +1,275 @@
-{{! This template is a fallback for when items don't have more specific templates. }}
-{{! Generally, you'll want to make more specific templates when possible. }}
-<form class='{{cssClass}}' autocomplete='off'>
-  <header class='sheet-header'>
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
     <img
-      class='profile-img'
-      src='{{item.img}}'
-      data-edit='img'
-      title='{{item.name}}'
+      class="profile-img"
+      src="{{item.img}}"
+      data-edit="img"
+      title="{{item.name}}"
     />
-    <div class='header-fields'>
-      <h1 class='charname'><input
-          name='name'
-          type='text'
-          value='{{item.name}}'
-          placeholder='Name'
-        /></h1>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="{{localize 'PERFECT_DRAW.Playbook.name'}}"
+        />
+      </h1>
     </div>
   </header>
 
-  {{! Sheet Tab Navigation }}
-  <nav class='sheet-tabs tabs' data-group='primary'>
-    <a class='item' data-tab='description'>Description</a>
-    <a class='item' data-tab='attributes'>Attributes</a>
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="main">{{localize "PERFECT_DRAW.Playbook.description"}}</a>
+    <a class="item" data-tab="stats">{{localize "PERFECT_DRAW.Playbook.initial_stats.label"}}</a>
+    <a class="item" data-tab="abilities">{{localize "PERFECT_DRAW.Playbook.initial_abilities.label"}}</a>
+    <a class="item" data-tab="mechanics">{{localize "PERFECT_DRAW.Playbook.unique_mechanics.label"}}</a>
+    <a class="item" data-tab="notes">{{localize "PERFECT_DRAW.Playbook.judge_advice"}}</a>
   </nav>
 
-  {{! Sheet Body }}
-  <section class='sheet-body'>
-
-    {{! Description Tab }}
-    <div class='tab' data-group='primary' data-tab='description'>
-      {{! Editors must receive enriched text data from getData to properly handle rolls }}
-      {{editor
-        enrichedDescription
-        target='system.description'
-        engine='prosemirror'
-        button=true
-        editable=editable
-      }}
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="main">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.description"}}</label>
+        {{editor
+          system.description
+          target="system.description"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.example_archetypes.label"}}</label>
+        <ul>
+          {{#each system.example_archetypes}}
+            <li>
+              <input type="text" name="system.example_archetypes.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.example_archetypes.item'}}" />
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.look_suggestions.label"}}</label>
+        <div>
+          <strong>{{localize "PERFECT_DRAW.Playbook.look_suggestions.hair.label"}}</strong>
+          <ul>
+            {{#each system.look_suggestions.hair}}
+              <li>
+                <input type="text" name="system.look_suggestions.hair.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.hair.item'}}" />
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+        <div>
+          <strong>{{localize "PERFECT_DRAW.Playbook.look_suggestions.clothes.label"}}</strong>
+          <ul>
+            {{#each system.look_suggestions.clothes}}
+              <li>
+                <input type="text" name="system.look_suggestions.clothes.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.clothes.item'}}" />
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+        <div>
+          <strong>{{localize "PERFECT_DRAW.Playbook.look_suggestions.game_tools.label"}}</strong>
+          <ul>
+            {{#each system.look_suggestions.game_tools}}
+              <li>
+                <input type="text" name="system.look_suggestions.game_tools.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.game_tools.item'}}" />
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+        <div>
+          <strong>{{localize "PERFECT_DRAW.Playbook.look_suggestions.other.label"}}</strong>
+          <ul>
+            {{#each system.look_suggestions.other}}
+              <li>
+                <input type="text" name="system.look_suggestions.other.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.other.item'}}" />
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
     </div>
 
-    {{! Attributes Tab }}
-    <div class='tab attributes' data-group='primary' data-tab='attributes'>
-      {{! As you add new fields, add them in here! }}
+    <div class="tab" data-group="primary" data-tab="stats">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.initial_stats.passion"}}</label>
+        <input type="number" name="system.initial_stats.passion" value="{{system.initial_stats.passion}}" />
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.initial_stats.skill"}}</label>
+        <input type="number" name="system.initial_stats.skill" value="{{system.initial_stats.skill}}" />
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.initial_stats.friendship"}}</label>
+        <input type="number" name="system.initial_stats.friendship" value="{{system.initial_stats.friendship}}" />
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.initial_stat_rule_description"}}</label>
+        {{editor
+          system.initial_stat_rule_description
+          target="system.initial_stat_rule_description"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="abilities">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.initial_abilities.label"}}</label>
+        <ul>
+          {{#each system.initial_abilities}}
+            <li>
+              <input type="text" name="system.initial_abilities.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.initial_abilities.item'}}" />
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.available_abilities.label"}}</label>
+        <ul>
+          {{#each system.available_abilities}}
+            <li>
+              <input type="text" name="system.available_abilities.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.available_abilities.item'}}" />
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.starting_staple_id"}}</label>
+        <input type="text" name="system.starting_staple_id" value="{{system.starting_staple_id}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.starting_staple_id'}}" />
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.initial_generic_staple_count"}}</label>
+        <input type="number" name="system.initial_generic_staple_count" value="{{system.initial_generic_staple_count}}" />
+      </div>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="mechanics">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.baggage_rule_description"}}</label>
+        {{editor
+          system.baggage_rule_description
+          target="system.baggage_rule_description"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.deck_rule_description"}}</label>
+        {{editor
+          system.deck_rule_description
+          target="system.deck_rule_description"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.unique_mechanics"}}</label>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_destruction_track" {{checked system.unique_mechanics.has_destruction_track}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_destruction_track"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_alignment_track" {{checked system.unique_mechanics.has_alignment_track}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_alignment_track"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_prep_resource" {{checked system.unique_mechanics.has_prep_resource}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_prep_resource"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_lessons_mechanic" {{checked system.unique_mechanics.has_lessons_mechanic}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_lessons_mechanic"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_terrible_things_mechanic" {{checked system.unique_mechanics.has_terrible_things_mechanic}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_terrible_things_mechanic"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.is_crew_playbook" {{checked system.unique_mechanics.is_crew_playbook}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.is_crew_playbook"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.is_other_me_playbook" {{checked system.unique_mechanics.is_other_me_playbook}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.is_other_me_playbook"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.requires_host_playbook" {{checked system.unique_mechanics.requires_host_playbook}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.requires_host_playbook"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_multiple_personas" {{checked system.unique_mechanics.has_multiple_personas}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_multiple_personas"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_protege" {{checked system.unique_mechanics.has_protege}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_protege"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_pet_option" {{checked system.unique_mechanics.has_pet_option}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_pet_option"}}
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="system.unique_mechanics.has_contacts_option" {{checked system.unique_mechanics.has_contacts_option}} />
+              {{localize "PERFECT_DRAW.Playbook.unique_mechanics.has_contacts_option"}}
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.advancement_notes"}}</label>
+        {{editor
+          system.advancement_notes
+          target="system.advancement_notes"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="notes">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Playbook.judge_advice"}}</label>
+        {{editor
+          system.judge_advice
+          target="system.judge_advice"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
     </div>
   </section>
 </form>

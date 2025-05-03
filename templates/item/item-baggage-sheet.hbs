@@ -1,47 +1,69 @@
-{{! This template is a fallback for when items don't have more specific templates. }}
-{{! Generally, you'll want to make more specific templates when possible. }}
-<form class='{{cssClass}}' autocomplete='off'>
-  <header class='sheet-header'>
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
     <img
-      class='profile-img'
-      src='{{item.img}}'
-      data-edit='img'
-      title='{{item.name}}'
+      class="profile-img"
+      src="{{item.img}}"
+      data-edit="img"
+      title="{{item.name}}"
     />
-    <div class='header-fields'>
-      <h1 class='charname'><input
-          name='name'
-          type='text'
-          value='{{item.name}}'
-          placeholder='Name'
-        /></h1>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="{{localize 'PERFECT_DRAW.Baggage.character_id'}}"
+        />
+      </h1>
     </div>
   </header>
 
-  {{! Sheet Tab Navigation }}
-  <nav class='sheet-tabs tabs' data-group='primary'>
-    <a class='item' data-tab='description'>Description</a>
-    <a class='item' data-tab='attributes'>Attributes</a>
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="main">{{localize "PERFECT_DRAW.Baggage.description"}}</a>
+    <a class="item" data-tab="notes">{{localize "PERFECT_DRAW.Baggage.notes"}}</a>
   </nav>
 
-  {{! Sheet Body }}
-  <section class='sheet-body'>
-
-    {{! Description Tab }}
-    <div class='tab' data-group='primary' data-tab='description'>
-      {{! Editors must receive enriched text data from getData to properly handle rolls }}
-      {{editor
-        enrichedDescription
-        target='system.description'
-        engine='prosemirror'
-        button=true
-        editable=editable
-      }}
+  <section class="sheet-body">
+    <div class="tab" data-group="primary" data-tab="main">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Baggage.description"}}</label>
+        {{editor
+          system.description
+          target="system.description"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Baggage.is_serious"}}</label>
+        <input
+          type="checkbox"
+          name="system.is_serious"
+          {{checked system.is_serious}}
+        />
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Baggage.gain_source"}}</label>
+        <input
+          type="text"
+          name="system.gain_source"
+          value="{{system.gain_source}}"
+          placeholder="{{localize 'PERFECT_DRAW.Baggage.gain_source'}}"
+        />
+      </div>
     </div>
-
-    {{! Attributes Tab }}
-    <div class='tab attributes' data-group='primary' data-tab='attributes'>
-      {{! As you add new fields, add them in here! }}
+    <div class="tab" data-group="primary" data-tab="notes">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Baggage.notes"}}</label>
+        {{editor
+          system.notes
+          target="system.notes"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
     </div>
   </section>
 </form>
