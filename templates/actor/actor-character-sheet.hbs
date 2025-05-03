@@ -1,4 +1,4 @@
-<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+<form class="perfectdraw-character-sheet {{cssClass}} {{actor.type}} flexcol" autocomplete="off">
 
   <header class="sheet-header flexrow">
     <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120"/>
@@ -6,31 +6,31 @@
       <h1 class="charname">
         <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'PERFECT_DRAW.Character.name'}}"/>
       </h1>
-      <div>
-        <label>{{localize "PERFECT_DRAW.Character.pronouns"}}</label>
-        <input name="system.pronouns" type="text" value="{{system.pronouns}}" placeholder="{{localize 'PERFECT_DRAW.Character.pronouns'}}"/>
+      <div class="header-row flexrow" style="gap:1em;">
+        <div style="flex:1;">
+          <label>{{localize "PERFECT_DRAW.Character.pronouns"}}</label>
+          <input name="system.pronouns" type="text" value="{{system.pronouns}}" placeholder="{{localize 'PERFECT_DRAW.Character.pronouns'}}"/>
+        </div>
+        <div style="flex:1;">
+          <label>{{localize "PERFECT_DRAW.Character.playbook"}}</label>
+          <input name="system.playbook" type="text" value="{{system.playbook}}" placeholder="{{localize 'PERFECT_DRAW.Character.playbook'}}"/>
+        </div>
       </div>
-      <div>
-        <label>{{localize "PERFECT_DRAW.Character.playbook"}}</label>
-        <input name="system.playbook" type="text" value="{{system.playbook}}" placeholder="{{localize 'PERFECT_DRAW.Character.playbook'}}"/>
-      </div>
-    </div>
-    <div class="stats-block flexcol">
-      <div>
-        <label>{{localize "PERFECT_DRAW.Character.stats_data.passion"}}</label>
-        <input name="system.stats_data.passion" type="number" value="{{system.stats_data.passion}}" />
-      </div>
-      <div>
-        <label>{{localize "PERFECT_DRAW.Character.stats_data.skill"}}</label>
-        <input name="system.stats_data.skill" type="number" value="{{system.stats_data.skill}}" />
-      </div>
-      <div>
-        <label>{{localize "PERFECT_DRAW.Character.stats_data.friendship"}}</label>
-        <input name="system.stats_data.friendship" type="number" value="{{system.stats_data.friendship}}" />
-      </div>
-      <div>
-        <label>{{localize "PERFECT_DRAW.Character.stats_data.life_points"}}</label>
-        <input name="system.stats_data.life_points" type="number" value="{{system.stats_data.life_points}}" />
+      <div class="stats-block">
+        <div class="stats-row" style="justify-content: center; flex-wrap: wrap; min-width:0;">
+          <div class="stat-block stat-block--passion">
+            <label>{{localize "PERFECT_DRAW.Character.stats_data.passion"}}</label>
+            <input name="system.stats_data.passion" type="number" value="{{system.stats_data.passion}}" />
+          </div>
+          <div class="stat-block stat-block--skill">
+            <label>{{localize "PERFECT_DRAW.Character.stats_data.skill"}}</label>
+            <input name="system.stats_data.skill" type="number" value="{{system.stats_data.skill}}" />
+          </div>
+          <div class="stat-block stat-block--friendship">
+            <label>{{localize "PERFECT_DRAW.Character.stats_data.friendship"}}</label>
+            <input name="system.stats_data.friendship" type="number" value="{{system.stats_data.friendship}}" />
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -119,13 +119,13 @@
 
     <div class="side-col flexcol">
       <section class="staples-section">
-        <h2>{{localize "PERFECT_DRAW.Character.staples"}}</h2>
+        <h2>General Moves</h2>
         <ul>
           {{#each system.staples}}
             <li>
-              <input type="text" name="system.staples.{{@index}}.name" value="{{this.name}}" placeholder="Staple Name"/>
+              <input type="text" name="system.staples.{{@index}}.name" value="{{this.name}}" placeholder="Move Name"/>
               <input type="text" name="system.staples.{{@index}}.description" value="{{this.description}}" placeholder="Description"/>
-              <input type="checkbox" name="system.staples.{{@index}}.is_playbook_staple" {{checked this.is_playbook_staple}}/> Playbook Staple
+              <input type="checkbox" name="system.staples.{{@index}}.is_playbook_staple" {{checked this.is_playbook_staple}}/> Playbook Move
             </li>
           {{/each}}
         </ul>

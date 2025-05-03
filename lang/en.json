@@ -150,7 +150,23 @@
       "roll_stat": "Roll Stat",
       "specific_effects": "Specific Effects",
       "type": "Move Type",
-      "usage_limits": "Usage Limits"
+      "usage_limits": "Usage Limits",
+        "typeOptions": {
+          "general-player": "General Player",
+          "card-combat-player": "Card Combat Player",
+          "npc-establish-plan": "NPC Establish Plan",
+          "npc-power-card": "NPC Power Card",
+          "npc-simple-card": "NPC Simple Card",
+          "npc-response": "NPC Response",
+          "npc-threat": "NPC Threat"
+        },
+      "rollStatOptions": {
+        "Friendship": "Friendship",
+        "Passion": "Passion",
+        "Skill": "Skill",
+        "Tension": "Tension",
+        "None": "None"
+      }          
     },
     "NPC": {
       "affiliated_organization_id": "Affiliated Organization",

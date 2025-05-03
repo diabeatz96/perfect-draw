@@ -1,0 +1,458 @@
+/* --- Manga Aesthetic: Yu-Gi-Oh! Inspired + Modern Manga Touches (Colorful + Extra Halftone + White Manga) --- */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@700&family=Zen+Kaku+Gothic+Antique:wght@700&display=swap');
+
+/* --- Main Background --- */
+body.vtt.perfectdraw {
+  background: #fff !important; /* White manga page */
+}
+
+/* --- Halftone SVG pattern for backgrounds (extra visible, colorful) --- */
+.perfectdraw-halftone-bg,
+.perfectdraw-character-sheet,
+.perfectdraw-character-sheet .sheet-body,
+.perfectdraw-character-sheet section,
+.perfectdraw-character-sheet .main-col,
+.perfectdraw-character-sheet .side-col {
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='6' cy='6' r='3' fill='%23e57373' fill-opacity='0.17'/><circle cx='26' cy='10' r='3' fill='%234caf50' fill-opacity='0.13'/><circle cx='14' cy='26' r='3' fill='%23ffb300' fill-opacity='0.13'/><circle cx='28' cy='28' r='3' fill='%233949ab' fill-opacity='0.13'/></svg>");
+  background-repeat: repeat;
+}
+
+/* --- Main Sheet --- */
+.perfectdraw-character-sheet {
+  font-family: 'Fira Sans', 'Zen Kaku Gothic Antique', 'Arial', sans-serif;
+  color: #232323;
+  padding: 0 1.5em 1.5em 1.5em;
+  margin: 0 auto;
+  letter-spacing: 0.01em;
+  font-size: 1.08em;
+  border-radius: 14px;
+  box-shadow: 0 0 0 2px #e0e0e0;
+  position: relative; /
+}
+
+/* --- Manga Panel Borders --- */
+.perfectdraw-character-sheet .sheet-header,
+.perfectdraw-character-sheet section,
+.perfectdraw-character-sheet .stats-block,
+.perfectdraw-character-sheet .main-col,
+.perfectdraw-character-sheet .side-col {
+  border: none;
+  border-radius: 10px;
+  background: none;
+  box-shadow: none;
+}
+
+.perfectdraw-character-sheet::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.90;
+  z-index: 99;
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  mix-blend-mode: multiply;
+}
+
+
+/* --- SHEET HEADER --- */
+.perfectdraw-character-sheet .sheet-header {
+  margin-bottom: 1.5em;
+  padding: 1.2em 2em 1.2em 2em;
+  align-items: flex-end;
+  background: #fff;
+  border-bottom: 4px solid #e57373;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 2px 0 #bbb;
+  position: relative;
+}
+.perfectdraw-character-sheet .sheet-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='6' cy='6' r='3' fill='%23e57373' fill-opacity='0.17'/><circle cx='26' cy='10' r='3' fill='%234caf50' fill-opacity='0.13'/><circle cx='14' cy='26' r='3' fill='%23ffb300' fill-opacity='0.13'/><circle cx='28' cy='28' r='3' fill='%233949ab' fill-opacity='0.13'/></svg>");
+  background-repeat: repeat;
+}
+
+/* --- Sheet Body --- */
+.perfectdraw-character-sheet .sheet-body {
+  background-color: #fff;
+  border-radius: 0 0 14px 14px;
+  padding: 1.5em 1.2em 1.5em 1.2em;
+  margin-bottom: 1.5em;
+  border: 4px solid #bbb;
+  box-shadow: 0 0 32px 0 #bbb3;
+  position: relative;
+}
+.perfectdraw-character-sheet .sheet-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='6' cy='6' r='3' fill='%23e57373' fill-opacity='0.17'/><circle cx='26' cy='10' r='3' fill='%234caf50' fill-opacity='0.13'/><circle cx='14' cy='26' r='3' fill='%23ffb300' fill-opacity='0.13'/><circle cx='28' cy='28' r='3' fill='%233949ab' fill-opacity='0.13'/></svg>");
+  background-repeat: repeat;
+}
+
+/* --- Profile Image --- */
+.perfectdraw-character-sheet .sheet-header .profile-img {
+  border: 5px solid #e57373;
+  border-radius: 18px 18px 80px 18px/18px 18px 80px 18px;
+  background: #fff;
+  margin-right: 2.5em;
+  margin-left: 0.5em;
+  margin-bottom: 1em;
+  height: 220px;
+  width: 220px;
+  object-fit: cover;
+  transition: border 0.3s, box-shadow 0.3s, filter 0.3s;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 8px 32px -8px #bbb, 0 0 0 0 #222;
+}
+.perfectdraw-character-sheet .profile-img:hover {
+  border: 5px solid #ffb300;
+  box-shadow: 0 0 32px 8px #ffb300, 0 0 0 8px #e57373;
+  filter: brightness(1.08) drop-shadow(0 0 12px #fff);
+  animation: card-glow 1.2s infinite alternate;
+}
+@keyframes card-glow {
+  0% { box-shadow: 0 0 32px 8px #ffb300, 0 0 0 8px #e57373; }
+  100% { box-shadow: 0 0 48px 16px #4caf50, 0 0 0 12px #3949ab; }
+}
+
+/* --- Header Fields --- */
+.perfectdraw-character-sheet .header-fields {
+  flex: 2;
+  min-width: 220px;
+  margin-right: 1.5em;
+}
+
+.perfectdraw-character-sheet .charname input {
+  font-size: 2.5em;
+  font-family: 'Fira Sans', 'Zen Kaku Gothic Antique', Arial, sans-serif;
+  font-weight: bold;
+  border: none;
+  border-bottom: 3px solid #e57373;
+  background: transparent;
+  width: 100%;
+  margin-bottom: 0.3em;
+  letter-spacing: 0.04em;
+  color: #232323;
+  text-shadow: 2px 2px 0 #fff, 3px 3px 0 #ffb300;
+}
+
+/* --- Stats Block --- */
+.perfectdraw-character-sheet .stats-block {
+  padding: 0.5em 0 0.5em 0;
+  margin: 0 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1em;
+  justify-content: center;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.perfectdraw-character-sheet .stats-row {
+  display: flex;
+  width: 100%;
+  gap: 0.5em;
+  margin-bottom: 0.2em;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.perfectdraw-character-sheet .stat-block {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  border: 2px solid #bbb;
+  padding: 0.7em 1.2em;
+  min-width: 90px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 0 #bbb;
+  text-align: center;
+  position: relative;
+}
+.perfectdraw-character-sheet .stat-block label {
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-bottom: 0.2em;
+  font-family: 'Fira Sans', Arial, sans-serif;
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: #888;
+  text-shadow: 1px 1px 0 #fff, 0 0 8px #bbb8;
+}
+.perfectdraw-character-sheet .stat-block--passion label {
+  color: #e57373;
+  text-shadow: 2px 2px 0 #fff, 0 0 12px #e5737388;
+}
+.perfectdraw-character-sheet .stat-block--skill label {
+  color: #3949ab;
+  text-shadow: 2px 2px 0 #fff, 0 0 12px #3949ab88;
+}
+.perfectdraw-character-sheet .stat-block--friendship label {
+  color: #4caf50;
+  text-shadow: 2px 2px 0 #fff, 0 0 12px #4caf5088;
+}
+.perfectdraw-character-sheet .stat-block--friendship input[type="number"] {
+  border-color: #4caf50;
+  box-shadow: 0 1px 0 #b2fab4;
+}
+.perfectdraw-character-sheet .stat-block input[type="number"] {
+  width: 3.5em;
+  font-size: 1.3em;
+  border: 2px solid #bbb;
+  border-radius: 8px;
+  background: #f7f7fa;
+  text-align: center;
+  font-family: inherit;
+  color: #232323;
+  box-shadow: 0 1px 0 #bbb;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.perfectdraw-character-sheet .stat-block--passion input[type="number"] {
+  border-color: #e57373;
+  box-shadow: 0 1px 0 #ffcdd2;
+}
+.perfectdraw-character-sheet .stat-block--skill input[type="number"] {
+  border-color: #3949ab;
+  box-shadow: 0 1px 0 #c5cae9;
+}
+
+/* --- Columns --- */
+.perfectdraw-character-sheet .main-col,
+.perfectdraw-character-sheet .side-col {
+  padding: 1.5em 1.2em 1.5em 1.2em;
+  background: #fff;
+  border-radius: 0;
+  margin-bottom: 1.5em;
+  border: none;
+  box-shadow: none;
+  position: relative;
+}
+.perfectdraw-character-sheet .main-col::before,
+.perfectdraw-character-sheet .side-col::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.13;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='6' cy='6' r='3' fill='%23e57373' fill-opacity='0.17'/><circle cx='26' cy='10' r='3' fill='%234caf50' fill-opacity='0.13'/><circle cx='14' cy='26' r='3' fill='%23ffb300' fill-opacity='0.13'/><circle cx='28' cy='28' r='3' fill='%233949ab' fill-opacity='0.13'/></svg>");
+  background-repeat: repeat;
+}
+
+/* --- Manga Panel Sections --- */
+.perfectdraw-character-sheet::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  z-index: 99;
+  background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  mix-blend-mode: multiply;
+}
+
+.perfectdraw-character-sheet section {
+  margin-bottom: 1.7em;
+  padding: 1.2em 1.5em 1.5em 1.5em;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 2px solid #bbb;
+  box-shadow: 0 2px 0 #bbb;
+  position: relative;
+}
+.perfectdraw-character-sheet section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='6' cy='6' r='3' fill='%23e57373' fill-opacity='0.17'/><circle cx='26' cy='10' r='3' fill='%234caf50' fill-opacity='0.13'/><circle cx='14' cy='26' r='3' fill='%23ffb300' fill-opacity='0.13'/><circle cx='28' cy='28' r='3' fill='%233949ab' fill-opacity='0.13'/></svg>");
+  background-repeat: repeat;
+}
+
+/* --- Headings --- */
+.perfectdraw-character-sheet h2 {
+  font-family: 'Fira Sans', 'Zen Kaku Gothic Antique', Arial, sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  background: #fff;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  margin: 0 0 0.7em 0;
+  padding: 0.3em 1.2em;
+  box-shadow: 0 2px 0 #ffe7e7;
+  display: inline-block;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e57373;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  transition: 
+    color 0.2s cubic-bezier(.68,-0.55,.27,1.55),
+    background 0.2s cubic-bezier(.68,-0.55,.27,1.55),
+    transform 0.15s cubic-bezier(.68,-0.55,.27,1.55),
+    box-shadow 0.15s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.perfectdraw-character-sheet h2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='3' cy='3' r='2' fill='%23e57373' fill-opacity='0.25'/><circle cx='13' cy='5' r='2' fill='%234caf50' fill-opacity='0.18'/><circle cx='8' cy='12' r='2' fill='%23ffb300' fill-opacity='0.18'/><circle cx='14' cy='14' r='2' fill='%233949ab' fill-opacity='0.18'/></svg>");
+  background-repeat: repeat;
+}
+.perfectdraw-character-sheet h2:hover {
+  color: #fff;
+  background: #e57373;
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 4px 24px 0 #e57373cc, 0 0 0 4px #ffb30088;
+  text-shadow: 2px 2px 0 #3949ab, 0 0 12px #ffb300;
+}
+
+/* --- List and Inputs --- */
+.perfectdraw-character-sheet ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.7em 0;
+}
+
+.perfectdraw-character-sheet li {
+  margin-bottom: 0.7em;
+  display: flex;
+  align-items: center;
+}
+
+.perfectdraw-character-sheet input[type="text"] {
+  border: 2px solid #3949ab;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 1em;
+  padding: 0.18em 0.5em;
+  margin-right: 0.5em;
+  flex: 1;
+  font-family: inherit;
+  color: #232323;
+  transition: box-shadow 0.1s, border 0.2s;
+}
+.perfectdraw-character-sheet input[type="text"]:focus,
+.perfectdraw-character-sheet input[type="number"]:focus {
+  outline: 2px solid #e57373;
+  background: #ffe7e7;
+  box-shadow: 0 0 0 2px #e57373;
+}
+
+.perfectdraw-character-sheet input[type="checkbox"] {
+  accent-color: #4caf50;
+  width: 1.2em;
+  height: 1.2em;
+  margin-left: 0.5em;
+}
+
+/* --- Manga Baggage, Struggles, Friends, etc. --- */
+.perfectdraw-character-sheet .baggage-section,
+.perfectdraw-character-sheet .struggles-section,
+.perfectdraw-character-sheet .friends-section,
+.perfectdraw-character-sheet .experience-section,
+.perfectdraw-character-sheet .advancements-section,
+.perfectdraw-character-sheet .staples-section,
+.perfectdraw-character-sheet .abilities-section {
+  background: #fff;
+  border: 2px solid #bbb;
+  border-radius: 12px;
+  box-shadow: 0 2px 0 #bbb;
+  margin-bottom: 1.2em;
+  padding: 0.7em 1em;
+  position: relative;
+}
+.perfectdraw-character-sheet .friends-section {
+  border-color: #4caf50;
+  box-shadow: 0 2px 0 #4caf50;
+}
+.perfectdraw-character-sheet .baggage-section {
+  border-color: #e57373;
+  box-shadow: 0 2px 0 #e57373;
+}
+.perfectdraw-character-sheet .struggles-section {
+  border-color: #3949ab;
+  box-shadow: 0 2px 0 #3949ab;
+}
+.perfectdraw-character-sheet .experience-section {
+  border-color: #ffb300;
+  box-shadow: 0 2px 0 #ffb300;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1100px) {
+  .perfectdraw-character-sheet .sheet-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .perfectdraw-character-sheet .profile-img {
+    margin-bottom: 1em;
+    margin-right: 0;
+  }
+  .perfectdraw-character-sheet .stats-block {
+    margin-left: 0;
+    margin-top: 1em;
+    min-width: 180px;
+  }
+  .perfectdraw-character-sheet .stats-row {
+    gap: 1em;
+  }
+}
+@media (max-width: 900px) {
+  .perfectdraw-character-sheet .sheet-body.flexrow {
+    flex-direction: column;
+  }
+  .perfectdraw-character-sheet .main-col,
+  .perfectdraw-character-sheet .side-col {
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+  }
+  .perfectdraw-character-sheet .stats-row {
+    gap: 0.5em;
+  }
+}
+
+@media (max-width: 1100px) {
+  .perfectdraw-character-sheet .sheet-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .perfectdraw-character-sheet .profile-img {
+    margin: 0 auto 1em auto;
+    display: block;
+    float: none;
+  }
+  .perfectdraw-character-sheet .header-fields {
+    margin-right: 0;
+    width: 100%;
+    text-align: center;
+  }
+}

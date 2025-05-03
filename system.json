@@ -34,7 +34,7 @@
     "verified": "12"
   },
   "esmodules": ["module/perfect-draw.mjs"],
-  "styles": ["css/perfect-draw.css"],
+  "styles": ["css/perfect-draw.css", "css/actor-character-sheet.css", "move-item-sheet.css"],
   "languages": [
     {
       "lang": "en",
