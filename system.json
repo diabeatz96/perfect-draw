@@ -24,17 +24,17 @@
   "media": [
     {
       "type": "setup",
-      "url": "systems/perfect-draw/assets/Perfect_Draw_Logo.png",
+      "url": "systems/perfect-draw/assets/Perfect_Draw_Logo.png", 
       "thumbnail": "systems/perfect-draw/assets/Perfect_Draw_Logo.png"
     }
   ],
   "version": "0.0.1",
   "compatibility": {
     "minimum": 11,
-    "verified": "12"
+    "verified": "13"
   },
   "esmodules": ["module/perfect-draw.mjs"],
-  "styles": ["css/perfect-draw.css", "css/actor-character-sheet.css", "move-item-sheet.css"],
+  "styles": ["css/perfect-draw.css", "css/actor-character-sheet.css", "css/move-item-sheet.css"],
   "languages": [
     {
       "lang": "en",

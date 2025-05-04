@@ -46,8 +46,6 @@ Hooks.once('init', function () {
   CONFIG.Item.dataModels = {
     ability: models.PerfectDrawAbility,
     baggage: models.PerfectDrawBaggage,
-    card: models.PerfectDrawCard,
-    staple: models.PerfectDrawStaple,
     keyword: models.PerfectDrawKeyword,
     playbook: models.PerfectDrawPlaybook,
     move: models.PerfectDrawMove

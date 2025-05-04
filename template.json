@@ -3,7 +3,7 @@
     "types": ["character", "npc"]
   },
   "Item": {
-    "types": ["ability", "baggage", "card", "staple", "keyword", "playbook", "move"]
+    "types": ["ability", "baggage", "keyword", "playbook", "move"]
   }
   
 }

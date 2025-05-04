@@ -317,11 +317,9 @@
     "Item": {
       "ability": "Ability",
       "baggage": "Baggage",
-      "card": "Card",
       "keyword": "Keyword",
       "move": "Move",
-      "playbook": "Playbook",
-      "staple": "Staple"
+      "playbook": "Playbook"
     }
   }
 }

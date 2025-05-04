@@ -5,8 +5,6 @@ export {default as PerfectDrawNPC} from "./actor-npc.mjs";
 export {default as PerfectDrawPlaybook} from "./ComponentModels/playbook-item.mjs";
 export {default as PerfectDrawMove} from "./ComponentModels/move-item.mjs";
 export {default as PerfectDrawAbility} from "./ComponentModels/ability-item.mjs";
-export {default as PerfectDrawStaple} from "./ComponentModels/staple-item.mjs";
-export {default as PerfectDrawCard} from "./ComponentModels/card-item.mjs";
 export {default as PerfectDrawBaggage} from "./ComponentModels/baggage-item.mjs";
 export {default as PerfectDrawKeyword} from "./ComponentModels/keyword-item.mjs";
 
