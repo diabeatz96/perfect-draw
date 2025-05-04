@@ -78,6 +78,7 @@ export class PerfectDrawItemSheet extends ItemSheet {
       }
     );
 
+
     // Add the item's data to context.data for easier access, as well as flags.
     context.system = itemData.system;
     context.flags = itemData.flags;
@@ -88,6 +89,7 @@ export class PerfectDrawItemSheet extends ItemSheet {
     // Prepare active effects for easier access
     context.effects = prepareActiveEffectCategories(this.item.effects);
 
+    console.log(context);
     return context;
   }
 
@@ -108,6 +110,7 @@ export class PerfectDrawItemSheet extends ItemSheet {
     );
 
     html.find('.linked-ability').on('click', async ev => {
+      ev.preventDefault();
       const uuid = ev.currentTarget.dataset.uuid;
       const item = await fromUuid(uuid);
       if (item) item.sheet.render(true);
@@ -117,7 +120,40 @@ export class PerfectDrawItemSheet extends ItemSheet {
     html.find('.linked-abilities-dropzone')
       .on('dragover', ev => ev.preventDefault())
       .on('drop', this._onDropAbility.bind(this));
+
+
+    html.find('.add-requirement').click(ev => {
+      ev.preventDefault();
+      const requirements = Array.from(this.item.system.requirements ?? []);
+      requirements.push("");
+      this.item.update({"system.requirements": requirements});
+    });
+
+    html.find('.remove-requirement').click(ev => {
+      ev.preventDefault();
+      const idx = Number(ev.currentTarget.dataset.index);
+      let requirements = Array.from(this.item.system.requirements ?? []);
+      requirements.splice(idx, 1);
+      this.item.update({"system.requirements": requirements});
+    });
+
+    html.find('.add-tag').click(ev => {
+      ev.preventDefault();
+      const tags = Array.from(this.item.system.tags ?? []);
+      tags.push("");
+      this.item.update({"system.tags": tags});
+    });
+
+    html.find('.remove-tag').click(ev => {
+      ev.preventDefault();
+      const idx = Number(ev.currentTarget.dataset.index);
+      let tags = Array.from(this.item.system.tags ?? []);
+      tags.splice(idx, 1);
+      this.item.update({"system.tags": tags});
+    });  
   }
+
+  
 
   async _onDropAbility(event) {
     event.preventDefault();

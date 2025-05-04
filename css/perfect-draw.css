@@ -238,11 +238,7 @@
 .perfect-draw .sheet-tabs {
   flex: 0;
 }
-.perfect-draw .sheet-body,
-.perfect-draw .sheet-body .tab,
-.perfect-draw .sheet-body .tab .editor {
-  height: 100%;
-}
+
 .perfect-draw .tox .tox-editor-container {
   background: #fff;
 }

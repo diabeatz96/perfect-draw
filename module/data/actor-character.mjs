@@ -3,8 +3,6 @@ import PerfectDrawActorBase from "./base-actor.mjs";
 // Import all relevant data models for integration
 import PerfectDrawPlaybook from "./ComponentModels/playbook-item.mjs";
 import PerfectDrawAbility from "./ComponentModels/ability-item.mjs";
-import PerfectDrawStaple from "./ComponentModels/staple-item.mjs";
-import PerfectDrawCard from "./ComponentModels/card-item.mjs";
 import PerfectDrawBaggage from "./ComponentModels/baggage-item.mjs";
 
 export default class PerfectDrawCharacter extends PerfectDrawActorBase {
@@ -148,26 +146,6 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
     if (Array.isArray(this.abilities)) {
       this.abilityData = await Promise.all(
         this.abilities.map(id => PerfectDrawAbility.findById?.(id))
-      );
-    }
-
-    // Resolve staple objects
-    if (Array.isArray(this.staples)) {
-      this.stapleData = await Promise.all(
-        this.staples.map(staple =>
-          staple.id ? PerfectDrawStaple.findById?.(staple.id) : null
-        )
-      );
-    }
-
-    // Resolve cards in deck_details (if using card IDs)
-    if (this.deck_details?.cards && Array.isArray(this.deck_details.cards)) {
-      this.cardData = await Promise.all(
-        this.deck_details.cards.map(cardId =>
-          typeof cardId === "string"
-            ? PerfectDrawCard.findById?.(cardId)
-            : cardId // already a card object
-        )
       );
     }
 

@@ -1,4 +1,4 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} perfectdraw-ability-sheet" autocomplete="off">
   <header class="sheet-header">
     <img
       class="profile-img"
@@ -18,63 +18,96 @@
     </div>
   </header>
 
+  <nav class="sheet-tabs tabs" data-group="main">
+    <a class="item" data-tab="main">{{localize "PERFECT_DRAW.Main"}}</a>
+    <a class="item" data-tab="notes">{{localize "PERFECT_DRAW.Notes"}}</a>
+  </nav>
+
   <section class="sheet-body">
-    <div class="form-group">
-      <label>{{localize "PERFECT_DRAW.Ability.playbook_origin"}}</label>
-      <input
-        type="text"
-        name="system.playbook_origin"
-        value="{{system.playbook_origin}}"
-        placeholder="{{localize 'PERFECT_DRAW.Ability.playbook_origin'}}"
-      />
+    <div class="tab" data-group="main" data-tab="main">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Ability.playbook_origin"}}</label>
+        <select name="system.playbook_origin">
+          <option value="custom" {{#if (eq system.playbook_origin "custom")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.custom"}}</option>
+          <option value="The Resolved" {{#if (eq system.playbook_origin "The Resolved")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheResolved"}}</option>
+          <option value="The Prodigy" {{#if (eq system.playbook_origin "The Prodigy")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheProdigy"}}</option>
+          <option value="The Glowing" {{#if (eq system.playbook_origin "The Glowing")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheGlowing"}}</option>
+          <option value="The Rogue" {{#if (eq system.playbook_origin "The Rogue")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheRogue"}}</option>
+          <option value="The Ally" {{#if (eq system.playbook_origin "The Ally")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheAlly"}}</option>
+          <option value="The Spirit" {{#if (eq system.playbook_origin "The Spirit")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheSpirit"}}</option>
+          <option value="The Medium" {{#if (eq system.playbook_origin "The Medium")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheMedium"}}</option>
+          <option value="The Destined" {{#if (eq system.playbook_origin "The Destined")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheDestined"}}</option>
+          <option value="The Idealist" {{#if (eq system.playbook_origin "The Idealist")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheIdealist"}}</option>
+          <option value="The Turncoat" {{#if (eq system.playbook_origin "The Turncoat")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheTurncoat"}}</option>
+          <option value="The Mentor" {{#if (eq system.playbook_origin "The Mentor")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheMentor"}}</option>
+          <option value="The Lovestruck" {{#if (eq system.playbook_origin "The Lovestruck")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheLovestruck"}}</option>
+          <option value="The Other Me" {{#if (eq system.playbook_origin "The Other Me")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheOtherMe"}}</option>
+          <option value="The Facade" {{#if (eq system.playbook_origin "The Facade")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheFacade"}}</option>
+          <option value="The Crew" {{#if (eq system.playbook_origin "The Crew")}}selected{{/if}}>{{localize "PERFECT_DRAW.PlaybookOptions.TheCrew"}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Ability.selection_type"}}</label>
+        <select name="system.selection_type">
+          <option value="selectable" {{#if (eq system.selection_type "selectable")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.selectable"}}</option>
+          <option value="starting" {{#if (eq system.selection_type "starting")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.starting"}}</option>
+          <option value="crew-unique" {{#if (eq system.selection_type "crew-unique")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.crew-unique"}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Ability.requirements.label"}}</label>
+        <ul>
+          {{#if system.requirements.length}}
+            {{#each system.requirements}}
+              <li>
+                <input type="text" name="system.requirements.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Ability.requirements.item'}}" />
+                <button type="button" class="remove-requirement" data-index="{{@index}}">-</button>
+              </li>
+            {{/each}}
+          {{else}}
+            <li class="empty-list">{{localize "PERFECT_DRAW.Ability.requirements.empty"}}</li>
+          {{/if}}
+        </ul>
+        <button type="button" class="add-requirement">{{localize "PERFECT_DRAW.Add"}}</button>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Ability.tags.label"}}</label>
+        <ul>
+          {{#if system.tags.length}}
+            {{#each system.tags}}
+              <li>
+                <input type="text" name="system.tags.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Ability.tags.item'}}" />
+                <button type="button" class="remove-tag" data-index="{{@index}}">-</button>
+              </li>
+            {{/each}}
+          {{else}}
+            <li class="empty-list">{{localize "PERFECT_DRAW.Ability.tags.empty"}}</li>
+          {{/if}}
+        </ul>
+        <button type="button" class="add-tag">{{localize "PERFECT_DRAW.Add"}}</button>
+      </div>
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Ability.description"}}</label>
+        {{editor
+          enrichedDescription
+          target="system.description"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
     </div>
-    <div class="form-group">
-      <label>{{localize "PERFECT_DRAW.Ability.selection_type"}}</label>
-      <select name="system.selection_type">
-        <option value="selectable" {{#if (eq system.selection_type "selectable")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.selectable"}}</option>
-        <option value="starting" {{#if (eq system.selection_type "starting")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.starting"}}</option>
-        <option value="crew-unique" {{#if (eq system.selection_type "crew-unique")}}selected{{/if}}>{{localize "PERFECT_DRAW.Ability.selectionTypeOptions.crew-unique"}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>{{localize "PERFECT_DRAW.Ability.requirements.label"}}</label>
-      <ul>
-        {{#each system.requirements}}
-          <li>
-            <input type="text" name="system.requirements.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Ability.requirements.item'}}" />
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-    <div class="form-group">
-      <label>{{localize "PERFECT_DRAW.Ability.tags.label"}}</label>
-      <ul>
-        {{#each system.tags}}
-          <li>
-            <input type="text" name="system.tags.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Ability.tags.item'}}" />
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-    <div class="form-group">
-      <label>{{localize "PERFECT_DRAW.Ability.linked_options.label"}}</label>
-      <ul>
-        {{#each system.linked_options}}
-          <li>
-            <input type="text" name="system.linked_options.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Ability.linked_options.item'}}" />
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-    <div class="form-group">
-      <label>{{localize "PERFECT_DRAW.Ability.notes"}}</label>
-      {{editor
-        system.notes
-        target="system.notes"
-        engine="prosemirror"
-        button=true
-        editable=editable
-      }}
+    <div class="tab" data-group="main" data-tab="notes">
+      <div class="form-group">
+        <label>{{localize "PERFECT_DRAW.Ability.notes"}}</label>
+        {{editor
+          system.notes
+          target="system.notes"
+          engine="prosemirror"
+          button=true
+          editable=editable
+        }}
+      </div>
     </div>
   </section>
 </form>

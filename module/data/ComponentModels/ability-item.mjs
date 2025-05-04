@@ -12,6 +12,14 @@ export default class PerfectDrawAbility extends PerfectDrawItemBase {
       label: "PERFECT_DRAW.Ability.name"
     }); // Display name
 
+    schema.description = new fields.HTMLField({
+      required: true,
+      blank: false,
+      label: "PERFECT_DRAW.Baggage.description",
+      initial: "none" // Source book
+    }); // Narrative/mechanical description
+    
+
     schema.playbook_origin = new fields.StringField({
       required: true,
       blank: false,
@@ -42,9 +50,10 @@ export default class PerfectDrawAbility extends PerfectDrawItemBase {
     ); // Further definition/choices
 
     schema.notes = new fields.HTMLField({
-      required: false,
+      required: true,
       blank: true,
-      label: "PERFECT_DRAW.Ability.notes"
+      label: "PERFECT_DRAW.Ability.notes",
+      initial: "none" // Source book
     }); // Judge/thematic notes
 
     return schema;

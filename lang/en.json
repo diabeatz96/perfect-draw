@@ -1,5 +1,8 @@
 {
   "PERFECT_DRAW": {
+    "Add": "Add",
+    "Main": "Main",
+    "Notes": "Notes",
     "Ability": {
       "description": "Description",
       "id": "Ability ID",
@@ -12,7 +15,8 @@
       "playbook_origin": "Playbook Origin",
       "requirements": {
         "item": "Required Ability",
-        "label": "Requirements"
+        "label": "Requirements",
+        "empty": "No requirements available"
       },
       "selection_type": "Selection Type",
       "selectionTypeOptions": {
@@ -22,8 +26,27 @@
       },
       "tags": {
         "item": "Tag",
-        "label": "Tags"
+        "label": "Tags",
+        "empty": "No tags available"
       }
+    },
+    "PlaybookOptions": {
+      "custom": "Custom",
+      "TheResolved": "The Resolved",
+      "TheProdigy": "The Prodigy",
+      "TheGlowing": "The Glowing",
+      "TheRogue": "The Rogue",
+      "TheAlly": "The Ally",
+      "TheSpirit": "The Spirit",
+      "TheMedium": "The Medium",
+      "TheDestined": "The Destined",
+      "TheIdealist": "The Idealist",
+      "TheTurncoat": "The Turncoat",
+      "TheMentor": "The Mentor",
+      "TheLovestruck": "The Lovestruck",
+      "TheOtherMe": "The Other Me",
+      "TheFacade": "The Facade",
+      "TheCrew": "The Crew"
     },
     "Baggage": {
       "character_id": "Character ID",

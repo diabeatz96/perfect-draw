@@ -268,7 +268,7 @@
               {{#if ability.missing}}
                 <span class="missing-ability">{{ability.name}} (Missing)</span>
               {{else}}
-                <a class="linked-ability" data-uuid="{{ability.uuid}}" href="#">{{ability.name}}</a>
+                <span class="linked-ability" data-uuid="{{ability.uuid}}" style="cursor:pointer; color:#337ab7; text-decoration:underline;">{{ability.name}}</span>
               {{/if}}
             </li>
           {{/each}}

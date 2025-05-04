@@ -1,0 +1,156 @@
+/* --- Ability Sheet: Manga-Inspired, Modern, Clean --- */
+
+.perfectdraw-ability-sheet {
+  font-family: 'Fira Sans', 'Zen Kaku Gothic Antique', Arial, sans-serif;
+  background: #fff;
+  padding: 0;
+}
+
+.perfectdraw-ability-sheet .sheet-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #2224;
+  background: repeating-linear-gradient(
+    135deg,
+    #f8f8f8 0 8px,
+    #eaeaea 8px 16px
+  );
+  padding: 1em 1em 0.5em 1em;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.perfectdraw-ability-sheet .profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px #bbb;
+  border: 2px solid #2222;
+  background: #fff;
+}
+
+.perfectdraw-ability-sheet .header-fields {
+  margin-left: 1.5em;
+  flex: 1;
+}
+
+.perfectdraw-ability-sheet .charname input[type="text"] {
+  font-size: 1.5em;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  width: 100%;
+  color: #222;
+  outline: none;
+  padding: 0;
+}
+
+.perfectdraw-ability-sheet .sheet-body {
+  padding: 1.5em;
+  background: #fff url("../../../systems/perfect-draw/assets/halftone.png") repeat;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.perfectdraw-ability-sheet .form-group {
+  margin-bottom: 1.2em;
+}
+
+.perfectdraw-ability-sheet label {
+  font-weight: bold;
+  color: #222;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.2em;
+  display: block;
+}
+
+.perfectdraw-ability-sheet input[type="text"],
+.perfectdraw-ability-sheet select {
+  width: 100%;
+  font-size: 1em;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  padding: 0.3em 0.6em;
+  margin-top: 0.2em;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+
+.perfectdraw-ability-sheet input[type="text"]:focus,
+.perfectdraw-ability-sheet select:focus {
+  border-color: #a0c4ff;
+  outline: none;
+}
+
+.perfectdraw-ability-sheet ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.2em 0 0.2em 0;
+}
+
+.perfectdraw-ability-sheet ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3em;
+}
+
+.perfectdraw-ability-sheet button.add-requirement,
+.perfectdraw-ability-sheet button.add-tag {
+  background: #a0c4ff;
+  color: #222;
+  border: none;
+  border-radius: 6px;
+  padding: 0.2em 0.8em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.2em;
+  transition: background 0.2s;
+}
+
+.perfectdraw-ability-sheet button.add-requirement:hover,
+.perfectdraw-ability-sheet button.add-tag:hover {
+  background: #4361ee;
+  color: #fff;
+}
+
+.perfectdraw-ability-sheet button.remove-requirement,
+.perfectdraw-ability-sheet button.remove-tag {
+  background: #ffadad;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 1.8em;
+  height: 1.8em;
+  font-weight: bold;
+  margin-left: 0.5em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.perfectdraw-ability-sheet button.remove-requirement:hover,
+.perfectdraw-ability-sheet button.remove-tag:hover {
+  background: #ff4d6d;
+  color: #fff;
+}
+
+/* Editor fields */
+.perfectdraw-ability-sheet .form-group .editor {
+  margin-top: 0.3em;
+  border-radius: 6px;
+  background: #f8f8f8;
+  border: 1px solid #bbb;
+  min-height: 20em;          
+  min-width: 100%;
+  padding: 0.5em;
+  resize: vertical;
+  box-sizing: border-box;
+  overflow: auto;
+}
+/* Optional: Add a manga-style border effect */
+.perfectdraw-ability-sheet {
+  box-shadow:
+    0 0 0 4px #fff,
+    0 0 0 8px #2222,
+    0 4px 24px #0002;
+}
