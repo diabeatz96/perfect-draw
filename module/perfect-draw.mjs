@@ -8,9 +8,6 @@ import { PerfectDrawItemSheet } from './sheets/item-sheet.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { PERFECT_DRAW } from './helpers/config.mjs';
 
-import { PerfectDrawCards } from './documents/cards.mjs';
-import { PerfectDrawCardsSheet } from './sheets/cards-sheet.mjs';
-
 // Import DataModel classes
 import * as models from './data/_module.mjs';
 
@@ -55,11 +52,7 @@ Hooks.once('init', function () {
     move: models.PerfectDrawMove
   }
 
-  // Config
-  CONFIG.Cards.documentClass = PerfectDrawCards;
-
-  Cards.registerSheet('perfect-draw', PerfectDrawCardsSheet, { makeDefault: true });
-
+  
   // Active Effects are never copied to the Actor,
   // but will still apply to the Actor from within the Item
   // if the transfer property on the Active Effect is true.
