@@ -3,6 +3,14 @@
     "Add": "Add",
     "Main": "Main",
     "Notes": "Notes",
+    "PickAnAbility": "Pick an Ability",
+    "AbilityPicker": {
+      "WorldAbilities": "World Abilities",
+      "CompendiumAbilities": "Compendium Abilities",
+      "NoWorldAbilities": "No World Abilities",
+      "NoCompendiumAbilities": "No Compendium Abilities",
+      "Search": "Search"
+    },
     "Ability": {
       "description": "Description",
       "id": "Ability ID",

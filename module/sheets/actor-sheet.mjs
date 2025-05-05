@@ -12,8 +12,8 @@ export class PerfectDrawActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['perfect-draw', 'sheet', 'actor'],
-      width: 600,
-      height: 600,
+      width: 765,
+      height: 802,
       tabs: [
         {
           navSelector: '.sheet-tabs',

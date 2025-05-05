@@ -1,0 +1,115 @@
+/* Manga-Inspired Dialog Styles for Perfect Draw */
+
+.pd-manga-dialog .window-content {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 4px #fff,
+    0 0 0 8px #2222,
+    0 4px 24px #0002;
+  padding: 1.2em 1.5em 1.2em 1.5em;
+  font-family: 'Fira Sans', 'Zen Kaku Gothic Antique', Arial, sans-serif;
+  color: #222;
+}
+
+.pd-manga-dialog .dialog-content {
+  margin-bottom: 1.2em;
+}
+
+.pd-manga-dialog input[type="text"],
+.pd-manga-dialog input[type="search"] {
+  width: 100%;
+  font-size: 1em;
+  border: 1.5px solid #a0c4ff;
+  border-radius: 7px;
+  padding: 0.4em 0.7em;
+  background: #f7faff;
+  margin-bottom: 0.7em;
+  transition: border 0.2s;
+}
+
+.pd-manga-dialog input[type="text"]:focus,
+.pd-manga-dialog input[type="search"]:focus {
+  border-color: #4361ee;
+  outline: none;
+}
+
+.pd-manga-dialog strong,
+.pd-manga-dialog label {
+  color: #4361ee;
+  font-weight: bold;
+  font-size: 1.08em;
+  margin-bottom: 0.3em;
+  display: block;
+  letter-spacing: 0.01em;
+}
+
+.pd-manga-dialog ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.2em 0 0.2em 0;
+}
+
+.pd-manga-dialog ul li {
+  background: #e3eaff;
+  border: 1px solid #a0c4ff;
+  border-radius: 6px;
+  padding: 0.25em 0.7em;
+  margin-bottom: 0.3em;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+}
+
+.pd-manga-dialog ul li.selected,
+.pd-manga-dialog ul li:active {
+  background: #a0c4ff;
+  border-color: #4361ee;
+  color: #222;
+}
+
+.pd-manga-dialog .dialog-buttons {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+  margin-top: 1.2em;
+}
+
+.pd-manga-dialog button {
+  font-size: 1em;
+  padding: 0.3em 1.2em;
+  border-radius: 7px;
+  border: none;
+  background: #a0c4ff;
+  color: #222;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px #a0c4ff33;
+}
+
+.pd-manga-dialog button:hover,
+.pd-manga-dialog button:focus {
+  background: #4361ee;
+  color: #fff;
+}
+
+.pd-manga-dialog .dialog-buttons button:last-child {
+  background: #ff4d6d;
+  color: #fff;
+}
+
+.pd-manga-dialog .dialog-buttons button:last-child:hover,
+.pd-manga-dialog .dialog-buttons button:last-child:focus {
+  background: #b7094c;
+  color: #fff;
+}
+
+/* Optional: Section headers for compendium/world */
+.pd-manga-dialog .section-header {
+  font-size: 1em;
+  color: #222;
+  font-weight: bold;
+  margin: 0.7em 0 0.3em 0;
+  border-bottom: 1.5px dashed #a0c4ff;
+  padding-bottom: 0.2em;
+}

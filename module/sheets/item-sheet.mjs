@@ -12,8 +12,8 @@ export class PerfectDrawItemSheet extends ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['perfect-draw', 'sheet', 'item'],
-      width: 520,
-      height: 480,
+      width: 709,
+      height: 675,
       tabs: [
         {
           navSelector: '.sheet-tabs',
@@ -228,71 +228,125 @@ export class PerfectDrawItemSheet extends ItemSheet {
     }
   }
 
-  /**
-   * Show a dialog to pick an ability from all available abilities in the world and compendiums.
-   * @param {"initial"|"available"} type
-   */
-  async _showAbilityPickerDialog(type) {
-    // Gather all ability items from world and compendiums
-    let abilities = game.items?.filter(i => i.type === "ability") ?? [];
-    // Add compendium abilities
-    for (let pack of game.packs.filter(p => p.documentName === "Item")) {
-      const index = await pack.getIndex();
-      for (let entry of index) {
-        if (entry.type === "ability" && !abilities.some(a => a.name === entry.name)) {
-          abilities.push({ name: entry.name, _id: entry._id, pack: pack.collection });
-        }
+async _showAbilityPickerDialog(type) {
+  // Gather all ability items from world and compendiums, grouped
+  let worldAbilities = game.items?.filter(i => i.type === "ability") ?? [];
+  let compendiumAbilities = {};
+
+  // Collect abilities from each compendium
+  for (let pack of game.packs.filter(p => p.documentName === "Item")) {
+    const index = await pack.getIndex();
+    const abilitiesInPack = [];
+    for (let entry of index) {
+      if (entry.type === "ability" && !worldAbilities.some(a => a.name === entry.name)) {
+        abilitiesInPack.push({ name: entry.name, _id: entry._id, pack: pack.collection });
       }
     }
-    // Sort alphabetically
-    abilities = abilities.sort((a, b) => a.name.localeCompare(b.name));
+    if (abilitiesInPack.length) {
+      compendiumAbilities[pack.metadata.label] = abilitiesInPack.sort((a, b) => a.name.localeCompare(b.name));
+    }
+  }
+  // Sort world abilities
+  worldAbilities = worldAbilities.sort((a, b) => a.name.localeCompare(b.name));
 
-    // Dialog content
-    let content = `
-      <input type="text" id="ability-search" style="width:100%;" placeholder="Search ability..."/>
-      <div style="max-height:250px;overflow-y:auto;margin-top:0.5em;">
-        <ul id="ability-list" style="list-style:none;padding:0;margin:0;">
-          ${abilities.map((a, i) => `<li data-index="${i}" style="padding:0.2em 0;cursor:pointer;">${a.name}</li>`).join('')}
+  const worldLabel = game.i18n.localize("PERFECT_DRAW.AbilityPicker.WorldAbilities");
+  const compendiumLabel = game.i18n.localize("PERFECT_DRAW.AbilityPicker.CompendiumAbilities");
+  const noWorldAbilities = game.i18n.localize("PERFECT_DRAW.AbilityPicker.NoWorldAbilities");
+  const noCompendiumAbilities = game.i18n.localize("PERFECT_DRAW.AbilityPicker.NoCompendiumAbilities");
+
+// Build dialog content
+let content = `
+  <div class="pd-manga-dialog">
+    <input type="text" id="ability-search" placeholder="${game.i18n.localize("PERFECT_DRAW.AbilityPicker.Search")}" />
+    <div style="max-height:250px;overflow-y:auto;margin-top:0.5em;">
+      <div style="margin-bottom:0.5em;">
+        <strong>${worldLabel}</strong>
+        <ul id="ability-list-world">
+          ${
+            worldAbilities.length
+              ? worldAbilities.map((a, i) => `<li data-type="world" data-index="${i}">${a.name}</li>`).join('')
+              : `<li style="color:#888;cursor:default;">${noWorldAbilities}</li>`
+          }
         </ul>
       </div>
-    `;
+      <div>
+        <strong>${compendiumLabel}</strong>
+        ${
+          Object.keys(compendiumAbilities).length
+            ? Object.entries(compendiumAbilities).map(([packLabel, abilities]) => `
+                <div style="margin-bottom:0.3em;">
+                  <span class="section-header">${packLabel}</span>
+                  <ul class="ability-list-compendium" data-pack="${packLabel}">
+                    ${
+                      abilities.length
+                        ? abilities.map((a, i) => `<li data-type="compendium" data-pack="${packLabel}" data-index="${i}">${a.name}</li>`).join('')
+                        : `<li style="color:#888;cursor:default;">${noCompendiumAbilities}</li>`
+                    }
+                  </ul>
+                </div>
+              `).join('')
+            : `<div style="color:#888;margin:0.5em 0 0.5em 0;">${noCompendiumAbilities}</div>`
+        }
+      </div>
+    </div>
+  </div>
+`;
 
-    let selectedAbility = null;
+  let selectedAbility = null;
 
-    new Dialog({
-      title: game.i18n.localize("PERFECT_DRAW.PickAbility"),
-      content,
-      buttons: {
-        ok: {
-          label: game.i18n.localize("PERFECT_DRAW.Add"),
-          callback: async (html) => {
-            if (!selectedAbility) return;
-            let arr = Array.from(this.item.system[`${type}_abilities`] ?? []);
-            if (!arr.includes(selectedAbility.name)) {
-              arr.push(selectedAbility.name);
-              await this.item.update({ [`system.${type}_abilities`]: arr });
-            }
+  new Dialog({
+    title: game.i18n.localize("PERFECT_DRAW.PickAbility"),
+    content,
+    buttons: {
+      ok: {
+        label: game.i18n.localize("PERFECT_DRAW.Add"),
+        callback: async (html) => {
+          if (!selectedAbility) return;
+          let arr = Array.from(this.item.system[`${type}_abilities`] ?? []);
+          if (!arr.includes(selectedAbility.name)) {
+            arr.push(selectedAbility.name);
+            await this.item.update({ [`system.${type}_abilities`]: arr });
           }
-        },
-        cancel: { label: game.i18n.localize("Cancel") }
+        }
       },
-      render: html => {
-        const $search = html.find('#ability-search');
-        const $list = html.find('#ability-list');
-        $search.on('input', function () {
-          const val = $(this).val().toLowerCase();
-          $list.children('li').each(function () {
+      cancel: { label: game.i18n.localize("Cancel") }
+    },
+    render: html => {
+      const $search = html.find('#ability-search');
+      const $worldList = html.find('#ability-list-world');
+      const $compLists = html.find('.ability-list-compendium');
+      $search.on('input', function () {
+        const val = $(this).val().toLowerCase();
+        $worldList.children('li').each(function () {
+          const $li = $(this);
+          $li.toggle($li.text().toLowerCase().includes(val));
+        });
+        $compLists.each(function () {
+          $(this).children('li').each(function () {
             const $li = $(this);
             $li.toggle($li.text().toLowerCase().includes(val));
           });
         });
-        $list.on('click', 'li', function () {
-          $list.children('li').css('background', '');
-          $(this).css('background', '#a0c4ff');
-          selectedAbility = abilities[Number($(this).data('index'))];
-        });
-      },
-      default: 'ok'
-    }).render(true);
-  }
+      });
+      // Click handlers for world abilities
+      $worldList.on('click', 'li', function () {
+        $worldList.children('li').css('background', '');
+        $compLists.children('li').css('background', '');
+        $(this).css('background', '#a0c4ff');
+        const idx = Number($(this).data('index'));
+        selectedAbility = worldAbilities[idx];
+      });
+      // Click handlers for compendium abilities
+      $compLists.on('click', 'li', function () {
+        $worldList.children('li').css('background', '');
+        $compLists.children('li').css('background', '');
+        $(this).css('background', '#a0c4ff');
+        const packLabel = $(this).data('pack');
+        const idx = Number($(this).data('index'));
+        selectedAbility = compendiumAbilities[packLabel][idx];
+      });
+    },
+    default: 'ok'
+  }).render(true);
+}
 }

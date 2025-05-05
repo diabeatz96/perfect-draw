@@ -36,7 +36,8 @@
   "esmodules": ["module/perfect-draw.mjs"],
   "styles": ["css/perfect-draw.css", "css/actor-character-sheet.css", "css/move-item-sheet.css",
             "css/item-ability-sheet.css", "css/item-playbook-sheet.css", "css/card-sheet.css",
-            "css/item-baggage-sheet.css", "css/item-keyword-sheet.css", "css/deck-sheet.css"],
+            "css/item-baggage-sheet.css", "css/item-keyword-sheet.css", "css/deck-sheet.css",
+            "css/dialog.css"],
   "languages": [
     {
       "lang": "en",
