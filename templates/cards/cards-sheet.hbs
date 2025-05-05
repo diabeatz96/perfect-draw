@@ -1,0 +1,17 @@
+{{!-- filepath: systems/perfect-draw/templates/cards/cards-sheet.hbs --}}
+<section class="perfectdraw-cards-sheet">
+  <h2>{{document.name}}</h2>
+  <p>Type: {{document.type}}</p>
+  <p>Cards in stack: {{document.size}}</p>
+  {{#if ccmDeck}}
+    <button class="ccm-shuffle">Shuffle Deck</button>
+    <button class="ccm-draw">Draw Card</button>
+    <ul>
+      {{#each ccmCards}}
+        <li>{{this.name}}</li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>No CCM deck linked.</p>
+  {{/if}}
+</section>
