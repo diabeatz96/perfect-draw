@@ -41,9 +41,9 @@ export default class PerfectDrawMove extends PerfectDrawItemBase {
     }); // Attribute used for roll
 
     schema.outcomes = new fields.SchemaField({
-      "10+": new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.10plus" }),
-      "7-9": new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.7_9" }),
-      "6-": new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.6minus" }),
+      "high": new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.10plus" }),
+      "mid": new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.7_9" }),
+      "low": new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.6minus" }),
     }, { label: "PERFECT_DRAW.Move.outcomes" }); // Results of 2d6+stat roll
 
     schema.specific_effects = new fields.HTMLField({ 

@@ -1,6 +1,6 @@
-/* --- Move Sheet: Manga-Inspired, Modern, Clean (Matches Ability Sheet) --- */
+/* --- Baggage Sheet: Manga-Inspired, Modern, Clean --- */
 
-.perfectdraw-move-sheet {
+.perfectdraw-baggage-sheet {
   font-family: 'Fira Sans', 'Zen Kaku Gothic Antique', Arial, sans-serif;
   background: #fff;
   border-radius: 12px;
@@ -8,7 +8,7 @@
   padding: 0;
 }
 
-.perfectdraw-move-sheet .sheet-header {
+.perfectdraw-baggage-sheet .sheet-header {
   display: flex;
   align-items: center;
   border-bottom: 2px solid #2224;
@@ -22,7 +22,7 @@
   border-top-right-radius: 12px;
 }
 
-.perfectdraw-move-sheet .profile-img {
+.perfectdraw-baggage-sheet .profile-img {
   width: 80px;
   height: 80px;
   border-radius: 8px;
@@ -32,12 +32,12 @@
   background: #fff;
 }
 
-.perfectdraw-move-sheet .header-fields {
+.perfectdraw-baggage-sheet .header-fields {
   margin-left: 1.5em;
   flex: 1;
 }
 
-.perfectdraw-move-sheet .charname input[type="text"] {
+.perfectdraw-baggage-sheet .charname input[type="text"] {
   font-size: 1.5em;
   font-weight: bold;
   border: none;
@@ -48,14 +48,14 @@
   padding: 0;
 }
 
-.perfectdraw-move-sheet .sheet-tabs {
+.perfectdraw-baggage-sheet .sheet-tabs {
   margin: 0 1em;
   border-bottom: 2px solid #2222;
   display: flex;
   gap: 1em;
 }
 
-.perfectdraw-move-sheet .sheet-tabs .item {
+.perfectdraw-baggage-sheet .sheet-tabs .item {
   padding: 0.5em 1.2em;
   cursor: pointer;
   font-weight: bold;
@@ -67,24 +67,25 @@
   transition: background 0.2s, color 0.2s;
 }
 
-.perfectdraw-move-sheet .sheet-tabs .item.active,
-.perfectdraw-move-sheet .sheet-tabs .item:hover {
+.perfectdraw-baggage-sheet .sheet-tabs .item.active,
+.perfectdraw-baggage-sheet .sheet-tabs .item:hover {
   background: #a0c4ff;
   color: #222;
   border-color: #a0c4ff #a0c4ff #fff #a0c4ff;
 }
 
-.perfectdraw-move-sheet .sheet-body {
+.perfectdraw-baggage-sheet .sheet-body {
   padding: 1.5em;
+  background: #fff url("../../../systems/perfect-draw/assets/.png") repeat;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
 
-.perfectdraw-move-sheet .form-group {
+.perfectdraw-baggage-sheet .form-group {
   margin-bottom: 1.2em;
 }
 
-.perfectdraw-move-sheet label {
+.perfectdraw-baggage-sheet label {
   font-weight: bold;
   color: #222;
   letter-spacing: 0.02em;
@@ -92,8 +93,8 @@
   display: block;
 }
 
-.perfectdraw-move-sheet input[type="text"],
-.perfectdraw-move-sheet select {
+.perfectdraw-baggage-sheet input[type="text"],
+.perfectdraw-baggage-sheet select {
   width: 100%;
   font-size: 1em;
   border: 1px solid #bbb;
@@ -104,66 +105,24 @@
   transition: border 0.2s;
 }
 
-.perfectdraw-move-sheet input[type="text"]:focus,
-.perfectdraw-move-sheet select:focus {
+.perfectdraw-baggage-sheet input[type="text"]:focus,
+.perfectdraw-baggage-sheet select:focus {
   border-color: #a0c4ff;
   outline: none;
 }
 
-.perfectdraw-move-sheet ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0.2em 0 0.2em 0;
+.perfectdraw-baggage-sheet input[type="checkbox"] {
+  transform: scale(1.3);
+  margin-top: 0.3em;
+  accent-color: #a0c4ff;
 }
 
-.perfectdraw-move-sheet ul li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.3em;
-}
-
-.perfectdraw-move-sheet button.add-associated-ability {
-  background: #a0c4ff;
-  color: #222;
-  border: none;
-  border-radius: 6px;
-  padding: 0.2em 0.8em;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 0.2em;
-  transition: background 0.2s;
-}
-
-.perfectdraw-move-sheet button.add-associated-ability:hover {
-  background: #4361ee;
-  color: #fff;
-}
-
-.perfectdraw-move-sheet button.remove-associated-ability {
-  background: #ffadad;
-  color: #222;
-  border: none;
-  border-radius: 50%;
-  width: 1.8em;
-  height: 1.8em;
-  font-weight: bold;
-  margin-left: 0.5em;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.perfectdraw-move-sheet button.remove-associated-ability:hover {
-  background: #ff4d6d;
-  color: #fff;
-}
-
-/* Editor fields */
-.perfectdraw-move-sheet .form-group .editor {
+.perfectdraw-baggage-sheet .form-group .editor {
   margin-top: 0.3em;
   border-radius: 6px;
   background: #f8f8f8;
   border: 1px solid #bbb;
-  min-height: 12em;
+  min-height: 8em;
   min-width: 100%;
   padding: 0.5em;
   resize: vertical;
@@ -172,7 +131,7 @@
 }
 
 /* Optional: Add a manga-style border effect */
-.perfectdraw-move-sheet {
+.perfectdraw-baggage-sheet {
   box-shadow:
     0 0 0 4px #fff,
     0 0 0 8px #2222,

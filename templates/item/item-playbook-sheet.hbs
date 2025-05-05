@@ -1,4 +1,4 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} perfectdraw-playbook-sheet" autocomplete="off">
   <header class="sheet-header">
     <img
       class="profile-img"
@@ -43,52 +43,62 @@
         <ul>
           {{#each system.example_archetypes}}
             <li>
-              <input type="text" name="system.example_archetypes.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.example_archetypes.item'}}" />
+              <input type="text" name="system.example_archetypes.{{@index}}.label" value="{{this.label}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.example_archetypes.item'}}" />
+              <button type="button" class="remove-archetype" data-index="{{@index}}">-</button>
             </li>
           {{/each}}
         </ul>
+        <button type="button" class="add-archetype">+ {{localize "PERFECT_DRAW.Add"}}</button>
       </div>
-      <div class="form-group">
+      <div class="form-group flex-center-column">
         <label>{{localize "PERFECT_DRAW.Playbook.look_suggestions.label"}}</label>
         <div>
           <strong>{{localize "PERFECT_DRAW.Playbook.look_suggestions.hair.label"}}</strong>
           <ul>
             {{#each system.look_suggestions.hair}}
               <li>
-                <input type="text" name="system.look_suggestions.hair.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.hair.item'}}" />
+                <input type="text" name="system.look_suggestions.hair.{{@index}}.label" value="{{this.label}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.hair.item'}}" />
+                <button type="button" class="remove-look-hair" data-index="{{@index}}">-</button>
               </li>
             {{/each}}
           </ul>
+          <button type="button" class="add-look-hair">+ {{localize "PERFECT_DRAW.Add"}}</button>
         </div>
         <div>
           <strong>{{localize "PERFECT_DRAW.Playbook.look_suggestions.clothes.label"}}</strong>
           <ul>
             {{#each system.look_suggestions.clothes}}
               <li>
-                <input type="text" name="system.look_suggestions.clothes.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.clothes.item'}}" />
+                <input type="text" name="system.look_suggestions.clothes.{{@index}}.label" value="{{this.label}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.clothes.item'}}" />
+                <button type="button" class="remove-look-clothes" data-index="{{@index}}">-</button>
               </li>
             {{/each}}
           </ul>
+          <button type="button" class="add-look-clothes">+ {{localize "PERFECT_DRAW.Add"}}</button>
         </div>
         <div>
           <strong>{{localize "PERFECT_DRAW.Playbook.look_suggestions.game_tools.label"}}</strong>
           <ul>
             {{#each system.look_suggestions.game_tools}}
               <li>
-                <input type="text" name="system.look_suggestions.game_tools.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.game_tools.item'}}" />
+                <input type="text" name="system.look_suggestions.game_tools.{{@index}}.label" value="{{this.label}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.game_tools.item'}}" />
+                <button type="button" class="remove-look-game_tools" data-index="{{@index}}">-</button>
               </li>
             {{/each}}
           </ul>
+          <button type="button" class="add-look-game_tools">+ {{localize "PERFECT_DRAW.Add"}}</button>
         </div>
         <div>
           <strong>{{localize "PERFECT_DRAW.Playbook.look_suggestions.other.label"}}</strong>
           <ul>
             {{#each system.look_suggestions.other}}
               <li>
-                <input type="text" name="system.look_suggestions.other.{{@index}}.label" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.other.item'}}" />
+                <input type="text" name="system.look_suggestions.other.{{@index}}.label" value="{{this.label}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.look_suggestions.other.item'}}" />
+                <button type="button" class="remove-look-other" data-index="{{@index}}">-</button>
               </li>
             {{/each}}
           </ul>
+          <button type="button" class="add-look-other">+ {{localize "PERFECT_DRAW.Add"}}</button>
         </div>
       </div>
     </div>
@@ -121,23 +131,33 @@
     <div class="tab" data-group="primary" data-tab="abilities">
       <div class="form-group">
         <label>{{localize "PERFECT_DRAW.Playbook.initial_abilities.label"}}</label>
-        <ul>
-          {{#each system.initial_abilities}}
-            <li>
-              <input type="text" name="system.initial_abilities.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.initial_abilities.item'}}" />
-            </li>
-          {{/each}}
-        </ul>
+        <div class="draggable-abilities-dropzone" data-type="initial">
+          <ul>
+            {{#each system.initial_abilities}}
+              <li class="draggable-ability" draggable="true" data-index="{{@index}}">
+                <span>{{this}}</span>
+                <button type="button" class="remove-initial-ability" data-index="{{@index}}">-</button>
+              </li>
+            {{/each}}
+          </ul>
+          <button type="button" class="add-initial-ability">+ {{localize "PERFECT_DRAW.Add"}}</button>
+          <small>Drag to reorder or move to Available Abilities. Drop ability items here to add by name.</small>
+        </div>
       </div>
       <div class="form-group">
         <label>{{localize "PERFECT_DRAW.Playbook.available_abilities.label"}}</label>
-        <ul>
-          {{#each system.available_abilities}}
-            <li>
-              <input type="text" name="system.available_abilities.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Playbook.available_abilities.item'}}" />
-            </li>
-          {{/each}}
-        </ul>
+        <div class="draggable-abilities-dropzone" data-type="available">
+          <ul>
+            {{#each system.available_abilities}}
+              <li class="draggable-ability" draggable="true" data-index="{{@index}}">
+                <span>{{this}}</span>
+                <button type="button" class="remove-available-ability" data-index="{{@index}}">-</button>
+              </li>
+            {{/each}}
+          </ul>
+          <button type="button" class="add-available-ability">+ {{localize "PERFECT_DRAW.Add"}}</button>
+          <small>Drag to reorder or move to Initial Abilities. Drop ability items here to add by name.</small>
+        </div>
       </div>
       <div class="form-group">
         <label>{{localize "PERFECT_DRAW.Playbook.starting_staple_id"}}</label>
@@ -258,24 +278,6 @@
         }}
       </div>
     </div>
-
-    <section class="linked-abilities-section">
-      <h2>Linked Abilities</h2>
-      <div class="linked-abilities-dropzone" style="border: 2px dashed #bbb; padding: 0.5em; min-height: 2em;">
-        <ul>
-          {{#each linkedAbilities as |ability|}}
-            <li>
-              {{#if ability.missing}}
-                <span class="missing-ability">{{ability.name}} (Missing)</span>
-              {{else}}
-                <span class="linked-ability" data-uuid="{{ability.uuid}}" style="cursor:pointer; color:#337ab7; text-decoration:underline;">{{ability.name}}</span>
-              {{/if}}
-            </li>
-          {{/each}}
-        </ul>
-        <small>Drag abilities here to link them.</small>
-      </div>
-    </section>
 
     <div class="tab" data-group="primary" data-tab="notes">
       <div class="form-group">

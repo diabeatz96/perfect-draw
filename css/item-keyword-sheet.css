@@ -1,0 +1,106 @@
+/* --- Keyword Sheet: Manga-Inspired, Modern, Clean --- */
+
+.perfectdraw-keyword-sheet {
+  font-family: 'Fira Sans', 'Zen Kaku Gothic Antique', Arial, sans-serif;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px #0002, 0 0 0 2px #2222;
+  padding: 0;
+}
+
+.perfectdraw-keyword-sheet .sheet-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #2224;
+  background: repeating-linear-gradient(
+    135deg,
+    #f8f8f8 0 8px,
+    #eaeaea 8px 16px
+  );
+  padding: 1em 1em 0.5em 1em;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.perfectdraw-keyword-sheet .profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px #bbb;
+  border: 2px solid #2222;
+  background: #fff;
+}
+
+.perfectdraw-keyword-sheet .header-fields {
+  margin-left: 1.5em;
+  flex: 1;
+}
+
+.perfectdraw-keyword-sheet .charname input[type="text"] {
+  font-size: 1.5em;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  width: 100%;
+  color: #222;
+  outline: none;
+  padding: 0;
+}
+
+.perfectdraw-keyword-sheet .sheet-body {
+  padding: 1.5em;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.perfectdraw-keyword-sheet .form-group {
+  margin-bottom: 1.2em;
+}
+
+.perfectdraw-keyword-sheet label {
+  font-weight: bold;
+  color: #222;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.2em;
+  display: block;
+}
+
+.perfectdraw-keyword-sheet input[type="text"],
+.perfectdraw-keyword-sheet select {
+  width: 100%;
+  font-size: 1em;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  padding: 0.3em 0.6em;
+  margin-top: 0.2em;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+
+.perfectdraw-keyword-sheet input[type="text"]:focus,
+.perfectdraw-keyword-sheet select:focus {
+  border-color: #a0c4ff;
+  outline: none;
+}
+
+.perfectdraw-keyword-sheet .form-group .editor {
+  margin-top: 0.3em;
+  border-radius: 6px;
+  background: #f8f8f8;
+  border: 1px solid #bbb;
+  min-height: 8em;
+  min-width: 100%;
+  padding: 0.5em;
+  resize: vertical;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+/* Optional: Add a manga-style border effect */
+.perfectdraw-keyword-sheet {
+  box-shadow:
+    0 0 0 4px #fff,
+    0 0 0 8px #2222,
+    0 4px 24px #0002;
+}
