@@ -220,9 +220,11 @@ Hooks.on('renderHotbar', (app, html, data) => {
   try {
     if (html[0].querySelector('.perfectdraw-hotbar-btns')) return;
     const hotbar = html[0].querySelector('#hotbar');
+    console.log("Hotbar:", hotbar);
+    console.log(html[0]);
     if (!hotbar) return; // If not found, just skip (likely not v12)
 
-    const isGM = game.user.isGM;
+    const isGM = game.user.isGM;  
     const btns = document.createElement('div');
     btns.className = "perfectdraw-hotbar-btns";
     btns.style.display = "flex";
