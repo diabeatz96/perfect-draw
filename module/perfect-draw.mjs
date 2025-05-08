@@ -218,8 +218,8 @@ Hooks.on('renderSidebar', (app, html, data) => {
 // Hotbar buttons (for v12 or fallback)
 Hooks.on('renderHotbar', (app, html, data) => {
   try {
-    if (html[0].querySelector('.perfectdraw-hotbar-btns')) return;
-    const hotbar = html[0].querySelector('#hotbar');
+    if (html[0].find('.perfectdraw-hotbar-btns')) return;
+    const hotbar = html[0].find('#hotbar');
     console.log("Hotbar:", hotbar);
     console.log(html[0]);
     if (!hotbar) return; // If not found, just skip (likely not v12)
@@ -245,14 +245,14 @@ Hooks.on('renderHotbar', (app, html, data) => {
       </button>` : ''}
     `;
     hotbar.appendChild(btns);
-    btns.querySelector('.perfectdraw-create-deck').addEventListener('click', () => {
+    btns.find('.perfectdraw-create-deck').addEventListener('click', () => {
       ui.notifications.info("[PerfectDraw] Create Deck dialog would open here.");
     });
-    btns.querySelector('.perfectdraw-create-card').addEventListener('click', () => {
+    btns.find('.perfectdraw-create-card').addEventListener('click', () => {
       ui.notifications.info("[PerfectDraw] Create Card dialog would open here.");
     });
     if (isGM) {
-      btns.querySelector('.perfectdraw-view-character-info').addEventListener('click', () => {
+      btns.find('.perfectdraw-view-character-info').addEventListener('click', () => {
         ui.notifications.info("[PerfectDraw] View Character Info dialog would open here.");
       });
     }
