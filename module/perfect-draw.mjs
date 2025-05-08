@@ -161,52 +161,94 @@ function rollItemMacro(itemUuid) {
 }
 
 Hooks.on('renderSidebar', (app, html, data) => {
-  // Only add once
-  if (html.querySelector('.perfectdraw-sidebar-main-btns')) return;
+  try {
+    // Only add once
+    if (html.querySelector('.perfectdraw-sidebar-main-btns')) return;
 
-  // Find the Game Settings button's <li>
-  const settingsBtn = html.querySelector('button[data-tab="settings"]')?.parentElement;
-  if (!settingsBtn) return;
+    // Find the Game Settings button's <li>
+    const settingsBtn = html.querySelector('button[data-tab="settings"]')?.parentElement;
+    if (!settingsBtn) throw new Error("Settings button not found");
 
-  // Build your custom button group as a <li> for consistency
-  const isGM = game.user.isGM;
-  const btns = document.createElement('li');
-  btns.className = "perfectdraw-sidebar-main-btns";
-  btns.style.display = "flex";
-  btns.style.flexDirection = "column";
-  btns.style.alignItems = "center";
-  btns.style.justifyContent = "center";
-  btns.style.gap = "0.25em";
-  btns.style.margin = "0.25em 0";
+    // Build your custom button group as a <li> for consistency
+    const isGM = game.user.isGM;
+    const btns = document.createElement('li');
+    btns.className = "perfectdraw-sidebar-main-btns";
+    btns.style.display = "flex";
+    btns.style.flexDirection = "column";
+    btns.style.alignItems = "center";
+    btns.style.justifyContent = "center";
+    btns.style.gap = "0.25em";
+    btns.style.margin = "0.25em 0";
 
-  btns.innerHTML = `
-    <button type="button" class="ui-control plain icon perfectdraw-create-deck" title="${game.i18n.localize("PERFECT_DRAW.CreateDeck")}">
-      <i class="fas fa-layer-group"></i>
-    </button>
-    <button type="button" class="ui-control plain icon perfectdraw-create-card" title="${game.i18n.localize("PERFECT_DRAW.CreateCard")}">
-      <i class="fas fa-clone"></i>
-    </button>
-    ${isGM ? `<button type="button" class="ui-control plain icon perfectdraw-view-character-info" title="${game.i18n.localize("PERFECT_DRAW.ViewCharacterInfo")}">
-      <i class="fas fa-user"></i>
-    </button>` : ''}
-  `;
+    btns.innerHTML = `
+      <button type="button" class="ui-control plain icon perfectdraw-create-deck" title="${game.i18n.localize("PERFECT_DRAW.CreateDeck")}">
+        <i class="fas fa-layer-group"></i>
+      </button>
+      <button type="button" class="ui-control plain icon perfectdraw-create-card" title="${game.i18n.localize("PERFECT_DRAW.CreateCard")}">
+        <i class="fas fa-clone"></i>
+      </button>
+      ${isGM ? `<button type="button" class="ui-control plain icon perfectdraw-view-character-info" title="${game.i18n.localize("PERFECT_DRAW.ViewCharacterInfo")}">
+        <i class="fas fa-user"></i>
+      </button>` : ''}
+    `;
 
-  // Insert after the settings <li>
-  settingsBtn.after(btns);
+    // Insert after the settings <li>
+    settingsBtn.after(btns);
 
-  // Event listeners (vanilla JS)
-  btns.querySelector('.perfectdraw-create-deck').addEventListener('click', () => {
-    ui.notifications.info("[PerfectDraw] Create Deck dialog would open here.");
-  });
-  btns.querySelector('.perfectdraw-create-card').addEventListener('click', () => {
-    ui.notifications.info("[PerfectDraw] Create Card dialog would open here.");
-  });
-  if (isGM) {
-    btns.querySelector('.perfectdraw-view-character-info').addEventListener('click', () => {
-      ui.notifications.info("[PerfectDraw] View Character Info dialog would open here.");
+    // Event listeners (vanilla JS)
+    btns.querySelector('.perfectdraw-create-deck').addEventListener('click', () => {
+      ui.notifications.info("[PerfectDraw] Create Deck dialog would open here.");
+    });
+    btns.querySelector('.perfectdraw-create-card').addEventListener('click', () => {
+      ui.notifications.info("[PerfectDraw] Create Card dialog would open here.");
+    });
+    if (isGM) {
+      btns.querySelector('.perfectdraw-view-character-info').addEventListener('click', () => {
+        ui.notifications.info("[PerfectDraw] View Character Info dialog would open here.");
+      });
+    }
+  } catch (err) {
+    // If sidebar render fails, try to render on the hotbar instead
+    Hooks.once('renderHotbar', (app, html, data) => {
+      if (html[0].querySelector('.perfectdraw-hotbar-btns')) return;
+      const hotbar = html[0].querySelector('#hotbar');
+      if (!hotbar) return;
+      const isGM = game.user.isGM;
+      const btns = document.createElement('div');
+      btns.className = "perfectdraw-hotbar-btns";
+      btns.style.display = "flex";
+      btns.style.flexDirection = "row";
+      btns.style.alignItems = "center";
+      btns.style.justifyContent = "center";
+      btns.style.gap = "0.25em";
+      btns.style.marginLeft = "1em";
+      btns.innerHTML = `
+        <button type="button" class="ui-control plain icon perfectdraw-create-deck" title="${game.i18n.localize("PERFECT_DRAW.CreateDeck")}">
+          <i class="fas fa-layer-group"></i>
+        </button>
+        <button type="button" class="ui-control plain icon perfectdraw-create-card" title="${game.i18n.localize("PERFECT_DRAW.CreateCard")}">
+          <i class="fas fa-clone"></i>
+        </button>
+        ${isGM ? `<button type="button" class="ui-control plain icon perfectdraw-view-character-info" title="${game.i18n.localize("PERFECT_DRAW.ViewCharacterInfo")}">
+          <i class="fas fa-user"></i>
+        </button>` : ''}
+      `;
+      hotbar.appendChild(btns);
+      btns.querySelector('.perfectdraw-create-deck').addEventListener('click', () => {
+        ui.notifications.info("[PerfectDraw] Create Deck dialog would open here.");
+      });
+      btns.querySelector('.perfectdraw-create-card').addEventListener('click', () => {
+        ui.notifications.info("[PerfectDraw] Create Card dialog would open here.");
+      });
+      if (isGM) {
+        btns.querySelector('.perfectdraw-view-character-info').addEventListener('click', () => {
+          ui.notifications.info("[PerfectDraw] View Character Info dialog would open here.");
+        });
+      }
     });
   }
 });
+
 Hooks.on = new Proxy(Hooks.on, {
   apply(target, thisArg, argumentsList) {
     const [hookName, fn] = argumentsList;
