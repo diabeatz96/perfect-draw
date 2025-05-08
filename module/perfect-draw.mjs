@@ -4,7 +4,7 @@ import { PerfectDrawItem } from './documents/item.mjs';
 // Import sheet classes.
 import { PerfectDrawActorSheet } from './sheets/actor-sheet.mjs';
 import { PerfectDrawItemSheet } from './sheets/item-sheet.mjs';
-
+import { CCMIntegration } from './helpers/ccm-integration.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { PERFECT_DRAW } from './helpers/config.mjs';
 
@@ -23,6 +23,8 @@ Hooks.once('init', function () {
     PerfectDrawItem,
     rollItemMacro,
   };
+
+  game.perfectdraw.CCMIntegration = CCMIntegration;
 
   // Add custom constants for configuration.
   CONFIG.PERFECT_DRAW = PERFECT_DRAW;
@@ -157,3 +159,65 @@ function rollItemMacro(itemUuid) {
     item.roll();
   });
 }
+
+Hooks.on('renderSidebar', (app, html, data) => {
+  // Only add once
+  if (html.querySelector('.perfectdraw-sidebar-main-btns')) return;
+
+  // Find the Game Settings button's <li>
+  const settingsBtn = html.querySelector('button[data-tab="settings"]')?.parentElement;
+  if (!settingsBtn) return;
+
+  // Build your custom button group as a <li> for consistency
+  const isGM = game.user.isGM;
+  const btns = document.createElement('li');
+  btns.className = "perfectdraw-sidebar-main-btns";
+  btns.style.display = "flex";
+  btns.style.flexDirection = "column";
+  btns.style.alignItems = "center";
+  btns.style.justifyContent = "center";
+  btns.style.gap = "0.25em";
+  btns.style.margin = "0.25em 0";
+
+  btns.innerHTML = `
+    <button type="button" class="ui-control plain icon perfectdraw-create-deck" title="${game.i18n.localize("PERFECT_DRAW.CreateDeck")}">
+      <i class="fas fa-layer-group"></i>
+    </button>
+    <button type="button" class="ui-control plain icon perfectdraw-create-card" title="${game.i18n.localize("PERFECT_DRAW.CreateCard")}">
+      <i class="fas fa-clone"></i>
+    </button>
+    ${isGM ? `<button type="button" class="ui-control plain icon perfectdraw-view-character-info" title="${game.i18n.localize("PERFECT_DRAW.ViewCharacterInfo")}">
+      <i class="fas fa-user"></i>
+    </button>` : ''}
+  `;
+
+  // Insert after the settings <li>
+  settingsBtn.after(btns);
+
+  // Event listeners (vanilla JS)
+  btns.querySelector('.perfectdraw-create-deck').addEventListener('click', () => {
+    ui.notifications.info("[PerfectDraw] Create Deck dialog would open here.");
+  });
+  btns.querySelector('.perfectdraw-create-card').addEventListener('click', () => {
+    ui.notifications.info("[PerfectDraw] Create Card dialog would open here.");
+  });
+  if (isGM) {
+    btns.querySelector('.perfectdraw-view-character-info').addEventListener('click', () => {
+      ui.notifications.info("[PerfectDraw] View Character Info dialog would open here.");
+    });
+  }
+});
+Hooks.on = new Proxy(Hooks.on, {
+  apply(target, thisArg, argumentsList) {
+    const [hookName, fn] = argumentsList;
+    console.log(`[HOOK REGISTERED] ${hookName}`);
+    return Reflect.apply(target, thisArg, argumentsList);
+  }
+});
+Hooks.callAll = new Proxy(Hooks.callAll, {
+  apply(target, thisArg, argumentsList) {
+    const [hookName] = argumentsList;
+    console.log(`[HOOK CALLED] ${hookName}`);
+    return Reflect.apply(target, thisArg, argumentsList);
+  }
+});

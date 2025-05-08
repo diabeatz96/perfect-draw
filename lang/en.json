@@ -11,6 +11,9 @@
       "NoCompendiumAbilities": "No Compendium Abilities",
       "Search": "Search"
     },
+    "CreateDeck": "Create Deck",
+    "CreateCard": "Create Card",
+    "ViewCharacterInfo": "View Character Info",
     "Ability": {
       "description": "Description",
       "id": "Ability ID",
