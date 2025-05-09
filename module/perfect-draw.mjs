@@ -240,6 +240,7 @@ Hooks.on('renderCardsDirectory', (app, html, data) => {
     btns.style.justifyContent = "flex-end";
     btns.style.gap = "0.25em";
     btns.style.margin = "0.5em 0";
+    btns.style.flex = "0";
 
     const isGM = game.user.isGM;
     btns.innerHTML = `
