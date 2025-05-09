@@ -218,12 +218,9 @@ Hooks.on('renderSidebar', (app, html, data) => {
 // Hotbar buttons (for v12 or fallback)
 Hooks.on('renderHotbar', (app, html, data) => {
   try {
-    if (html[0].find('.perfectdraw-hotbar-btns')) return;
-    const hotbar = html[0].querySelector('#hotbar');
-    console.log("Hotbar:", hotbar);
-    console.log(html[0]);
-    if (!hotbar) return; // If not found, just skip (likely not v12)
+    if (html[0].querySelector('.perfectdraw-hotbar-btns')) return;
 
+    console.log(html[0]);
     const isGM = game.user.isGM;  
     const btns = document.createElement('div');
     btns.className = "perfectdraw-hotbar-btns";
@@ -244,7 +241,7 @@ Hooks.on('renderHotbar', (app, html, data) => {
         <i class="fas fa-user"></i>
       </button>` : ''}
     `;
-    hotbar.appendChild(btns);
+    html[0].appendChild(btns);
     btns.querySelector('.perfectdraw-create-deck').addEventListener('click', () => {
       ui.notifications.info("[PerfectDraw] Create Deck dialog would open here.");
     });
@@ -256,6 +253,7 @@ Hooks.on('renderHotbar', (app, html, data) => {
         ui.notifications.info("[PerfectDraw] View Character Info dialog would open here.");
       });
     }
+    console.log("Hotbar buttons added", html[0]);
   } catch (err) {
     // If this errors, it's likely just a version mismatch or missing hotbar structure
     console.warn("[PerfectDraw] Hotbar render skipped (likely not v12):", err);
