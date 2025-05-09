@@ -161,14 +161,17 @@ function rollItemMacro(itemUuid) {
 }
 
 // Sidebar buttons (for v13+)
-// Sidebar buttons (for v13+)
 Hooks.on('renderSidebar', (app, html, data) => {
   try {
+    // Support both v12 (html[0]) and v13+ (html is element)
+    const sidebar = html instanceof HTMLElement ? html : html[0];
+    if (!sidebar) return;
+
     // Only add once
-    if (html.querySelector('.perfectdraw-sidebar-main-btns')) return;
+    if (sidebar.querySelector('.perfectdraw-sidebar-main-btns')) return;
 
     // Find the Game Settings button's <li>
-    const settingsBtn = html.querySelector('button[data-tab="settings"]')?.parentElement;
+    const settingsBtn = sidebar.querySelector('button[data-tab="settings"]')?.parentElement;
     if (!settingsBtn) return; // If not found, just skip (likely not v13+)
 
     // Build your custom button group as a <li> for consistency
@@ -215,15 +218,13 @@ Hooks.on('renderSidebar', (app, html, data) => {
   }
 });
 
-// Hotbar buttons (for v12 or fallback)
 Hooks.on('renderHotbar', (app, html, data) => {
   try {
-    if (html[0].querySelector('.perfectdraw-hotbar-btns')) return;
-    
-    const hotbar = html[0].querySelector('#hotbar');
-    console.log(html[0]);
-    console.log("The hotbar", hotbar);
-    const isGM = game.user.isGM;  
+    // v12: html is a jQuery-like array, v13: html is the element
+    const hotbar = html instanceof HTMLElement ? html : html[0];
+    if (hotbar.querySelector('.perfectdraw-hotbar-btns')) return;
+
+    const isGM = game.user.isGM;
     const btns = document.createElement('div');
     btns.className = "perfectdraw-hotbar-btns";
     btns.style.display = "flex";
@@ -255,9 +256,8 @@ Hooks.on('renderHotbar', (app, html, data) => {
         ui.notifications.info("[PerfectDraw] View Character Info dialog would open here.");
       });
     }
-    console.log("Hotbar buttons added", html[0]);
+    console.log("Hotbar buttons added", hotbar);
   } catch (err) {
-    // If this errors, it's likely just a version mismatch or missing hotbar structure
     console.warn("[PerfectDraw] Hotbar render skipped (likely not v12):", err);
   }
 });
