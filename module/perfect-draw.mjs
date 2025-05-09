@@ -219,8 +219,10 @@ Hooks.on('renderSidebar', (app, html, data) => {
 Hooks.on('renderHotbar', (app, html, data) => {
   try {
     if (html[0].querySelector('.perfectdraw-hotbar-btns')) return;
-
+    
+    const hotbar = html[0].querySelector('#hotbar');
     console.log(html[0]);
+    console.log("The hotbar", hotbar);
     const isGM = game.user.isGM;  
     const btns = document.createElement('div');
     btns.className = "perfectdraw-hotbar-btns";
@@ -241,7 +243,7 @@ Hooks.on('renderHotbar', (app, html, data) => {
         <i class="fas fa-user"></i>
       </button>` : ''}
     `;
-    html[0].appendChild(btns);
+    hotbar.appendChild(btns);
     btns.querySelector('.perfectdraw-create-deck').addEventListener('click', () => {
       ui.notifications.info("[PerfectDraw] Create Deck dialog would open here.");
     });
