@@ -218,21 +218,30 @@ Hooks.on('renderSidebar', (app, html, data) => {
   }
 });
 
-Hooks.on('renderHotbar', (app, html, data) => {
+// Place buttons above the player list on renderPlayerList
+// Place buttons above the player list on renderPlayerList
+// Add PerfectDraw buttons to the Cards Directory panel
+// Add PerfectDraw buttons to the Cards Directory panel
+Hooks.on('renderCardsDirectory', (app, html, data) => {
   try {
-    // v12: html is a jQuery-like array, v13: html is the element
-    const hotbar = html instanceof HTMLElement ? html : html[0];
-    if (hotbar.querySelector('.perfectdraw-hotbar-btns')) return;
+    // Support both v12 (html[0]) and v13+ (html is element)
+    const directory = html instanceof HTMLElement ? html : html[0];
+    if (!directory) return;
 
-    const isGM = game.user.isGM;
+    // Only add once
+    if (directory.querySelector('.perfectdraw-cardsdirectory-btns')) return;
+
+    // Create a container for the buttons
     const btns = document.createElement('div');
-    btns.className = "perfectdraw-hotbar-btns";
+    btns.className = "perfectdraw-cardsdirectory-btns";
     btns.style.display = "flex";
     btns.style.flexDirection = "row";
     btns.style.alignItems = "center";
-    btns.style.justifyContent = "center";
+    btns.style.justifyContent = "flex-end";
     btns.style.gap = "0.25em";
-    btns.style.marginLeft = "1em";
+    btns.style.margin = "0.5em 0";
+
+    const isGM = game.user.isGM;
     btns.innerHTML = `
       <button type="button" class="ui-control plain icon perfectdraw-create-deck" title="${game.i18n.localize("PERFECT_DRAW.CreateDeck")}">
         <i class="fas fa-layer-group"></i>
@@ -244,7 +253,11 @@ Hooks.on('renderHotbar', (app, html, data) => {
         <i class="fas fa-user"></i>
       </button>` : ''}
     `;
-    hotbar.appendChild(btns);
+
+    // Insert the buttons at the bottom of the directory panel, after all children
+    directory.appendChild(btns);
+
+    // Event listeners
     btns.querySelector('.perfectdraw-create-deck').addEventListener('click', () => {
       ui.notifications.info("[PerfectDraw] Create Deck dialog would open here.");
     });
@@ -256,13 +269,11 @@ Hooks.on('renderHotbar', (app, html, data) => {
         ui.notifications.info("[PerfectDraw] View Character Info dialog would open here.");
       });
     }
-    console.log("Hotbar buttons added", hotbar);
+    console.log("PerfectDraw buttons added to Cards Directory");
   } catch (err) {
-    console.warn("[PerfectDraw] Hotbar render skipped (likely not v12):", err);
+    console.warn("[PerfectDraw] Cards Directory render skipped:", err);
   }
 });
-
-
 Hooks.on = new Proxy(Hooks.on, {
   apply(target, thisArg, argumentsList) {
     const [hookName, fn] = argumentsList;
