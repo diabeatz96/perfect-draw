@@ -164,6 +164,7 @@ body.vtt.perfectdraw {
 }
 
 .perfectdraw-character-sheet .stats-row {
+  margin-top: 0.5em;
   display: flex;
   width: 100%;
   gap: 0.5em;
@@ -372,6 +373,73 @@ body.vtt.perfectdraw {
   margin-left: 0.5em;
 }
 
+/* Advancements Section Styling */
+/* --- Advancements Section Improvements --- */
+.perfectdraw-character-sheet .advancements-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
+}
+
+.perfectdraw-character-sheet .advancements-section li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: flex-start; /* Left align all content */
+}
+
+.perfectdraw-character-sheet .advancements-section label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1em;
+  font-weight: 500;
+  background: rgba(255,255,255,0.6);
+  border-radius: 4px;
+  padding: 0.25em 0.5em;
+  transition: background 0.2s;
+  width: 100%;
+  justify-content: flex-start; /* Left align label content */
+}
+
+.perfectdraw-character-sheet .advancements-section label:hover {
+  background: #ffe4e1;
+}
+
+.perfectdraw-character-sheet .advancements-section input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: #b22222;
+  transform: scale(1.2);
+  margin-left: 0;
+}
+
+.perfectdraw-character-sheet .advancements-section > label {
+  margin-bottom: 0.5em;
+  font-size: 0.95em;
+  font-weight: 400;
+  color: #444;
+  justify-content: flex-start;
+}
+
+.perfectdraw-character-sheet .advancements-section {
+  align-items: flex-start; /* Left align the section itself */
+}
+
+
+.perfectdraw-character-sheet .experience-condensed {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.perfectdraw-character-sheet .experience-condensed label {
+  font-weight: bold;
+}
+.perfectdraw-character-sheet .experience-condensed .experience-track {
+  display: flex;
+  gap: 0.3em;
+}
+
 /* --- Manga Baggage, Struggles, Friends, etc. --- */
 .perfectdraw-character-sheet .baggage-section,
 .perfectdraw-character-sheet .struggles-section,
@@ -405,6 +473,189 @@ body.vtt.perfectdraw {
   box-shadow: 0 2px 0 #ffb300;
 }
 
+.struggles-section ul, .friends-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
+}
+.struggles-section li, .friends-section li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.3em;
+}
+.struggles-section input[type="text"], .friends-section input[type="text"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 1em;
+  padding: 0.3em 0.5em;
+}
+
+.rollable-stat {
+  cursor: pointer;
+  text-decoration: underline dotted;
+}
+.rollable-stat:hover {
+  color: #b22222;
+}
+
+.struggles-section button.delete-struggle,
+.friends-section button.delete-friend {
+  flex: 0 0 auto;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0;
+  margin-left: 0.2em;
+  background: #e57373;
+  color: #fff;
+  border: none;
+  font-size: 1em;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.struggles-section button.delete-struggle:hover,
+.friends-section button.delete-friend:hover {
+  background: #b22222;
+}
+
+.moves-section .moves-list-header {
+  display: flex;
+  font-weight: bold;
+  color: #3949ab;
+  padding: 0.2em 0.5em;
+  border-bottom: 1px solid #bbb;
+  margin-bottom: 0.2em;
+}
+.moves-section .move-col-icon { width: 2.5em; }
+.moves-section .move-col-name { flex: 2; }
+.moves-section .move-col-stat { flex: 1; text-align: center; }
+.moves-section .move-col-actions { flex: 1; text-align: right; }
+
+.moves-section .moves-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.moves-section .draggable-move {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.2em;
+  background: #f7faff;
+  border-radius: 4px;
+  padding: 0.2em 0.5em;
+  transition: background 0.2s;
+}
+.moves-section .draggable-move:hover {
+  background: #e3f2fd;
+}
+.moves-section .move-icon {
+  cursor: pointer;
+  border: 1px solid #bbb;
+  background: #fff;
+  box-shadow: 0 1px 4px #bbb;
+}
+.moves-section .move-name {
+  flex: 2;
+  font-weight: 500;
+  font-size: 1.1em;
+  color: #232323;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.moves-section .move-stat {
+  flex: 1;
+  text-align: center;
+  font-family: monospace;
+  font-size: 1em;
+  color: #3949ab;
+}
+.moves-section .roll-move,
+.moves-section .delete-move {
+  background: #ffd600;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 1.7em;
+  height: 1.7em;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-left: 0.2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.moves-section .roll-move:hover { background: #ffb300; }
+.moves-section .delete-move {
+  background: #e57373;
+  color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  font-size: 1em;
+}
+.moves-section .delete-move:hover { background: #b22222; }
+
+.moves-grid {
+  display: grid;
+  grid-template-columns: 2.5em 2fr 1fr 2.5em 2.5em;
+  align-items: center;
+  gap: 0.3em;
+}
+.moves-list-header.moves-grid {
+  font-weight: bold;
+  color: #3949ab;
+  border-bottom: 1px solid #bbb;
+  padding: 0.2em 0.5em;
+  margin-bottom: 0.2em;
+}
+.moves-list.moves-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.moves-list.moves-grid li {
+  background: #f7faff;
+  border-radius: 4px;
+  padding: 0.2em 0.5em;
+  margin-bottom: 0.2em;
+  display: contents;
+}
+
+/* Add or update in actor-character-sheet.css */
+.baggage-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.7em;
+  width: 100%;
+}
+.baggage-controls-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+}
+.baggage-controls label {
+  margin: 0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.baggage-modifier-input {
+  width: 2.2em;
+  margin-left: 0.2em;
+}
+.serious-baggage-label {
+  font-weight: 700;
+}
+
 /* --- Responsive --- */
 @media (max-width: 1100px) {
   .perfectdraw-character-sheet .sheet-header {
@@ -421,6 +672,7 @@ body.vtt.perfectdraw {
     min-width: 180px;
   }
   .perfectdraw-character-sheet .stats-row {
+    margin-top: 10px;
     gap: 1em;
   }
 }
@@ -456,3 +708,4 @@ body.vtt.perfectdraw {
     text-align: center;
   }
 }
+

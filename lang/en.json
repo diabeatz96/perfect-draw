@@ -3,7 +3,10 @@
     "Add": "Add",
     "Main": "Main",
     "Notes": "Notes",
+    "Roll": "Roll",
     "PickAnAbility": "Pick an Ability",
+    "Actions": "Actions",
+    "MoveNotFound": "Move item not found.", 
     "AbilityPicker": {
       "WorldAbilities": "World Abilities",
       "CompendiumAbilities": "Compendium Abilities",
@@ -96,6 +99,22 @@
       "weakness_text": "Weakness Text"
     },
     "Character": {
+    "baggageModifier": "Baggage Modifier",
+    "seriousBaggage": "Serious Baggage",
+    "general_moves": "General Moves",
+    "general_moves_drag_hint": "Drag move items here to add them.",
+      "struggles": {
+      "label": "Struggles",
+      "placeholderText": "Struggle Answer",
+      "add": "+ Add Struggle",
+      "delete": "Delete Struggle"
+    },
+    "friends": {
+      "label": "Friends",
+      "placeholderText": "Friend Answer",
+      "add": "+ Add Friend",
+      "delete": "Delete Friend"
+    },
       "abilities": "Abilities",
       "advancements": "Advancements",
       "baggage_data": "Baggage",
@@ -109,6 +128,9 @@
         "other": "Other"
       },
       "major_advancements_unlocked": "Major Advancements Unlocked",
+      "major_advancements": "Major Advancements",
+      "advancement_checks": "Advancement Options",
+      "major_advancement_checks": "Major Advancement Options",  
       "name": "Name",
       "playbook": "Playbook",
       "pronouns": "Pronouns",
@@ -118,7 +140,9 @@
         "friendship": "Friendship",
         "life_points": "Life Points",
         "passion": "Passion",
-        "skill": "Skill"
+        "skill": "Skill",
+        "tension": "Tension",
+        "advantage": "Advantage"
       },
       "the_ally_life": "The Ally's Life",
       "the_crew_details": "Crew Details",
@@ -160,10 +184,15 @@
       }
     },
     "Move": {
+    "OutcomeSuccess": "Success!",
+    "OutcomeComplications": "Complications!",
+    "OutcomeFailed": "Failed!",
       "associated_abilities": {
         "item": "Ability",
         "label": "Associated Abilities"
       },
+      "openSheet": "Open Move Sheet",
+      "Outcome": "Outcome",
       "card_details": {
         "features": "Card Features",
         "label": "Card Details",

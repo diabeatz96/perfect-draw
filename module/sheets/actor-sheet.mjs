@@ -193,6 +193,217 @@ export class PerfectDrawActorSheet extends ActorSheet {
         li.addEventListener('dragstart', handler, false);
       });
     }
+
+    html.find('.add-struggle').click(ev => {
+      ev.preventDefault();
+      console.log("Adding struggle");
+      const struggles = Array.from(this.actor.system.struggles ?? []);
+      struggles.push("");
+      this.actor.update({"system.struggles": struggles});
+    });
+    html.find('.delete-struggle').click(ev => {
+      ev.preventDefault();
+      const idx = Number(ev.currentTarget.dataset.index);
+      let struggles = Array.from(this.actor.system.struggles ?? []);
+      struggles.splice(idx, 1);
+      this.actor.update({"system.struggles": struggles});
+    });
+    html.find('.add-friend').click(ev => {
+      ev.preventDefault();
+      const friends = Array.from(this.actor.system.friends ?? []);
+      friends.push("");
+      this.actor.update({"system.friends": friends});
+    });
+    html.find('.delete-friend').click(ev => {
+      ev.preventDefault();
+      const idx = Number(ev.currentTarget.dataset.index);
+      let friends = Array.from(this.actor.system.friends ?? []);
+      friends.splice(idx, 1);
+      this.actor.update({"system.friends": friends});
+    });
+    html.find('.rollable-stat').click(async ev => {
+      const stat = ev.currentTarget.dataset.stat;
+      const statValue = this.actor.system.stats_data?.[stat] ?? 0;
+      const roll = new Roll(`2d6 + ${statValue}`);
+      await roll.evaluate();
+      roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: `${game.i18n.localize(`PERFECT_DRAW.Character.stats_data.${stat}`)} Roll`
+      });
+    });
+    
+    const dropzone = html.find('.moves-section');
+    dropzone.on('dragover', ev => {
+      ev.preventDefault();
+      dropzone.addClass('dragover');
+    });
+    dropzone.on('dragleave', ev => {
+      dropzone.removeClass('dragover');
+    });
+    dropzone.on('drop', async ev => {
+      ev.preventDefault();
+      dropzone.removeClass('dragover');
+      let data;
+      try {
+        data = JSON.parse(ev.originalEvent.dataTransfer.getData('application/json'));
+      } catch {
+        data = JSON.parse(ev.originalEvent.dataTransfer.getData('text/plain'));
+      }
+      if (data.type === "Item" && data.uuid) {
+        const item = await fromUuid(data.uuid);
+        if (item && item.type === "move") {
+          const moves = Array.from(this.actor.system.moves ?? []);
+          // Remove any existing move with same id (prevent duplicates)
+          const filtered = moves.filter(m => m.id !== item.id);
+          filtered.push({
+            id: item.id,
+            type: item.system.type ?? "general-player",
+            img: item.img,
+            name: item.name,
+            description: item.system.description,
+            outcomes: item.system.outcomes ?? { high: "", mid: "", low: "" },
+            roll_stat: item.system.roll_stat ?? "passion",
+          });
+          await this.actor.update({ "system.moves": filtered });
+        }
+      }
+    });
+
+     // Open move item sheet on icon click
+      html.find('.clickable-move-img').click(async ev => {
+        const moveId = ev.currentTarget.dataset.moveId;
+        let moveItem = game.items?.get(moveId);
+        if (!moveItem) {
+          // Try compendiums if not found in world
+          for (let pack of game.packs.filter(p => p.documentName === "Item")) {
+            const index = await pack.getIndex();
+            const entry = index.find(e => e._id === moveId);
+            if (entry) {
+              moveItem = await pack.getDocument(moveId);
+              break;
+            }
+          }
+        }
+        if (moveItem) moveItem.sheet.render(true);
+        else ui.notifications.warn(game.i18n.localize("PERFECT_DRAW.MoveNotFound"));
+      });
+
+      // Add Move: open item sheet, then add to actor when saved
+    html.find('.add-move').click(async ev => {
+      ev.preventDefault();
+      const type = ev.currentTarget.dataset.movetype || "general-player";
+      const item = await Item.create({
+        name: game.i18n.localize("PERFECT_DRAW.Move.name"),
+        type: "move",
+        img: "icons/svg/d20-black.svg",
+        system: { type }
+      }, { renderSheet: true });
+      if (item) {
+        Hooks.once("updateItem", async (createdItem, changes, options, userId) => {
+          if (createdItem.id !== item.id) return;
+          const moves = Array.from(this.actor.system.moves ?? []);
+          moves.push({
+            id: createdItem.id,
+            type: createdItem.system.type ?? type,
+            img: createdItem.img,
+            name: createdItem.name,
+            description: createdItem.system.description,
+            roll_stat: createdItem.system.roll_stat ?? "passion",
+            outcomes: createdItem.system.outcomes ?? { high: "", mid: "", low: "" }
+          });
+          await this.actor.update({ "system.moves": moves });
+        });
+      }
+    });
+
+    html.find('.roll-move').click(async ev => {
+      ev.preventDefault();
+      const moveId = ev.currentTarget.dataset.id;
+      const moves = Array.from(this.actor.system.moves ?? []);
+      const move = moves.find(m => m.id === moveId);
+      if (!move) return;
+      const statKey = (move.roll_stat || "passion").toLowerCase();
+      const statValue = this.actor.system.stats_data?.[statKey] ?? 0;
+
+      // Get global baggage modifiers
+      const baggageModifier = this.actor.system.baggageModifier ?? 0;
+      const seriousBaggage = this.actor.system.seriousBaggage ?? false;
+
+      let mod = statValue;
+      let baggageLog = "";
+      if (seriousBaggage) {
+        mod = -1;
+        baggageLog = `<div style="color:#b71c1c;font-size:0.95em;">Serious Baggage: All rolls set to -1</div>`;
+      } else if (baggageModifier > 0) {
+        const applied = Math.max(-1, statValue - baggageModifier);
+        baggageLog = `<div style="color:#b71c1c;font-size:0.95em;">Baggage Modifier: -${baggageModifier} (Stat ${statValue} → ${applied})</div>`;
+        mod = applied;
+      }
+
+      const roll = new Roll(`2d6 + ${mod}`);
+      await roll.evaluate();
+      let outcomeMsg = "";
+      let outcomeColor = "#3949ab";
+      let outcomeHeader = "";
+      let outcomeBg = "#e3eafc";
+      const total = roll.total ?? 0;
+      if (total >= 10) {
+        outcomeMsg = move.outcomes?.high || "";
+        outcomeColor = "#388e3c"; // green
+        outcomeBg = "#e8f5e9";
+        outcomeHeader = game.i18n.localize("PERFECT_DRAW.Move.OutcomeSuccess");
+      } else if (total >= 7) {
+        outcomeMsg = move.outcomes?.mid || "";
+        outcomeColor = "#e65100"; // dark orange
+        outcomeBg = "#fff8e1";
+        outcomeHeader = game.i18n.localize("PERFECT_DRAW.Move.OutcomeComplications");
+      } else {
+        outcomeMsg = move.outcomes?.low || "";
+        outcomeColor = "#d32f2f"; // red
+        outcomeBg = "#ffebee";
+        outcomeHeader = game.i18n.localize("PERFECT_DRAW.Move.OutcomeFailed");
+      }
+
+      const outcomeStyle = `
+        color:${outcomeColor};
+        background:${outcomeBg};
+        border-radius:0.3em;
+        padding:0.2em 0.7em;
+        font-size:1.25em;
+        font-weight:bold;
+        margin:0.5em 0 0.2em 0;
+        display:inline-block;
+      `;
+
+      roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: `
+          <div class="pd-move-roll">
+            <h1>${move.name}</h1>
+            ${move.description ? `<h2 style="font-size:1em;font-weight:normal;color:#444;margin-bottom:0.7em;margin-top:0;">${move.description}</h2>` : ""}
+            ${baggageLog}
+            <h2 style="${outcomeStyle}">${outcomeHeader}</h2>
+            <div style="margin-top:0.7em;font-size:1em;">${outcomeMsg}</div>
+            <div style="margin-top:0.7em;font-size:1em;">Roll: <strong>${roll.formula}</strong> = ${total}</div>
+            <div> BaggageModifier: <strong>${baggageModifier}</strong></div>
+            <div> SeriousBaggage: <strong>${seriousBaggage ? "Yes" : "No"}</strong></div>
+          </div>
+        `
+      });
+    });
+
+
+          // Delete move
+      html.find('.delete-move').click(ev => {
+        ev.preventDefault();
+        const moveId = ev.currentTarget.dataset.id;
+        let moves = Array.from(this.actor.system.moves ?? []);
+        const idx = moves.findIndex(m => m.id === moveId);
+        if (idx !== -1) {
+          moves.splice(idx, 1);
+          this.actor.update({ "system.moves": moves });
+        }
+      });
   }
 
   /**
@@ -228,7 +439,6 @@ export class PerfectDrawActorSheet extends ActorSheet {
    * @private
    */
   _onRoll(event) {
-    event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
 

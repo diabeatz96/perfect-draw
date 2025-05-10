@@ -15,24 +15,52 @@
           <label>{{localize "PERFECT_DRAW.Character.playbook"}}</label>
           <input name="system.playbook" type="text" value="{{system.playbook}}" placeholder="{{localize 'PERFECT_DRAW.Character.playbook'}}"/>
         </div>
+          <div class="experience-condensed">
+            <label>{{localize "PERFECT_DRAW.Character.experience_track"}}</label>
+            <div class="experience-track">
+              {{#each system.experience_track}}
+                <input type="checkbox" name="system.experience_track.{{@index}}" {{#if this}}checked{{/if}}/>
+              {{/each}}
+            </div>
+          </div>
+          <div class="life-points-row" style="margin-top:0.5em;">
+        <label style="font-weight:bold;">{{localize "PERFECT_DRAW.Character.stats_data.life_points"}}</label>
+        <input name="system.life_points" type="number" value="{{system.life_points}}" min="0" style="width:3em; margin-left:0.5em;" />
       </div>
-      <div class="stats-block">
+      </div>
+    </section>
         <div class="stats-row" style="justify-content: center; flex-wrap: wrap; min-width:0;">
           <div class="stat-block stat-block--passion">
-            <label>{{localize "PERFECT_DRAW.Character.stats_data.passion"}}</label>
+            <label class="rollable-stat" data-stat="passion" title="{{localize 'PERFECT_DRAW.Character.stats_data.passion'}}">
+              {{localize "PERFECT_DRAW.Character.stats_data.passion"}}
+            </label>
             <input name="system.stats_data.passion" type="number" value="{{system.stats_data.passion}}" />
           </div>
           <div class="stat-block stat-block--skill">
-            <label>{{localize "PERFECT_DRAW.Character.stats_data.skill"}}</label>
+            <label class="rollable-stat" data-stat="skill" title="{{localize 'PERFECT_DRAW.Character.stats_data.skill'}}">
+              {{localize "PERFECT_DRAW.Character.stats_data.skill"}}
+            </label>
             <input name="system.stats_data.skill" type="number" value="{{system.stats_data.skill}}" />
           </div>
           <div class="stat-block stat-block--friendship">
-            <label>{{localize "PERFECT_DRAW.Character.stats_data.friendship"}}</label>
+            <label class="rollable-stat" data-stat="friendship" title="{{localize 'PERFECT_DRAW.Character.stats_data.friendship'}}">
+              {{localize "PERFECT_DRAW.Character.stats_data.friendship"}}
+            </label>
             <input name="system.stats_data.friendship" type="number" value="{{system.stats_data.friendship}}" />
           </div>
+          <div class="stat-block stat-block--tension">
+            <label class="rollable-stat" data-stat="tension" title="{{localize 'PERFECT_DRAW.Character.stats_data.tension'}}">
+              {{localize "PERFECT_DRAW.Character.stats_data.tension"}}
+            </label>
+            <input name="system.stats_data.tension" type="number" value="{{system.stats_data.tension}}" />
+          </div>
+          <div class="stat-block stat-block--advantage">
+            <label class="" data-stat="advantage" title="{{localize 'PERFECT_DRAW.Character.stats_data.advantage'}}">
+              {{localize "PERFECT_DRAW.Character.stats_data.advantage"}}
+            </label>
+            <input name="system.stats_data.advantage" type="number" value="{{system.stats_data.advantage}}" />
+          </div>
         </div>
-      </div>
-    </div>
   </header>
 
   <section class="sheet-body flexrow">
@@ -58,25 +86,29 @@
       </section>
 
       <section class="struggles-section">
-        <h2>Struggles</h2>
-        <ul>
-          {{#each system.struggles}}
-            <li>
-              <input type="text" name="system.struggles.{{@index}}" value="{{this}}" placeholder="Struggle Question or Answer"/>
-            </li>
-          {{/each}}
-        </ul>
+         <h2>{{localize "PERFECT_DRAW.Character.struggles.label"}}</h2>
+          <ul>
+            {{#each system.struggles}}
+              <li>
+                <input type="text" name="system.struggles.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Character.struggles.placeholderText'}}"/>
+                <button type="button" class="delete-struggle" data-index="{{@index}}" title="{{localize 'PERFECT_DRAW.Character.struggles.delete'}}">&times;</button>
+              </li>
+            {{/each}}
+          </ul>
+          <button type="button" class="add-struggle">{{localize "PERFECT_DRAW.Character.struggles.add"}}</button>
       </section>
 
       <section class="friends-section">
-        <h2>Friends</h2>
+        <h2>{{localize "PERFECT_DRAW.Character.friends.label"}}</h2>
         <ul>
           {{#each system.friends}}
             <li>
-              <input type="text" name="system.friends.{{@index}}" value="{{this}}" placeholder="Friend Question or Answer"/>
+              <input type="text" name="system.friends.{{@index}}" value="{{this}}" placeholder="{{localize 'PERFECT_DRAW.Character.friends.placeholderText'}}"/>
+              <button type="button" class="delete-friend" data-index="{{@index}}" title="{{localize 'PERFECT_DRAW.Character.friends.delete'}}">&times;</button>
             </li>
           {{/each}}
         </ul>
+        <button type="button" class="add-friend">{{localize "PERFECT_DRAW.Character.friends.add"}}</button>
       </section>
 
       <section class="baggage-section">
@@ -90,46 +122,112 @@
         </ul>
       </section>
 
-      <section class="experience-section">
-        <h2>{{localize "PERFECT_DRAW.Character.experience_track"}}</h2>
-        <div class="experience-track">
-          {{#each system.experience_track}}
-            <input type="checkbox" name="system.experience_track.{{@index}}" {{#if this}}checked{{/if}}/>
-          {{/each}}
-        </div>
-      </section>
-
-      <section class="advancements-section">
-        <h2>{{localize "PERFECT_DRAW.Character.advancements"}}</h2>
-        <ul>
-          {{#each system.advancements}}
-            <li>
-              <input type="text" name="system.advancements.{{@index}}.type" value="{{this.type}}" placeholder="Type"/>
-              <input type="text" name="system.advancements.{{@index}}.ref_id" value="{{this.ref_id}}" placeholder="Ref ID"/>
-              <input type="text" name="system.advancements.{{@index}}.stat" value="{{this.stat}}" placeholder="Stat"/>
-            </li>
-          {{/each}}
-        </ul>
-        <label>
+          <section class="advancements-section">
+            <h2>{{localize "PERFECT_DRAW.Character.advancements"}}</h2>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" name="system.advancement_checks.0" {{checked system.advancement_checks.[0]}} />
+                  <input type="checkbox" name="system.advancement_checks.1" {{checked system.advancement_checks.[1]}} />
+                  Take an ability from your Playbook
+                </label>
+                <label>
+                  <input type="checkbox" name="system.advancement_checks.2" {{checked system.advancement_checks.[2]}} />
+                  Take an ability from another Playbook
+                </label>
+                <label>
+                  <input type="checkbox" name="system.advancement_checks.3" {{checked system.advancement_checks.[3]}} />
+                  Add a new staple to your Staple List
+                </label>
+                <label>
+                  <input type="checkbox" name="system.advancement_checks.4" {{checked system.advancement_checks.[4]}} />
+                  <input type="checkbox" name="system.advancement_checks.5" {{checked system.advancement_checks.[5]}} />
+                  Increase one of your stats by one
+                </label>
+              </li>
+            </ul>
+          <label>
           <input type="checkbox" name="system.major_advancements_unlocked" {{checked system.major_advancements_unlocked}}/>
           {{localize "PERFECT_DRAW.Character.major_advancements_unlocked"}}
         </label>
-      </section>
+            <h3>Major Advancements</h3>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" name="system.major_advancement_checks.0" {{checked system.major_advancement_checks.[0]}} />
+                  Take an ability from your Playbook
+                </label>
+                <label>
+                  <input type="checkbox" name="system.major_advancement_checks.1" {{checked system.major_advancement_checks.[1]}} />
+                  Take an ability from another Playbook
+                </label>
+                <label>
+                  <input type="checkbox" name="system.major_advancement_checks.2" {{checked system.major_advancement_checks.[2]}} />
+                  Add a new staple to your Staple List
+                </label>
+                <label>
+                  <input type="checkbox" name="system.major_advancement_checks.3" {{checked system.major_advancement_checks.[3]}} />
+                  Create a new {Ace} card
+                </label>
+                <label>
+                  <input type="checkbox" name="system.major_advancement_checks.4" {{checked system.major_advancement_checks.[4]}} />
+                  Complete your character’s fin
+                </label>
+              </li>
+            </ul>
+          </section>
     </div>
 
     <div class="side-col flexcol">
-      <section class="staples-section">
-        <h2>General Moves</h2>
-        <ul>
-          {{#each system.staples}}
-            <li>
-              <input type="text" name="system.staples.{{@index}}.name" value="{{this.name}}" placeholder="Move Name"/>
-              <input type="text" name="system.staples.{{@index}}.description" value="{{this.description}}" placeholder="Description"/>
-              <input type="checkbox" name="system.staples.{{@index}}.is_playbook_staple" {{checked this.is_playbook_staple}}/> Playbook Move
+      <section class="moves-section">
+      <h2>{{localize "PERFECT_DRAW.Character.general_moves"}}</h2>
+        <div class="baggage-controls">
+          <div class="baggage-controls-inner">
+            <label>
+              {{localize "PERFECT_DRAW.Character.baggageModifier"}}
+              <input type="number" name="system.baggageModifier" value="{{system.baggageModifier}}" min="0" max="99" class="baggage-modifier-input" />
+            </label>
+            <label class="serious-baggage-label">
+              <input type="checkbox" name="system.seriousBaggage" {{#if system.seriousBaggage}}checked{{/if}} />
+              {{localize "PERFECT_DRAW.Character.seriousBaggage"}}
+            </label>
+          </div>
+        </div>
+      <div class="moves-subsection">
+        <h3>{{localize "PERFECT_DRAW.Move.typeOptions.general-player"}}</h3>
+        <ul class="moves-list moves-grid">
+          {{#each (filter system.moves "type" "general-player")}}
+            <li class="draggable-move" draggable="true" data-index="{{@index}}">
+              <img src="{{this.img}}" alt="Move Icon" class="move-icon clickable-move-img"
+                  data-move-id="{{this.id}}" title="{{localize 'PERFECT_DRAW.Move.openSheet'}}">
+              <span class="move-name">{{this.name}}</span>
+              <span class="move-stat">{{this.roll_stat}}</span>
+              <button type="button" class="roll-move" data-id="{{this.id}}" title="{{localize 'PERFECT_DRAW.Roll'}}">🎲</button>
+              <button type="button" class="delete-move" data-id="{{this.id}}" title="{{localize 'PERFECT_DRAW.Delete'}}">&times;</button>
             </li>
           {{/each}}
         </ul>
-      </section>
+        <button type="button" class="add-move" data-movetype="general-player">+ {{localize "PERFECT_DRAW.Add"}}</button>
+      </div>
+
+      <div class="moves-subsection">
+        <h3>{{localize "PERFECT_DRAW.Move.typeOptions.card-combat-player"}}</h3>
+        <ul class="moves-list moves-grid">
+          {{#each (filter system.moves "type" "card-combat-player")}}
+            <li class="draggable-move" draggable="true" data-index="{{@index}}">
+              <img src="{{this.img}}" alt="Move Icon" class="move-icon clickable-move-img"
+                  data-move-id="{{this.id}}" title="{{localize 'PERFECT_DRAW.Move.openSheet'}}">
+              <span class="move-name">{{this.name}}</span>
+              <span class="move-stat">{{this.roll_stat}}</span>
+              <button type="button" class="roll-move" data-id="{{this.id}}" title="{{localize "PERFECT_DRAW.Roll"}}">🎲</button>
+              <button type="button" class="delete-move" data-id="{{this.id}}" title="{{localize 'PERFECT_DRAW.Delete'}}">&times;</button>
+            </li>
+          {{/each}}
+        </ul>
+        <button type="button" class="add-move" data-movetype="card-combat-player">+ {{localize "PERFECT_DRAW.Add"}}</button>
+      </div>
+      <small>{{localize "PERFECT_DRAW.Character.general_moves_drag_hint"}}</small>
+    </section>
 
       <section class="abilities-section">
         <h2>{{localize "PERFECT_DRAW.Character.abilities"}}</h2>

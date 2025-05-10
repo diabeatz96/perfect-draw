@@ -38,8 +38,19 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
 
     schema.experience_track = new fields.ArrayField(
       new fields.BooleanField({ required: false, initial: false }),
-      { required: false, initial: [], label: "PERFECT_DRAW.Character.experience_track" }
+      { required: true, initial: [false, false, false], label: "PERFECT_DRAW.Character.experience_track" },
     );
+
+    schema.advancement_checks = new fields.ArrayField(
+    new fields.BooleanField({ required: false, initial: false }),
+    { required: false, initial: [false, false, false, false, false, false], label: "PERFECT_DRAW.Character.advancement_checks" }
+  );
+
+  schema.major_advancement_checks = new fields.ArrayField(
+      new fields.BooleanField({ required: false, initial: false }),
+      { required: false, initial: [false, false, false, false, false], label: "PERFECT_DRAW.Character.major_advancement_checks" }
+  );
+      
 
     schema.advancements = new fields.ArrayField(
       new fields.SchemaField({
@@ -50,6 +61,8 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
       { required: false, initial: [], label: "PERFECT_DRAW.Character.advancements" }
     );
 
+    schema.life_points = new fields.NumberField({required: false, initial: 0, label: "PERFECT_DRAW.Character.life_points" });
+
     schema.major_advancements_unlocked = new fields.BooleanField({
       required: false,
       initial: false,
@@ -58,11 +71,13 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
 
     // These fields are flexible objects, but you should use the imported models for validation/manipulation elsewhere
     schema.stats_data = new fields.SchemaField({
-      passion: new fields.NumberField({ required: false, label: "PERFECT_DRAW.Character.stats_data.passion" }),
-      skill: new fields.NumberField({ required: false, label: "PERFECT_DRAW.Character.stats_data.skill" }),
-      friendship: new fields.NumberField({ required: false, label: "PERFECT_DRAW.Character.stats_data.friendship" }),
-      life_points: new fields.NumberField({ required: false, label: "PERFECT_DRAW.Character.stats_data.life_points" }),
+      passion: new fields.NumberField({ required: false, initial: 0, label: "PERFECT_DRAW.Character.stats_data.passion" }),
+      skill: new fields.NumberField({ required: false, initial: 0, label: "PERFECT_DRAW.Character.stats_data.skill" }),
+      friendship: new fields.NumberField({ required: false, initial: 0, label: "PERFECT_DRAW.Character.stats_data.friendship" }),
+      tension: new fields.NumberField({ required: false, initial: 0, label: "PERFECT_DRAW.Character.stats_data.tension" }),
+      advantage: new fields.NumberField({ required: false, initial: 0, label: "PERFECT_DRAW.Character.stats_data.advantage" })
     }, { required: false, label: "PERFECT_DRAW.Character.stats_data" });
+
     schema.baggage_data = new fields.SchemaField({}, { required: false, label: "PERFECT_DRAW.Character.baggage_data" });
     schema.deck_details = new fields.SchemaField({}, { required: false, label: "PERFECT_DRAW.Character.deck_details" });
 
@@ -77,6 +92,36 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
       }),
       { required: false, initial: [], label: "PERFECT_DRAW.Character.staples" }
     );
+
+    schema.moves = new fields.ArrayField(
+      new fields.SchemaField({
+        id: new fields.StringField({ required: false, blank: true }), // Move item id (optional, for reference)
+        type: new fields.StringField({ required: false, blank: true }), // Move type (optional)
+        img: new fields.StringField({ required: false, blank: true }), // Image URL (optional)
+        name: new fields.StringField({ required: true, blank: false }),
+        description: new fields.HTMLField({ required: false, blank: true }),
+        roll_stat: new fields.StringField({ required: false, blank: true, initial: "passion" }), // e.g. "passion", "skill"
+        outcomes: new fields.SchemaField({
+          high: new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.10plus" }),
+          mid: new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.7_9" }),
+          low: new fields.HTMLField({ required: false, blank: true, label: "PERFECT_DRAW.Move.outcomes.6minus" })
+        }, { required: false, label: "PERFECT_DRAW.Move.outcomes" }),
+      }),
+      { required: false, initial: [], label: "PERFECT_DRAW.Character.moves" }
+    );
+
+
+    schema.baggageModifier = new fields.NumberField({
+      required: false,
+      initial: 0,
+      label: "PERFECT_DRAW.Character.baggageModifier"
+    });
+
+    schema.seriousBaggage = new fields.BooleanField({
+      required: false,
+      initial: false,
+      label: "PERFECT_DRAW.Character.seriousBaggage"
+    });
 
     // Abilities as references to Ability IDs
     schema.abilities = new fields.ArrayField(
@@ -118,6 +163,16 @@ export default class PerfectDrawCharacter extends PerfectDrawActorBase {
       villainous: new fields.NumberField({ required: false }),
       current_bonus_alignment: new fields.StringField({ required: false, blank: true })
     }, { required: false });
+
+    schema.struggles = new fields.ArrayField(
+      new fields.StringField({ required: false, blank: true }),
+      { required: false, initial: [], label: "PERFECT_DRAW.Character.struggles" }
+    );
+
+    schema.friends = new fields.ArrayField(
+      new fields.StringField({ required: false, blank: true }),
+      { required: false, initial: [], label: "PERFECT_DRAW.Character.friends" }
+    );
 
     schema.the_crew_details = new fields.SchemaField({}, { required: false });
 

@@ -85,6 +85,10 @@ Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
 });
 
+Handlebars.registerHelper('filter', function(array, key, value) {
+  return (array ?? []).filter(obj => obj[key] === value);
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
